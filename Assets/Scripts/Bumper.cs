@@ -10,6 +10,7 @@ public class Bumper : MonoBehaviour {
 	private Player player;
 	public float blockLaunchPower;
 	private bool bumped;
+	public bool isActive;
 
 	// Use this for initialization
 	void Start () {
@@ -30,9 +31,11 @@ public class Bumper : MonoBehaviour {
 		if (active) {
 			sr.enabled = true;
 			col.enabled = true;
+			isActive = true;
 		} else {
 			sr.enabled = false;
 			col.enabled = false;
+			isActive = false;
 		}
 	}
 
@@ -50,7 +53,7 @@ public class Bumper : MonoBehaviour {
 		GameObject obj = collider.gameObject;
 		if (obj.tag == "Surface" && !bumped) {
 			Vector3 launchVector = obj.GetComponent<Surface>().surfaceNormal * blockLaunchPower;
-			player.GetBumped (launchVector);
+			player.GetBumped (launchVector, true);
 			bumped = true;
 			Destroy (obj.transform.parent.gameObject);
 		}

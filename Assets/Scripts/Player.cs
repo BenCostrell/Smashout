@@ -10,12 +10,17 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rb;
 	public float driftForce;
 	private Bumper bumper;
+	private Transform bumperCooldownObj;
 	public float blockBounceFactor;
+	public float bumpCooldown;
+	private float bumpCooldownTimer;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		bumper = GetComponentInChildren<Bumper> ();
+		bumpCooldownTimer = 0;
+		bumperCooldownObj = GetComponentsInChildren<Transform> () [2];
 	}
 	
 	// Update is called once per frame
@@ -29,8 +34,13 @@ public class Player : MonoBehaviour {
 	void ProcessInput(){
 		float x = Input.GetAxis ("Horizontal_P" + playerNum);
 		Move (x);
-		if (Input.GetButtonDown ("Bump_P" + playerNum)) {
-			Bump ();
+		if (bumpCooldownTimer > 0) {
+			bumpCooldownTimer -= Time.deltaTime;
+			UpdateCooldownTimerObj ();
+		} else {
+			if (Input.GetButton ("Bump_P" + playerNum) && !bumper.isActive) {
+				Bump ();
+			}
 		}
 	}
 
@@ -41,10 +51,18 @@ public class Player : MonoBehaviour {
 
 	void Bump(){
 		bumper.Activate ();
+		bumpCooldownTimer = bumpCooldown;
+		UpdateCooldownTimerObj ();
 	}
 
-	public void GetBumped(Vector2 bumpVector){
-		rb.velocity += bumpVector;
+	public void GetBumped(Vector2 bumpVector, bool vertical){
+		Vector2 newVelocity;
+		if (vertical) {
+			newVelocity = new Vector2 (0, bumpVector.y);
+		} else {
+			newVelocity = new Vector2 (bumpVector.x, 0);
+		}
+		rb.velocity = newVelocity;
 	}
 
 	bool IsGrounded(){
@@ -55,7 +73,11 @@ public class Player : MonoBehaviour {
 		GameObject obj = collision.collider.gameObject;
 		if (obj.tag == "Surface") {
 			Vector3 launchVector = obj.GetComponent<Surface>().surfaceNormal * blockBounceFactor;
-			GetBumped (launchVector);
+			GetBumped (launchVector, true);
 		}
+	}
+
+	void UpdateCooldownTimerObj(){
+		bumperCooldownObj.localScale = Vector3.one * Mathf.Lerp (0, 1, 1 - (bumpCooldownTimer / bumpCooldown));
 	}
 }
