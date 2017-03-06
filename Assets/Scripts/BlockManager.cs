@@ -9,6 +9,7 @@ public class BlockManager : MonoBehaviour {
 	public float minAcceptableDistance;
 	public Vector2 range;
 	public GameObject blockPrefab;
+	public int maxNumTries;
 
 	void Start(){
 		blockList = new List<Block> ();
@@ -42,22 +43,36 @@ public class BlockManager : MonoBehaviour {
 	Vector3 GenerateValidLocation(){
 		Vector3 location = GenerateLocation ();
 		bool valid = ValidateLocation (location);
-		while (!valid) {
-			location = GenerateLocation ();
-			valid = ValidateLocation (location);
+		for(int i = 0; i < maxNumTries; i++) {
+			if (!valid) {
+				location = GenerateLocation ();
+				valid = ValidateLocation (location);
+			} else {
+				break;
+			}
+		}
+		if (!valid) {
+			location = Vector3.forward;
 		}
 		return location;
 	}
 
 	Block GenerateValidBlock(){
 		Vector3 location = GenerateValidLocation ();
-		Block block = Create (location);
+		Block block;
+		block = Create (location);
 		return block;
 	}
 
 	void GenerateInitialBlockSetup(){
+		Block block;
 		for (int i = 0; i < numInitialBlocks; i++) {
-			GenerateValidBlock ();
+			block = GenerateValidBlock ();
+			if (block.transform.position == Vector3.forward) {
+				Destroy (block.gameObject);
+				Debug.Log("only made " + i + "blocks");
+				break;
+			}
 		}
 	}
 }
