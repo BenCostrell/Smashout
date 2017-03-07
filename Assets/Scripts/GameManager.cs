@@ -31,19 +31,23 @@ public class GameManager : MonoBehaviour {
 	Player InitializePlayer(int playerNum){
 		GameObject playerObj;
 		Player player;
+		Color defColor = Color.white;
 		playerObj = Instantiate (playerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		player = playerObj.GetComponent<Player> ();
 		player.playerNum = playerNum;
 		if (playerNum == 1) {
 			player.transform.position = spawnPoint_P1;
 			playerObj.GetComponentsInChildren<SpriteRenderer> () [1].color = Color.green;
-			playerObj.GetComponentsInChildren<SpriteRenderer> () [2].color = new Color(0.5f, 1, 0.5f);
+			defColor = new Color(0.5f, 1, 0.5f);
 		}
 		else if (playerNum == 2) {
 			player.transform.position = spawnPoint_P2;
 			playerObj.GetComponentsInChildren<SpriteRenderer> () [1].color = Color.blue;
-			playerObj.GetComponentsInChildren<SpriteRenderer> () [2].color = new Color(0.5f, 0.5f, 1);
+			defColor = new Color(0.5f, 0.5f, 1);
 		}
+		playerObj.GetComponentsInChildren<SpriteRenderer> () [2].color = defColor;
+		player.defaultColor = defColor;
+
 		return player;
 	}
 }

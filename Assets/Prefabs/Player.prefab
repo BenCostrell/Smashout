@@ -171,7 +171,11 @@ MonoBehaviour:
     m_Bits: 256
   driftForce: 200
   blockBounceFactor: 1
+  playerBounceFactor: 1
   bumpCooldown: 0.6
+  hitstunTimer: 0
+  hitstunDuration: 0.3
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114727248102592108
 MonoBehaviour:
   m_ObjectHideFlags: 1

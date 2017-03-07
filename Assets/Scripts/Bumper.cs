@@ -64,8 +64,8 @@ public class Bumper : MonoBehaviour {
 		if (obj.tag == "Player" && !bumpedPlayer) {
 			Player otherPlayer = obj.GetComponent<Player> ();
 			if (otherPlayer.playerNum != player.playerNum) {
-				Vector3 launchVector = (otherPlayer.transform.position - player.transform.position).normalized * playerBumpPower;
-				otherPlayer.GetBumped (launchVector, true, true);
+				Vector3 launchVector = (player.transform.position - otherPlayer.transform.position).normalized * playerBumpPower;
+				otherPlayer.GetHit (launchVector);
 				bumpedPlayer = true;
 			}
 		}

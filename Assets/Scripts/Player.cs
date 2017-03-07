@@ -12,15 +12,20 @@ public class Player : MonoBehaviour {
 	private Bumper bumper;
 	private Transform bumperCooldownObj;
 	public float blockBounceFactor;
+	public float playerBounceFactor;
 	public float bumpCooldown;
 	private float bumpCooldownTimer;
 	private Vector2 previousVelocity;
+	public float hitstunTimer;
+	public float hitstunDuration;
+	public Color defaultColor;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		bumper = GetComponentInChildren<Bumper> ();
 		bumpCooldownTimer = 0;
+		hitstunTimer = 0;
 		bumperCooldownObj = GetComponentsInChildren<Transform> () [2];
 	}
 	
@@ -30,7 +35,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		ProcessInput ();
+		if (hitstunTimer > 0) {
+			hitstunTimer -= Time.deltaTime;
+			UpdateCooldownTimerObj ();
+		} else {
+			ProcessInput ();
+		}
 	}
 
 	void ProcessInput(){
@@ -57,6 +67,14 @@ public class Player : MonoBehaviour {
 		UpdateCooldownTimerObj ();
 	}
 
+	public void GetHit(Vector2 knockback){
+		GetBumped (knockback, true, true);
+		hitstunTimer = hitstunDuration;
+		bumpCooldownTimer = 0;
+		UpdateCooldownTimerObj ();
+		Debug.Log ("player " + playerNum + " got hit");
+	}
+
 	public void GetBumped(Vector2 bumpVector, bool vertical, bool horizontal){
 		Vector2 newVelocity = Vector2.zero;
 		if (vertical) {
@@ -74,14 +92,30 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		GameObject obj = collision.collider.gameObject;
+		Vector3 launchVector;
 		if (obj.tag == "Surface") {
-			Vector3 launchVector = previousVelocity * blockBounceFactor;
-			launchVector = new Vector3 (launchVector.x, -launchVector.y, 0);
+			launchVector = previousVelocity * blockBounceFactor;
+			launchVector = new Vector2 (launchVector.x, -launchVector.y);
+			if (hitstunTimer > 0) {
+				GetHit (launchVector);
+				obj.transform.parent.gameObject.GetComponent<Block> ().DestroyThis ();
+			} else {
+				GetBumped (launchVector, true, true);
+			}
+		}
+		if (obj.tag == "Player") {
+			launchVector = previousVelocity * -playerBounceFactor;
 			GetBumped (launchVector, true, true);
 		}
 	}
 
 	void UpdateCooldownTimerObj(){
-		bumperCooldownObj.localScale = Vector3.one * Mathf.Lerp (0, 1, 1 - (bumpCooldownTimer / bumpCooldown));
+		if (hitstunTimer > 0) {
+			bumperCooldownObj.localScale = Vector3.one * Mathf.Lerp (0, 1, 1 - (hitstunTimer / hitstunDuration));
+			bumperCooldownObj.GetComponent<SpriteRenderer> ().color = Color.grey;
+		} else {
+			bumperCooldownObj.localScale = Vector3.one * Mathf.Lerp (0, 1, 1 - (bumpCooldownTimer / bumpCooldown));
+			bumperCooldownObj.GetComponent<SpriteRenderer> ().color = defaultColor;
+		}
 	}
 }
