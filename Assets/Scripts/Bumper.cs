@@ -9,7 +9,9 @@ public class Bumper : MonoBehaviour {
 	public float duration;
 	private Player player;
 	public float blockLaunchPower;
-	private bool bumped;
+	public float playerBumpPower;
+	private bool bumpedBlock;
+	private bool bumpedPlayer;
 	public bool isActive;
 
 	// Use this for initialization
@@ -17,7 +19,8 @@ public class Bumper : MonoBehaviour {
 		sr = GetComponent<SpriteRenderer> ();
 		col = GetComponent<CircleCollider2D> ();
 		player = GetComponentInParent<Player> ();
-		bumped = false;
+		bumpedBlock = false;
+		bumpedPlayer = false;
 
 		Deactivate ();
 	}
@@ -46,16 +49,25 @@ public class Bumper : MonoBehaviour {
 
 	void Deactivate(){
 		SetActiveStatus (false);
-		bumped = false;
+		bumpedBlock = false;
+		bumpedPlayer = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
 		GameObject obj = collider.gameObject;
-		if (obj.tag == "Surface" && !bumped) {
+		if (obj.tag == "Surface" && !bumpedBlock) {
 			Vector3 launchVector = obj.GetComponent<Surface>().surfaceNormal * blockLaunchPower;
-			player.GetBumped (launchVector, true);
-			bumped = true;
+			player.GetBumped (launchVector, true, false);
+			bumpedBlock = true;
 			obj.transform.parent.gameObject.GetComponent<Block> ().DestroyThis ();
+		}
+		if (obj.tag == "Player" && !bumpedPlayer) {
+			Player otherPlayer = obj.GetComponent<Player> ();
+			if (otherPlayer.playerNum != player.playerNum) {
+				Vector3 launchVector = (otherPlayer.transform.position - player.transform.position).normalized * playerBumpPower;
+				otherPlayer.GetBumped (launchVector, true, true);
+				bumpedPlayer = true;
+			}
 		}
 	}
 }

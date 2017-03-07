@@ -57,14 +57,14 @@ public class Player : MonoBehaviour {
 		UpdateCooldownTimerObj ();
 	}
 
-	public void GetBumped(Vector2 bumpVector, bool vertical){
-		Vector2 newVelocity;
+	public void GetBumped(Vector2 bumpVector, bool vertical, bool horizontal){
+		Vector2 newVelocity = Vector2.zero;
 		if (vertical) {
-			newVelocity = new Vector2 (0, bumpVector.y);
-		} else {
-			newVelocity = new Vector2 (bumpVector.x, 0);
+			newVelocity = new Vector2 (newVelocity.x, bumpVector.y);
+		} 
+		if (horizontal) {
+			newVelocity = new Vector2 (bumpVector.x, newVelocity.y);
 		}
-
 		rb.velocity = newVelocity;
 	}
 
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour {
 		if (obj.tag == "Surface") {
 			Vector3 launchVector = previousVelocity * blockBounceFactor;
 			launchVector = new Vector3 (launchVector.x, -launchVector.y, 0);
-			GetBumped (launchVector, true);
+			GetBumped (launchVector, true, true);
 		}
 	}
 
