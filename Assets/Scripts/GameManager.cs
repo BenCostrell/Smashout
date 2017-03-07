@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -12,12 +13,15 @@ public class GameManager : MonoBehaviour {
 	public Vector3 spawnPoint_P2;
 	private BlockManager blockManager;
 	public bool gameOver;
+	public GameObject gameOverText;
+	public float gameOverTextTweenDuration;
 
 	// Use this for initialization
 	void Start () {
 		InitializePlayers ();
 		blockManager = GameObject.FindGameObjectWithTag ("BlockManager").GetComponent<BlockManager> ();
 		gameOver = false;
+		gameOverText.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -58,5 +62,30 @@ public class GameManager : MonoBehaviour {
 	public void GameOver (int playerNum){
 		Debug.Log ("game over");
 		blockManager.DestroyAllBlocks ();
+		StartCoroutine (WaitToShowText (playerNum));
+	}
+
+	IEnumerator WaitToShowText(int playerNum){
+		yield return new WaitForSeconds(blockManager.blockDeathTime);
+		ShowGameOverText(playerNum);
+	}
+
+	void ShowGameOverText(int playerNum){
+		Color textColor = Color.white;
+		string winText = "whoops";
+		if (playerNum == 1) {
+			textColor = Color.blue;
+			winText = "BLUE";
+		} else if (playerNum == 2) {
+			textColor = Color.green;
+			winText = "GREEN";
+		}
+		Text[] textObjs= gameOverText.GetComponentsInChildren<Text>();
+		textObjs [0].color = textColor;
+		textObjs [1].color = textColor;
+		textObjs [0].text = winText + " WINS";
+		gameOverText.SetActive (true);
+		iTween.ScaleFrom(gameOverText, iTween.Hash("scale", 0f * Vector3.one, "duration", gameOverTextTweenDuration,
+			"easetype", iTween.EaseType.easeOutExpo));
 	}
 }
