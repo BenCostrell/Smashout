@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
-  groundDetectionDistance: 1
+  groundDetectionDistance: 6
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -174,8 +174,10 @@ MonoBehaviour:
   playerBounceFactor: 1
   bumpCooldown: 0.6
   hitstunTimer: 0
-  hitstunDuration: 0.3
+  hitstunDuration: 0.5
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  comboScaling: 0.15
+  platformLifetimeWhileStanding: 1
 --- !u!114 &114727248102592108
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4736572746893586}
   - component: {fileID: 61164835618550722}
   - component: {fileID: 114271907557311170}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Top
   m_TagString: Surface
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4806956483000592}
   - component: {fileID: 61975872456206388}
   - component: {fileID: 114784619859284184}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Bottom
   m_TagString: Surface
   m_Icon: {fileID: 0}

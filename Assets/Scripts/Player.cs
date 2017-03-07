@@ -19,6 +19,10 @@ public class Player : MonoBehaviour {
 	public float hitstunTimer;
 	public float hitstunDuration;
 	public Color defaultColor;
+	private int comboCounter;
+	public float comboScaling;
+	public float platformLifetimeWhileStanding;
+	private float currentTimeOnTopOfPlatform;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +30,8 @@ public class Player : MonoBehaviour {
 		bumper = GetComponentInChildren<Bumper> ();
 		bumpCooldownTimer = 0;
 		hitstunTimer = 0;
+		comboCounter = 0;
+		currentTimeOnTopOfPlatform = 0;
 		bumperCooldownObj = GetComponentsInChildren<Transform> () [2];
 	}
 	
@@ -35,6 +41,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
+		CheckIfGrounded ();
 		if (hitstunTimer > 0) {
 			hitstunTimer -= Time.deltaTime;
 			UpdateCooldownTimerObj ();
@@ -68,11 +75,13 @@ public class Player : MonoBehaviour {
 	}
 
 	public void GetHit(Vector2 knockback){
+		if (hitstunTimer > 0) {
+			comboCounter += 1;
+		}
 		GetBumped (knockback, true, true);
-		hitstunTimer = hitstunDuration;
+		hitstunTimer = hitstunDuration * (1 + (comboScaling * comboCounter));
 		bumpCooldownTimer = 0;
 		UpdateCooldownTimerObj ();
-		Debug.Log ("player " + playerNum + " got hit");
 	}
 
 	public void GetBumped(Vector2 bumpVector, bool vertical, bool horizontal){
@@ -86,8 +95,22 @@ public class Player : MonoBehaviour {
 		rb.velocity = newVelocity;
 	}
 
-	bool IsGrounded(){
-		return Physics2D.Raycast (transform.position, Vector2.down, groundDetectionDistance, groundLayer);
+	bool CheckIfGrounded(){
+		bool grounded;
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, groundDetectionDistance, groundLayer);
+		Debug.DrawRay (transform.position, Vector2.down * groundDetectionDistance);
+		if (hit) {
+			grounded = true;
+			currentTimeOnTopOfPlatform += Time.deltaTime;
+			if (currentTimeOnTopOfPlatform >= platformLifetimeWhileStanding) {
+				Block block = hit.collider.gameObject.GetComponent<Block> ();
+				block.DestroyThis ();
+			}
+		} else {
+			grounded = false;
+			currentTimeOnTopOfPlatform = 0;
+		}
+		return grounded;
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
