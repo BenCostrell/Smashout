@@ -10,10 +10,14 @@ public class GameManager : MonoBehaviour {
 	private Player player2;
 	public Vector3 spawnPoint_P1;
 	public Vector3 spawnPoint_P2;
+	private BlockManager blockManager;
+	public bool gameOver;
 
 	// Use this for initialization
 	void Start () {
 		InitializePlayers ();
+		blockManager = GameObject.FindGameObjectWithTag ("BlockManager").GetComponent<BlockManager> ();
+		gameOver = false;
 	}
 	
 	// Update is called once per frame
@@ -49,5 +53,10 @@ public class GameManager : MonoBehaviour {
 		player.defaultColor = defColor;
 
 		return player;
+	}
+
+	public void GameOver (int playerNum){
+		Debug.Log ("game over");
+		blockManager.DestroyAllBlocks ();
 	}
 }

@@ -20,7 +20,6 @@ public class BlockManager : MonoBehaviour {
 	Block Create(Vector3 location){
 		GameObject obj = Instantiate (blockPrefab, location, Quaternion.identity) as GameObject;
 		Block block = obj.GetComponent<Block> ();
-		blockList.Add (block);
 		return block;
 	}
 
@@ -71,20 +70,29 @@ public class BlockManager : MonoBehaviour {
 			block = GenerateValidBlock ();
 			if (block.transform.position == Vector3.forward) {
 				Destroy (block.gameObject);
-				Debug.Log("only made " + i + "blocks");
+				Debug.Log ("only made " + i + "blocks");
 				break;
+			} else {
+				blockList.Add (block);
 			}
 		}
 	}
 
 	public void DestroyBlock(Block block){
-		blockList.Remove (block);
 		Collider2D[] colliders = block.GetComponentsInChildren<Collider2D> ();
 		foreach (Collider2D col in colliders) {
 			col.enabled = false;
 		}
 		block.gameObject.GetComponent<SpriteRenderer> ().color = Color.red;
 		block.StartDestructionAnimation ();
+		blockList.Remove (block);
 		Destroy (block.gameObject, blockDeathTime);
+	}
+
+	public void DestroyAllBlocks(){
+		for (int i = blockList.Count - 1; i >= 0; i--) {
+			Block block = blockList [i];
+			DestroyBlock (block);
+		}
 	}
 }

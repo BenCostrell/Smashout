@@ -23,11 +23,13 @@ public class Player : MonoBehaviour {
 	public float comboScaling;
 	public float platformLifetimeWhileStanding;
 	private float currentTimeOnTopOfPlatform;
+	private GameManager gameManager;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		bumper = GetComponentInChildren<Bumper> ();
+		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GameManager> ();
 		bumpCooldownTimer = 0;
 		hitstunTimer = 0;
 		comboCounter = 0;
@@ -125,10 +127,14 @@ public class Player : MonoBehaviour {
 			} else {
 				GetBumped (launchVector, true, true);
 			}
-		}
-		if (obj.tag == "Player") {
+		} else if (obj.tag == "Player") {
 			launchVector = previousVelocity * -playerBounceFactor;
 			GetBumped (launchVector, true, true);
+		} else if (obj.tag == "DeathZone") {
+			if (!gameManager.gameOver) {
+				gameManager.gameOver = true;
+				gameManager.GameOver (playerNum);
+			}
 		}
 	}
 
