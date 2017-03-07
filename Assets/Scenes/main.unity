@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 916781793}
   m_Layer: 0
   m_Name: BlockManager
-  m_TagString: Untagged
+  m_TagString: BlockManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 1450301891890428, guid: 17df2f721fbb91447b5a69c273324f28,
     type: 2}
   maxNumTries: 200
+  blockDeathTime: 0.3
 --- !u!4 &916781794
 Transform:
   m_ObjectHideFlags: 0
@@ -542,5 +543,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   driftForce: 200
-  blockBounceFactor: 50
+  blockBounceFactor: 1
   bumpCooldown: 0.6

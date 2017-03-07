@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
 	public float blockBounceFactor;
 	public float bumpCooldown;
 	private float bumpCooldownTimer;
+	private Vector2 previousVelocity;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		previousVelocity = rb.velocity;
 	}
 
 	void FixedUpdate(){
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour {
 		} else {
 			newVelocity = new Vector2 (bumpVector.x, 0);
 		}
+
 		rb.velocity = newVelocity;
 	}
 
@@ -72,7 +75,8 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision){
 		GameObject obj = collision.collider.gameObject;
 		if (obj.tag == "Surface") {
-			Vector3 launchVector = obj.GetComponent<Surface>().surfaceNormal * blockBounceFactor;
+			Vector3 launchVector = previousVelocity * blockBounceFactor;
+			launchVector = new Vector3 (launchVector.x, -launchVector.y, 0);
 			GetBumped (launchVector, true);
 		}
 	}

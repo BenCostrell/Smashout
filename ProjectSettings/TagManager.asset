@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Surface
+  - BlockManager
   layers:
   - Default
   - TransparentFX

@@ -55,7 +55,7 @@ public class Bumper : MonoBehaviour {
 			Vector3 launchVector = obj.GetComponent<Surface>().surfaceNormal * blockLaunchPower;
 			player.GetBumped (launchVector, true);
 			bumped = true;
-			Destroy (obj.transform.parent.gameObject);
+			obj.transform.parent.gameObject.GetComponent<Block> ().DestroyThis ();
 		}
 	}
 }

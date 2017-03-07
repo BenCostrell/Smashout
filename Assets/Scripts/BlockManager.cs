@@ -10,6 +10,7 @@ public class BlockManager : MonoBehaviour {
 	public Vector2 range;
 	public GameObject blockPrefab;
 	public int maxNumTries;
+	public float blockDeathTime;
 
 	void Start(){
 		blockList = new List<Block> ();
@@ -74,5 +75,16 @@ public class BlockManager : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	public void DestroyBlock(Block block){
+		blockList.Remove (block);
+		Collider2D[] colliders = block.GetComponentsInChildren<Collider2D> ();
+		foreach (Collider2D col in colliders) {
+			col.enabled = false;
+		}
+		block.gameObject.GetComponent<SpriteRenderer> ().color = Color.red;
+		block.StartDestructionAnimation ();
+		Destroy (block.gameObject, blockDeathTime);
 	}
 }
