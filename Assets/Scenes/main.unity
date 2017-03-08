@@ -632,8 +632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1907077944721200, guid: 4bdc06d7be444ab4b86194b2826726ad,
     type: 2}
-  spawnPoint_P1: {x: -50, y: 90, z: 0}
-  spawnPoint_P2: {x: 50, y: 90, z: 0}
+  spawnPoint_P1: {x: -50, y: 110, z: 0}
+  spawnPoint_P2: {x: 50, y: 110, z: 0}
   gameOver: 0
   gameOverText: {fileID: 1807293114}
   gameOverTextTweenDuration: 0.2

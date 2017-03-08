@@ -177,7 +177,7 @@ MonoBehaviour:
   hitstunDuration: 0.6
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   comboScaling: 0.1
-  platformLifetimeWhileStanding: 0.5
+  platformLifetimeWhileStanding: 0.2
 --- !u!114 &114727248102592108
 MonoBehaviour:
   m_ObjectHideFlags: 1
