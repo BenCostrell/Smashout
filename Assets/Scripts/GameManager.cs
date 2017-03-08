@@ -15,13 +15,17 @@ public class GameManager : MonoBehaviour {
 	public bool gameOver;
 	public GameObject gameOverText;
 	public float gameOverTextTweenDuration;
+	private int frameCount;
 
 	// Use this for initialization
 	void Start () {
-		InitializePlayers ();
 		blockManager = GameObject.FindGameObjectWithTag ("BlockManager").GetComponent<BlockManager> ();
 		gameOver = false;
 		gameOverText.SetActive (false);
+		frameCount = 0;
+
+		blockManager.GenerateInitialBlockSetup ();
+		StartCoroutine (QueueAppearanceOfAllBlocksAndPlayerInitialization ());
 	}
 	
 	// Update is called once per frame
@@ -62,12 +66,23 @@ public class GameManager : MonoBehaviour {
 	public void GameOver (int playerNum){
 		Debug.Log ("game over");
 		blockManager.DestroyAllBlocks ();
-		StartCoroutine (WaitToShowText (playerNum));
+		StartCoroutine (QueueGameOverText (playerNum));
 	}
 
-	IEnumerator WaitToShowText(int playerNum){
+	IEnumerator QueueGameOverText(int playerNum){
 		yield return new WaitForSeconds(blockManager.blockDeathTime);
 		ShowGameOverText(playerNum);
+	}
+
+	IEnumerator QueuePlayerInitialization(){
+		yield return new WaitForSeconds (blockManager.blockAppearanceTime);
+		InitializePlayers ();
+	}
+
+	IEnumerator QueueAppearanceOfAllBlocksAndPlayerInitialization(){
+		yield return new WaitForSeconds (0.05f);
+		blockManager.StartAppearanceOfAllBlocks ();
+		StartCoroutine (QueuePlayerInitialization ());
 	}
 
 	void ShowGameOverText(int playerNum){

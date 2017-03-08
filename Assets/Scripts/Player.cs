@@ -131,6 +131,7 @@ public class Player : MonoBehaviour {
 			launchVector = previousVelocity * -playerBounceFactor;
 			GetBumped (launchVector, true, true);
 		} else if (obj.tag == "DeathZone") {
+			Destroy (gameObject);
 			if (!gameManager.gameOver) {
 				gameManager.gameOver = true;
 				gameManager.GameOver (playerNum);

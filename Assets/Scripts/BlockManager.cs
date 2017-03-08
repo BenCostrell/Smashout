@@ -11,15 +11,15 @@ public class BlockManager : MonoBehaviour {
 	public GameObject blockPrefab;
 	public int maxNumTries;
 	public float blockDeathTime;
+	public float blockAppearanceTime;
 
 	void Start(){
-		blockList = new List<Block> ();
-		GenerateInitialBlockSetup ();
 	}
 
 	Block Create(Vector3 location){
 		GameObject obj = Instantiate (blockPrefab, location, Quaternion.identity) as GameObject;
 		Block block = obj.GetComponent<Block> ();
+		block.GetComponent<SpriteRenderer> ().enabled = false;
 		return block;
 	}
 
@@ -64,7 +64,8 @@ public class BlockManager : MonoBehaviour {
 		return block;
 	}
 
-	void GenerateInitialBlockSetup(){
+	public void GenerateInitialBlockSetup(){
+		blockList = new List<Block> ();
 		Block block;
 		for (int i = 0; i < numInitialBlocks; i++) {
 			block = GenerateValidBlock ();
@@ -95,4 +96,11 @@ public class BlockManager : MonoBehaviour {
 			DestroyBlock (block);
 		}
 	}
+
+	public void StartAppearanceOfAllBlocks(){
+		foreach (Block block in blockList) {
+			block.StartAppearanceAnimation ();
+		}
+	}
+
 }

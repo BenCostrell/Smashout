@@ -23,4 +23,10 @@ public class Block : MonoBehaviour {
 		iTween.ScaleTo (gameObject, iTween.Hash ("scale", Vector3.zero, "easetype", iTween.EaseType.easeInBack, 
 			"time", blockManager.blockDeathTime));
 	}
+
+	public void StartAppearanceAnimation(){
+		GetComponent<SpriteRenderer> ().enabled = true;
+		iTween.ScaleFrom(gameObject, iTween.Hash ("scale", Vector3.zero, "easetype", iTween.EaseType.easeOutBack, 
+			"time", blockManager.blockAppearanceTime));
+	}
 }
