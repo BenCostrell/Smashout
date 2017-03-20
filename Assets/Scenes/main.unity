@@ -151,7 +151,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 120
+  orthographic size: 85
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -172,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 501818379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -279,9 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306740b7f10d2634380d1d7c8fce5e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numInitialBlocks: 35
+  numInitialBlocks: 20
   minAcceptableDistance: 28
-  range: {x: 150, y: 80}
+  range: {x: 100, y: 55}
   blockPrefab: {fileID: 1450301891890428, guid: 17df2f721fbb91447b5a69c273324f28,
     type: 2}
   maxNumTries: 200
@@ -632,8 +632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1907077944721200, guid: 4bdc06d7be444ab4b86194b2826726ad,
     type: 2}
-  spawnPoint_P1: {x: -50, y: 110, z: 0}
-  spawnPoint_P2: {x: 50, y: 110, z: 0}
+  spawnPoint_P1: {x: -50, y: 90, z: 0}
+  spawnPoint_P2: {x: 50, y: 90, z: 0}
   gameOver: 0
   gameOverText: {fileID: 1807293114}
   gameOverTextTweenDuration: 0.2
