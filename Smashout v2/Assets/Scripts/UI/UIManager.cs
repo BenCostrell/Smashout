@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour {
     public GameObject startPrompt;
     public GameObject congrats;
     public GameObject restartPrompt;
+
+    public float titleScaleInTime;
     
     // Use this for initialization
 	void Start () {
@@ -18,4 +20,9 @@ public class UIManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void SetUpUI()
+    {
+
+    }
 }
