@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 4906706938114216}
   - component: {fileID: 212146806216633426}
   - component: {fileID: 114941581012821566}
+  - component: {fileID: 50088582152735038}
+  - component: {fileID: 58726277273771828}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,11 +38,45 @@ Transform:
   m_GameObject: {fileID: 1489146486522114}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50088582152735038
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489146486522114}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 25
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &58726277273771828
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489146486522114}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5
 --- !u!114 &114941581012821566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +88,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca3e090b0b5ba44392fdfa6068ef639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 0.88235295, g: 0.08434254, b: 0.08434254, a: 0}
+  playerNum: 0
+  bumpCooldown: 0.6
+  hurtScale: 0
+  moveSpeed: 250
+  xDrag: 0
+  maxVelocity: 200
+  bounceScale: 1
+  bumpBounceScale: 1.8
+  bumpPlayerScale: 1.5
+  bump: 0
+  bounced: 0
+  stun: 0
+  stunTimeLenght: 0.6
+  stunTimeUntil: 0
+  bounceTime: 0
 --- !u!212 &212146806216633426
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -83,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fb893893bb20f5245a519bb60cbca3c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
