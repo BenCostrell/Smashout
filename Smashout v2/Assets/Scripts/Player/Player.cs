@@ -29,11 +29,16 @@ public class Player : MonoBehaviour
 	public float bounceTime = 0;
 
     // Use this for initialization
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Start()
     {
 
-        rb = GetComponent<Rigidbody2D>();
-		GetComponent<SpriteRenderer> ().color = color;
+        GetComponent<SpriteRenderer> ().color = color;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
     }

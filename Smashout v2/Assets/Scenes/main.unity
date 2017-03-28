@@ -226,10 +226,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1736180919811160, guid: b4e6283245e841d4b9a2c6414d0ddc13, type: 2}
-      propertyPath: m_TagString
-      value: UIManager
-      objectReference: {fileID: 0}
+    - target: {fileID: 114710618839059030, guid: b4e6283245e841d4b9a2c6414d0ddc13,
+        type: 2}
+      propertyPath: title
+      value: 
+      objectReference: {fileID: 1812145166}
+    - target: {fileID: 114710618839059030, guid: b4e6283245e841d4b9a2c6414d0ddc13,
+        type: 2}
+      propertyPath: startPrompt
+      value: 
+      objectReference: {fileID: 110751052}
+    - target: {fileID: 114710618839059030, guid: b4e6283245e841d4b9a2c6414d0ddc13,
+        type: 2}
+      propertyPath: congrats
+      value: 
+      objectReference: {fileID: 1567486841}
+    - target: {fileID: 114710618839059030, guid: b4e6283245e841d4b9a2c6414d0ddc13,
+        type: 2}
+      propertyPath: restartPrompt
+      value: 
+      objectReference: {fileID: 412343843}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4e6283245e841d4b9a2c6414d0ddc13, type: 2}
   m_IsPrefabParent: 0
@@ -640,6 +656,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: spawnpoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4782839498460714, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -671,6 +692,16 @@ Prefab:
     - target: {fileID: 4782839498460714, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: spawnpoints.Array.data[0].x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: spawnpoints.Array.data[1].x
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}

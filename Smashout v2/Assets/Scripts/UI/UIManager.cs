@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour {
     
     // Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -21,8 +20,11 @@ public class UIManager : MonoBehaviour {
 		
 	}
 
-    void SetUpUI()
+    public void SetUpUI()
     {
-
+        title.SetActive(false);
+        startPrompt.SetActive(false);
+        congrats.SetActive(false);
+        restartPrompt.SetActive(false);
     }
 }

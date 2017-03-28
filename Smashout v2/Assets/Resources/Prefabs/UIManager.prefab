@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114710618839059030}
   m_Layer: 0
   m_Name: UIManager
-  m_TagString: Untagged
+  m_TagString: UIManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,3 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e15e65eac6547b499f463981dc3186f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 0}
+  startPrompt: {fileID: 0}
+  congrats: {fileID: 0}
+  restartPrompt: {fileID: 0}
+  titleScaleInTime: 0

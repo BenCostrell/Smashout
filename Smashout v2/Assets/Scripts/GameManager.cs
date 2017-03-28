@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour {
     public Player player1;
     public Player player2;
 
-    public Vector3 spawnPoint_P1;
-    public Vector3 spawnPoint_P2;
+    public Vector3[] spawnpoints;
     
     // Use this for initialization
 	void Awake () {
@@ -22,6 +21,7 @@ public class GameManager : MonoBehaviour {
         Services.EventManager.Register<GameOver>(GameOver);
         Services.BlockManager.GenerateLevel();
         InitializePlayers();
+        Services.UIManager.SetUpUI();
     }
 
 	// Update is called once per frame
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour {
 
     Player InitializePlayer(int num)
     {
-        Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnPoint_P1, Quaternion.identity).GetComponent<Player>();
+        Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[num-1], Quaternion.identity).GetComponent<Player>();
         newPlayer.playerNum = num;
         return newPlayer;
     }
