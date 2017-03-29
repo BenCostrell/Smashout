@@ -4,29 +4,35 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public Color color;
+    public Color color;
     public int playerNum;
     public float bumpCooldown;
-	private float bumpTime;
-	public float hurtScale;
+    private float bumpTime;
+    public float hurtScale;
     private bool actionable;
 
+    private Bumper bumper;
     public float moveSpeed;
     public float xDrag;
     public float maxVelocity;
     public float bounceScale;
     public float bounceMinSpd;
     public float underBumpCut;
+
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
-    private Rigidbody2D rb;
-    private Vector2 previousVelocity;
+    public Rigidbody2D rb;
+    public Vector2 previousVelocity;
 	public bool bump;
-    public int bounced = 0;
 
-	public bool stun;
-	public float stunTimeLength;
-	public float stunTimeUntil;
+    public int bounced = 0;
+    public float wallKickCut;
+    public float wallKickMinSpeed;
+    public float sideCollisionOffset;
+
+    public bool stun;
+    public float stunTimeLength;
+    public float stunTimeUntil;
 
     public float groundDetectionDistance;
     public LayerMask groundLayer;
@@ -40,12 +46,13 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        bumper = GetComponentInChildren<Bumper>();
     }
 
     void Start()
     {
 
-        GetComponent<SpriteRenderer> ().color = color;
+        GetComponent<SpriteRenderer>().color = color;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
@@ -88,58 +95,44 @@ public class Player : MonoBehaviour
         Vector2 bounceVector;
         if (obj.tag == "Surface")
         {
-			if (bump) {
-                Debug.Log("bounce");
-                bounceVector = previousVelocity * bumpBounceScale - Vector2.up * bounceMinSpd;
-                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
-                {
-                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
-                }
-				rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
-                obj.GetComponent<Block>().DestroyThis();
-                Services.EventManager.Fire(new BumpHit(this));
-			} else {
-				//rb.AddForce(new Vector2(0, Mathf.Abs(rb.velocity.y * 200)));
-				bounceVector = previousVelocity * bounceScale;
-                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
-                {
-                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
-                }
-
-                //for more sudden jerk bounce, do bounceVector.x
-                rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
-				//rb.velocity = new Vector2(bounceVector.x / 4, -bounceVector.y);
-       
-				/*
             float velocityX = previousVelocity.x;
             float velocityY = previousVelocity.y;
-			*/
-
-				/*
-            if(transform.localPosition.y <= obj.transform.localPosition.y)
+                velocityY = previousVelocity.y * bounceScale;
+            
+            //Check if hitting from below
+            if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
             {
-                velocityY = Mathf.Abs(bounceVector.y);
-                //rb.velocity = new Vector2(previousVelocity.x, Mathf.Abs(bounceVector.y));
+                velocityY = velocityY * (1.0f - underBumpCut);
             }
-            else if(transform.localPosition.y > obj.transform.localPosition.y)
+            //Check if hitting left side of the block
+            //if (GetComponent<SpriteRenderer>().bounds.max.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
+			if (transform.position.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
             {
-                velocityY = -Mathf.Abs(previousVelocity.y);
-                //rb.velocity = new Vector2(previousVelocity.x, -Mathf.Abs(bounceVector.y));
+                velocityX = -previousVelocity.x * (1.0f - wallKickCut) - wallKickMinSpeed;
+                //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
+                Debug.Log("hit on the left side");
             }
-            rb.velocity = new Vector2(velocityX, velocityY);
-            */
-			}
+            //Check if hitting right side of the block
+            //else if (GetComponent<SpriteRenderer>().bounds.min.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
+			else if (transform.position.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
+            {
+                velocityX = -previousVelocity.x * (1.0f - wallKickCut) + wallKickMinSpeed;
+                //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
+                Debug.Log("hit on the right side");
+            }
+            rb.velocity = new Vector2(velocityX, -velocityY);
         }
 		if (obj.tag == "Player")
 		{
 			Player enemy = collision.gameObject.GetComponent<Player>();
+            Bumper enemy_bump = collision.gameObject.GetComponent<Bumper>();
 			bool sameDirection = false;
 			float velocityX = previousVelocity.x;
 			float velocityY = previousVelocity.y;
-			if (enemy.bump) {
+			/*if (enemy.bump) {
 				if (!bump) {
 					velocityX = enemy.previousVelocity.x;
-					velocityY = enemy.previousVelocity.y;
+					velocityY = enemy.previousVelocity.y;*/
                     /*
 					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
 						velocityX = enemy.previousVelocity.x;
@@ -153,7 +146,7 @@ public class Player : MonoBehaviour
 						velocityY -= previousVelocity.y - enemy.previousVelocity.y;
 					}
 					*/
-                    GetStunned(stunTimeLength);
+                    /*GetStunned(stunTimeLength);
 				}
 			} else {
 				if (bump) {
@@ -169,7 +162,7 @@ public class Player : MonoBehaviour
 						velocityY = previousVelocity.y - enemy.previousVelocity.y*.1f;
 					}
 				}
-			}
+			}*/
 			rb.velocity = new Vector2(velocityX, velocityY);
 		}
     }
