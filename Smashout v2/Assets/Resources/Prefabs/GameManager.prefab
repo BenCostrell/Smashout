@@ -51,3 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2f1f785c2779249b62c015df4cda7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  spawnpoints:
+  - {x: -50, y: 80, z: 0}
+  - {x: 50, y: 80, z: 0}

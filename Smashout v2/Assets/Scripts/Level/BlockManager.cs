@@ -37,7 +37,7 @@ public class BlockManager : MonoBehaviour {
         behaviour = _behaviour;
 
         preInitRNG = UnityEngine.Random.state;
-        _init();
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Update()

@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public Player player1;
-    public Player player2;
-
+    public Player[] players;
+    public Color[] playerColors;
     public Vector3[] spawnpoints;
     
     // Use this for initialization
@@ -36,7 +35,7 @@ public class GameManager : MonoBehaviour {
         Services.EventManager = new EventManager();
         Services.TaskManager = new TaskManager();
         Services.PrefabDB = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
-        Services.BlockManager = new BlockManager();
+        Services.BlockManager = GameObject.FindGameObjectWithTag("BlockManager").GetComponent<BlockManager>();
         Services.UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Services.InputManager = new InputManager();
     }
@@ -53,13 +52,15 @@ public class GameManager : MonoBehaviour {
 
     void InitializePlayers()
     {
-        player1 = InitializePlayer(1);
-        player2 = InitializePlayer(2);
+        players = new Player[2];
+        players[0] = InitializePlayer(1);
+        players[1] = InitializePlayer(2);
     }
 
     Player InitializePlayer(int num)
     {
         Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[num-1], Quaternion.identity).GetComponent<Player>();
+        newPlayer.color = playerColors[num - 1];
         newPlayer.playerNum = num;
         return newPlayer;
     }

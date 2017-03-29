@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     {
         //Input Handling with the joysticks of the controllers
         float input = Input.GetAxis("Horizontal_P" + playerNum);
+        Debug.Log(input + " from player " + playerNum);
         Vector2 moveForce = new Vector2(input * moveSpeed, 0);
         rb.AddForce(moveForce);
         /*Vector2 addDrag = new Vector2(-input*xDrag, 0);
