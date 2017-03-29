@@ -5,13 +5,16 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour {
     public List<GameObject> blockTypes;
     public List<GameObject> blockPatterns;
-    public List<GameObject> blockStatics;
+    public List<Block> blockStatics;
     public float blockDeathTime;
     public float blockAppearanceTime;
     public float minAcceptableDistance;
     public int maxNumTries;
-    public double blockCount;
-    public double patternCount;
+    public int blockCountLow;
+    public int blockCountHigh;
+    public int patternCountLow;
+    public int patternCountHigh;
+    public float playerSpawnPlatformOffset;
     public bool pause;
 
     public Action init
@@ -29,12 +32,17 @@ public class BlockManager : MonoBehaviour {
     private Action _behaviour;
     private List<Block> blocks;
     private UnityEngine.Random.State preInitRNG;
+    private int blockCount;
+    private int patternCount;
 
     void Start()
     {
         //Defaults _init and _behaviour if they have not already been set
         init = _init;
         behaviour = _behaviour;
+
+        blockCount = UnityEngine.Random.Range(blockCountLow, blockCountHigh);
+        patternCount = UnityEngine.Random.Range(patternCountLow, patternCountHigh);
 
         preInitRNG = UnityEngine.Random.state;
         GetComponent<SpriteRenderer>().enabled = false;
@@ -111,6 +119,53 @@ public class BlockManager : MonoBehaviour {
         return valid;
     }
 
+    bool ValidateLocation(Bounds bounds)
+    {
+        foreach (Block block in blocks)
+        {
+            Vector3 refPoint = Vector3.zero;
+            if (block.transform.position.x > bounds.max.x) refPoint += new Vector3(bounds.max.x, 0);
+            else if (block.transform.position.x < bounds.min.x) refPoint += new Vector3(bounds.min.x, 0);
+            else return false;
+
+            if (block.transform.position.y > bounds.max.y) refPoint += new Vector3(0, bounds.max.y);
+            else if (block.transform.position.y < bounds.min.y) refPoint += new Vector3(0, bounds.min.y);
+            else return false;
+
+            if (Vector3.Distance(block.transform.position, refPoint) < minAcceptableDistance) return false;
+        }
+        return true;
+    }
+
+    Vector3 GenerateValidLocation(GameObject pattern)
+    {
+        GameObject obj = Instantiate(pattern, Vector3.zero, Quaternion.identity) as GameObject;
+        Bounds bounds = new TotalBounds(obj);
+        bounds.center = GenerateLocation();
+        bool valid = ValidateLocation(bounds);
+
+        for (int i = 0; i < maxNumTries; i++)
+        {
+            if (!valid)
+            {
+                bounds.center = GenerateLocation();
+                valid = ValidateLocation(bounds);
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (!valid)
+        {
+            bounds.center = Vector3.forward;
+        }
+
+        Destroy(obj);
+
+        return bounds.center;
+    }
+
     Vector3 GenerateValidLocation()
     {
         Vector3 location = GenerateLocation();
@@ -146,6 +201,24 @@ public class BlockManager : MonoBehaviour {
     {
         blocks = new List<Block>();
         Block block;
+
+        foreach (Vector3 loc in Services.GameManager.spawnpoints) blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
+
+        //for (int i = 0; i < patternCount; i++)
+        //{
+        //    GameObject patternType = blockPatterns[UnityEngine.Random.Range(0, blockPatterns.Count)];
+        //    Vector3 location = GenerateValidLocation(patternType);
+        //    if (location == Vector3.forward) continue;
+
+        //    GameObject pattern = Instantiate(patternType, location, Quaternion.identity) as GameObject;
+        //    foreach (Transform b in pattern.GetComponentsInChildren<Transform>())
+        //    {
+        //        b.parent = null;
+        //        blocks.Add(b.GetComponent<Block>());
+        //    }
+        //    Destroy(pattern);
+        //}
+
         for (int i = 0; i < blockCount; i++)
         {
             block = GenerateValidBlock();
@@ -159,6 +232,12 @@ public class BlockManager : MonoBehaviour {
             {
                 blocks.Add(block);
             }
+        }
+
+        foreach (Block b in blockStatics)
+        {
+            blocks.Add(b);
+            blockStatics.Remove(b);
         }
     }
 
