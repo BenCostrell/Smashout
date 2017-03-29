@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public Color color;
+    public Color color;
     public int playerNum;
     public float bumpCooldown;
-	private float bumpTime;
-	public float hurtScale;
+    private float bumpTime;
+    public float hurtScale;
     private bool actionable;
 
     public float moveSpeed;
@@ -17,18 +17,21 @@ public class Player : MonoBehaviour
     public float bounceScale;
     public float bounceMinSpd;
     public float underBumpCut;
-	public float bumpBounceScale;
-	public float bumpPlayerScale;
+    public float bumpBounceScale;
+    public float bumpPlayerScale;
     private Rigidbody2D rb;
     private Vector2 previousVelocity;
-	public bool bump;
+    public bool bump;
     public int bounced = 0;
+    public float wallKickCut;
+    public float wallKickMinSpeed;
+    public float sideCollisionOffset;
 
-	public bool stun;
-	public float stunTimeLength;
-	public float stunTimeUntil;
+    public bool stun;
+    public float stunTimeLength;
+    public float stunTimeUntil;
 
-	public float bounceTime = 0;
+    public float bounceTime = 0;
 
     // Use this for initialization
 
@@ -40,7 +43,7 @@ public class Player : MonoBehaviour
     void Start()
     {
 
-        GetComponent<SpriteRenderer> ().color = color;
+        GetComponent<SpriteRenderer>().color = color;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
@@ -82,90 +85,84 @@ public class Player : MonoBehaviour
         Vector2 bounceVector;
         if (obj.tag == "Surface")
         {
-			if (bump) {
-                Debug.Log("bounce");
-                bounceVector = previousVelocity * bumpBounceScale - Vector2.up * bounceMinSpd;
-                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
-                {
-                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
-                }
-				rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
-                obj.GetComponent<Block>().DestroyThis();
-                Services.EventManager.Fire(new BumpHit(this));
-			} else {
-				//rb.AddForce(new Vector2(0, Mathf.Abs(rb.velocity.y * 200)));
-				bounceVector = previousVelocity * bounceScale;
-                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
-                {
-                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
-                }
-
-                //for more sudden jerk bounce, do bounceVector.x
-                rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
-				//rb.velocity = new Vector2(bounceVector.x / 4, -bounceVector.y);
-       
-				/*
             float velocityX = previousVelocity.x;
             float velocityY = previousVelocity.y;
-			*/
 
-				/*
-            if(transform.localPosition.y <= obj.transform.localPosition.y)
+            if (bump)
             {
-                velocityY = Mathf.Abs(bounceVector.y);
-                //rb.velocity = new Vector2(previousVelocity.x, Mathf.Abs(bounceVector.y));
+                Debug.Log("bounce");
+                velocityY = previousVelocity.y * bumpBounceScale - bounceMinSpd;
+                obj.GetComponent<Block>().DestroyThis();
+                Services.EventManager.Fire(new BumpHit(this));
             }
-            else if(transform.localPosition.y > obj.transform.localPosition.y)
+            else
             {
-                velocityY = -Mathf.Abs(previousVelocity.y);
-                //rb.velocity = new Vector2(previousVelocity.x, -Mathf.Abs(bounceVector.y));
+                velocityY = previousVelocity.y * bounceScale;
+            }
+            //Check if hitting from below
+            if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
+            {
+                velocityY = velocityY * (1.0f - underBumpCut);
+            }
+            //Check if hitting left side of the block
+            //if (GetComponent<SpriteRenderer>().bounds.max.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
+			if (transform.position.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
+            {
+                velocityX = -previousVelocity.x * (1.0f - wallKickCut) - wallKickMinSpeed;
+                //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
+                Debug.Log("hit on the left side");
+            }
+            //Check if hitting right side of the block
+            //else if (GetComponent<SpriteRenderer>().bounds.min.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
+			else if (transform.position.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
+            {
+                velocityX = -previousVelocity.x * (1.0f - wallKickCut) + wallKickMinSpeed;
+                //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
+                Debug.Log("hit on the right side");
+            }
+            rb.velocity = new Vector2(velocityX, -velocityY);
+        }
+
+        if (obj.tag == "Player")
+        {
+            Player enemy = collision.gameObject.GetComponent<Player>();
+            bool sameDirection = false;
+            float velocityX = previousVelocity.x;
+            float velocityY = previousVelocity.y;
+            if (enemy.bump)
+            {
+                if (!bump)
+                {
+                    velocityX = enemy.previousVelocity.x;
+                    velocityY = enemy.previousVelocity.y;
+                    GetStunned(stunTimeLength);
+                }
+            }
+            else
+            {
+                if (bump)
+                {
+                    if (Mathf.Sign(previousVelocity.x) != Mathf.Sign(enemy.previousVelocity.x))
+                    {
+                        velocityX = previousVelocity.x + enemy.previousVelocity.x * .1f;
+
+                    }
+                    else
+                    {
+                        velocityX -= previousVelocity.x - enemy.previousVelocity.x;
+                    }
+                    if (Mathf.Sign(previousVelocity.y) != Mathf.Sign(enemy.previousVelocity.y))
+                    {
+                        velocityY = velocityY + enemy.previousVelocity.y;
+                    }
+                    else
+                    {
+                        velocityY = previousVelocity.y - enemy.previousVelocity.y * .1f;
+                    }
+                }
             }
             rb.velocity = new Vector2(velocityX, velocityY);
-            */
-			}
         }
-		if (obj.tag == "Player")
-		{
-			Player enemy = collision.gameObject.GetComponent<Player>();
-			bool sameDirection = false;
-			float velocityX = previousVelocity.x;
-			float velocityY = previousVelocity.y;
-			if (enemy.bump) {
-				if (!bump) {
-					velocityX = enemy.previousVelocity.x;
-					velocityY = enemy.previousVelocity.y;
-                    /*
-					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
-						velocityX = enemy.previousVelocity.x;
-
-					} else {
-						velocityX = enemy.previousVelocity.x;
-					}
-					if (Mathf.Sign (previousVelocity.y) != Mathf.Sign (enemy.previousVelocity.y)) {
-						velocityY = velocityY + enemy.previousVelocity.y;
-					} else {
-						velocityY -= previousVelocity.y - enemy.previousVelocity.y;
-					}
-					*/
-                    GetStunned(stunTimeLength);
-				}
-			} else {
-				if (bump) {
-					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
-						velocityX = previousVelocity.x + enemy.previousVelocity.x*.1f;
-
-					} else {
-						velocityX -= previousVelocity.x - enemy.previousVelocity.x;
-					}
-					if (Mathf.Sign (previousVelocity.y) != Mathf.Sign (enemy.previousVelocity.y)) {
-						velocityY = velocityY + enemy.previousVelocity.y;
-					} else {
-						velocityY = previousVelocity.y - enemy.previousVelocity.y*.1f;
-					}
-				}
-			}
-			rb.velocity = new Vector2(velocityX, velocityY);
-		}
     }
 
     void OnButtonPressed(ButtonPressed e)
