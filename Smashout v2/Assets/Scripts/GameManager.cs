@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour {
 
     public void SoftReset()
     {
-        Destroy(players[0]);
-        Destroy(players[1]);
+        Destroy(players[0].gameObject);
+        Destroy(players[1].gameObject);
         Services.BlockManager.DestroyAllBlocks(false);
         Services.UIManager.SetUpUI();
         Services.EventManager.Register<GameOver>(GameOver);
