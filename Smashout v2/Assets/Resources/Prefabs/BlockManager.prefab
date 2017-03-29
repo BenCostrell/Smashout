@@ -53,9 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockTypes:
-  - {fileID: 1234142187582140, guid: 96b327d276915d148bfb6bd953f65435, type: 2}
+  - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   blockPatterns:
-  - {fileID: 1030431041035670, guid: 9f6ca28c7beb82a409fe2ab74e631397, type: 2}
+  - {fileID: 0}
   blockStatics: []
   blockDeathTime: 0.2
   blockAppearanceTime: 0.4
