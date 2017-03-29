@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
 	public float stunTimeLength;
 	public float stunTimeUntil;
 
+    public float groundDetectionDistance;
+    public LayerMask groundLayer;
+    private float currentTimeOnTopOfPlatform;
+    public float platformLifetimeWhileStanding;
+
 	public float bounceTime = 0;
 
     // Use this for initialization
@@ -48,6 +53,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckIfGrounded();
         previousVelocity = rb.velocity;
         if (actionable)
         {
@@ -212,6 +218,24 @@ public class Player : MonoBehaviour
     {
         UnlockButtonInput();
         actionable = true;
+    }
+
+    void CheckIfGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundDetectionDistance, groundLayer);
+        Debug.DrawRay(transform.position, Vector2.down * groundDetectionDistance);
+        if (hit)
+        {
+            currentTimeOnTopOfPlatform += Time.deltaTime;
+            if (currentTimeOnTopOfPlatform >= platformLifetimeWhileStanding)
+            {
+                Block block = hit.collider.gameObject.GetComponent<Block>();
+                block.DestroyThis();
+            }
+        }
+        else {
+            currentTimeOnTopOfPlatform = 0;
+        }
     }
 
     void Die()

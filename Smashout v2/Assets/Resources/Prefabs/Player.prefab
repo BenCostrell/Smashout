@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114941581012821566}
   - component: {fileID: 50088582152735038}
   - component: {fileID: 58726277273771828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -105,6 +105,11 @@ MonoBehaviour:
   stun: 0
   stunTimeLength: 0.6
   stunTimeUntil: 0
+  groundDetectionDistance: 6
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  platformLifetimeWhileStanding: 0.2
   bounceTime: 0
 --- !u!212 &212146806216633426
 SpriteRenderer:
