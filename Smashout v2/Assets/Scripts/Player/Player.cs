@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        currentTimeOnTopOfPlatform = 0f;
         GetComponent<SpriteRenderer>().color = color;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("good");
         CheckIfGrounded();
         previousVelocity = rb.velocity;
         if (actionable)
@@ -108,7 +109,7 @@ public class Player : MonoBehaviour
             //if (GetComponent<SpriteRenderer>().bounds.max.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
 			if (transform.position.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
             {
-                velocityX = -previousVelocity.x * (1.0f - wallKickCut) - wallKickMinSpeed;
+                velocityX = -Mathf.Abs(previousVelocity.x * (1.0f - wallKickCut)) - wallKickMinSpeed;
                 //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
                 Debug.Log("hit on the left side");
             }
@@ -116,10 +117,24 @@ public class Player : MonoBehaviour
             //else if (GetComponent<SpriteRenderer>().bounds.min.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
 			else if (transform.position.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
             {
-                velocityX = -previousVelocity.x * (1.0f - wallKickCut) + wallKickMinSpeed;
+                velocityX = Mathf.Abs(previousVelocity.x * (1.0f - wallKickCut)) + wallKickMinSpeed;
                 //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
                 Debug.Log("hit on the right side");
             }
+            
+            //Maybe the stun bounce recoil//
+            if (stun)
+            {
+                bounceVector = previousVelocity * bumpBounceScale - Vector2.up * bounceMinSpd;
+                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
+                {
+                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
+                }
+                rb.velocity = new Vector2(previousVelocity.x, -bounceVector.y);
+                obj.GetComponent<Block>().DestroyThis();
+                Services.EventManager.Fire(new BumpHit(this));
+            }
+            //---------------------------//
             rb.velocity = new Vector2(velocityX, -velocityY);
         }
 		if (obj.tag == "Player")
@@ -163,7 +178,7 @@ public class Player : MonoBehaviour
 					}
 				}
 			}*/
-			rb.velocity = new Vector2(velocityX, velocityY);
+			rb.velocity = new Vector2(-velocityX/4, -velocityY/4);
 		}
     }
 
@@ -219,6 +234,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * groundDetectionDistance);
         if (hit)
         {
+            Debug.Log(currentTimeOnTopOfPlatform);
             currentTimeOnTopOfPlatform += Time.deltaTime;
             if (currentTimeOnTopOfPlatform >= platformLifetimeWhileStanding)
             {

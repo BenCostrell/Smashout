@@ -10,6 +10,7 @@ public class StunTask : LockOutAllInput {
     {
         base.Init();
         if (player == null) return;
+        player.stun = true;
         player.gameObject.GetComponent<SpriteRenderer>().color = 0.4f * player.color + 0.6f * Color.red;
     }
 
@@ -17,6 +18,7 @@ public class StunTask : LockOutAllInput {
     {
         base.OnSuccess();
         if (player == null) return;
+        player.stun = false;
         player.gameObject.GetComponent<SpriteRenderer>().color = player.color;
     }
 

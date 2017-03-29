@@ -46,15 +46,40 @@ public class Bumper : MonoBehaviour {
         {
             if (active)
             {
+                float velocityX = player.previousVelocity.x;
+                float velocityY = player.previousVelocity.y;
                 Debug.Log("bounce");
+                velocityY = player.previousVelocity.y * player.bounceScale;
                 bounceVector = player.previousVelocity * player.bumpBounceScale - Vector2.up * player.bounceMinSpd;
                 if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
                 {
                     bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - player.underBumpCut));
                 }
-                player.rb.velocity = new Vector2(player.previousVelocity.x, -bounceVector.y);
+                //Check if hitting from below
+                /*if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
+                {
+                    velocityY = velocityY * (1.0f - player.underBumpCut);
+                }*/
+                //Check if hitting left side of the block
+                //if (GetComponent<SpriteRenderer>().bounds.max.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
+                if (transform.position.x - player.sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
+                {
+                    velocityX = -Mathf.Abs(player.previousVelocity.x * (1.0f - player.wallKickCut)) - player.wallKickMinSpeed;
+                    //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
+                    Debug.Log("hit on the left side");
+                }
+                //Check if hitting right side of the block
+                //else if (GetComponent<SpriteRenderer>().bounds.min.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
+                else if (transform.position.x + player.sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
+                {
+                    velocityX = Mathf.Abs(player.previousVelocity.x * (1.0f - player.wallKickCut)) + player.wallKickMinSpeed;
+                    //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
+                    Debug.Log("hit on the right side");
+                }
+                player.rb.velocity = new Vector2(velocityX, -bounceVector.y);
                 obj.GetComponent<Block>().DestroyThis();
                 Services.EventManager.Fire(new BumpHit(player));
+
             }
         }
         if(obj.tag == "Player")
