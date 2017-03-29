@@ -102,6 +102,9 @@ MonoBehaviour:
   bumpPlayerScale: 1.5
   bump: 0
   bounced: 0
+  wallKickCut: 0.25
+  wallKickMinSpeed: 35
+  sideCollisionOffset: 2
   stun: 0
   stunTimeLength: 0.6
   stunTimeUntil: 0
@@ -142,7 +145,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1e3c758b9b512884b8adfc2cfba5f318, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32bf8e2fd67042444aa62e92b3f19b85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
