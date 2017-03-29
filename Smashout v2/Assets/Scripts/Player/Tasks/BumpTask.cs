@@ -12,6 +12,7 @@ public class BumpTask : LockOutButtonInput {
         if (player == null) return;
         player.gameObject.GetComponent<SpriteRenderer>().color = Services.GameManager.bumpColors[player.playerNum-1];
         player.bump = true;
+        player.GetComponentInChildren<Bumper>().setActiveStatus(true);
         Services.EventManager.Register<BumpHit>(OnBumpHit);
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
@@ -35,10 +36,7 @@ public class BumpTask : LockOutButtonInput {
         if (player == null) return;
         player.gameObject.GetComponent<SpriteRenderer>().color = player.color;
         player.bump = false;
-    }
-
-    protected override void CleanUp()
-    {
+        player.GetComponentInChildren<Bumper>().setActiveStatus(false);
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         Services.EventManager.Unregister<GameOver>(OnGameOver);
     }

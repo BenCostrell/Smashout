@@ -11,17 +11,20 @@ public class Player : MonoBehaviour
     public float hurtScale;
     private bool actionable;
 
+    private Bumper bumper;
     public float moveSpeed;
     public float xDrag;
     public float maxVelocity;
     public float bounceScale;
     public float bounceMinSpd;
     public float underBumpCut;
-    public float bumpBounceScale;
-    public float bumpPlayerScale;
-    private Rigidbody2D rb;
-    private Vector2 previousVelocity;
-    public bool bump;
+
+	public float bumpBounceScale;
+	public float bumpPlayerScale;
+    public Rigidbody2D rb;
+    public Vector2 previousVelocity;
+	public bool bump;
+
     public int bounced = 0;
     public float wallKickCut;
     public float wallKickMinSpeed;
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        bumper = GetComponentInChildren<Bumper>();
     }
 
     void Start()
@@ -93,18 +97,8 @@ public class Player : MonoBehaviour
         {
             float velocityX = previousVelocity.x;
             float velocityY = previousVelocity.y;
-
-            if (bump)
-            {
-                Debug.Log("bounce");
-                velocityY = previousVelocity.y * bumpBounceScale - bounceMinSpd;
-                obj.GetComponent<Block>().DestroyThis();
-                Services.EventManager.Fire(new BumpHit(this));
-            }
-            else
-            {
                 velocityY = previousVelocity.y * bounceScale;
-            }
+            
             //Check if hitting from below
             if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
             {
@@ -128,47 +122,49 @@ public class Player : MonoBehaviour
             }
             rb.velocity = new Vector2(velocityX, -velocityY);
         }
+		if (obj.tag == "Player")
+		{
+			Player enemy = collision.gameObject.GetComponent<Player>();
+            Bumper enemy_bump = collision.gameObject.GetComponent<Bumper>();
+			bool sameDirection = false;
+			float velocityX = previousVelocity.x;
+			float velocityY = previousVelocity.y;
+			/*if (enemy.bump) {
+				if (!bump) {
+					velocityX = enemy.previousVelocity.x;
+					velocityY = enemy.previousVelocity.y;*/
+                    /*
+					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
+						velocityX = enemy.previousVelocity.x;
 
-        if (obj.tag == "Player")
-        {
-            Player enemy = collision.gameObject.GetComponent<Player>();
-            bool sameDirection = false;
-            float velocityX = previousVelocity.x;
-            float velocityY = previousVelocity.y;
-            if (enemy.bump)
-            {
-                if (!bump)
-                {
-                    velocityX = enemy.previousVelocity.x;
-                    velocityY = enemy.previousVelocity.y;
-                    GetStunned(stunTimeLength);
-                }
-            }
-            else
-            {
-                if (bump)
-                {
-                    if (Mathf.Sign(previousVelocity.x) != Mathf.Sign(enemy.previousVelocity.x))
-                    {
-                        velocityX = previousVelocity.x + enemy.previousVelocity.x * .1f;
+					} else {
+						velocityX = enemy.previousVelocity.x;
+					}
+					if (Mathf.Sign (previousVelocity.y) != Mathf.Sign (enemy.previousVelocity.y)) {
+						velocityY = velocityY + enemy.previousVelocity.y;
+					} else {
+						velocityY -= previousVelocity.y - enemy.previousVelocity.y;
+					}
+					*/
+                    /*GetStunned(stunTimeLength);
+				}
+			} else {
+				if (bump) {
+					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
+						velocityX = previousVelocity.x + enemy.previousVelocity.x*.1f;
 
-                    }
-                    else
-                    {
-                        velocityX -= previousVelocity.x - enemy.previousVelocity.x;
-                    }
-                    if (Mathf.Sign(previousVelocity.y) != Mathf.Sign(enemy.previousVelocity.y))
-                    {
-                        velocityY = velocityY + enemy.previousVelocity.y;
-                    }
-                    else
-                    {
-                        velocityY = previousVelocity.y - enemy.previousVelocity.y * .1f;
-                    }
-                }
-            }
-            rb.velocity = new Vector2(velocityX, velocityY);
-        }
+					} else {
+						velocityX -= previousVelocity.x - enemy.previousVelocity.x;
+					}
+					if (Mathf.Sign (previousVelocity.y) != Mathf.Sign (enemy.previousVelocity.y)) {
+						velocityY = velocityY + enemy.previousVelocity.y;
+					} else {
+						velocityY = previousVelocity.y - enemy.previousVelocity.y*.1f;
+					}
+				}
+			}*/
+			rb.velocity = new Vector2(velocityX, velocityY);
+		}
     }
 
     void OnButtonPressed(ButtonPressed e)
