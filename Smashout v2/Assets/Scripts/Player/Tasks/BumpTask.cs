@@ -11,6 +11,7 @@ public class BumpTask : LockOutButtonInput {
         base.Init();
         player.gameObject.GetComponent<SpriteRenderer>().color = Services.GameManager.bumpColors[player.playerNum-1];
         player.bump = true;
+        player.GetComponentInChildren<Bumper>().setActiveStatus(true);
         Services.EventManager.Register<BumpHit>(OnBumpHit);
 
     }
@@ -28,6 +29,7 @@ public class BumpTask : LockOutButtonInput {
         base.OnSuccess();
         player.gameObject.GetComponent<SpriteRenderer>().color = player.color;
         player.bump = false;
+        player.GetComponentInChildren<Bumper>().setActiveStatus(false);
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
     }
 }

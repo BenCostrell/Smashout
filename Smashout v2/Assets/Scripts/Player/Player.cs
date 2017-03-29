@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 	public float hurtScale;
     private bool actionable;
 
+    private Bumper bumper;
     public float moveSpeed;
     public float xDrag;
     public float maxVelocity;
@@ -19,8 +20,8 @@ public class Player : MonoBehaviour
     public float underBumpCut;
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
-    private Rigidbody2D rb;
-    private Vector2 previousVelocity;
+    public Rigidbody2D rb;
+    public Vector2 previousVelocity;
 	public bool bump;
     public int bounced = 0;
 
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        bumper = GetComponentInChildren<Bumper>();
     }
 
     void Start()
@@ -82,7 +84,7 @@ public class Player : MonoBehaviour
         Vector2 bounceVector;
         if (obj.tag == "Surface")
         {
-			if (bump) {
+			/*if (bump) {
                 Debug.Log("bounce");
                 bounceVector = previousVelocity * bumpBounceScale - Vector2.up * bounceMinSpd;
                 if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
 				rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
                 obj.GetComponent<Block>().DestroyThis();
                 Services.EventManager.Fire(new BumpHit(this));
-			} else {
+			} else {*/
 				//rb.AddForce(new Vector2(0, Mathf.Abs(rb.velocity.y * 200)));
 				bounceVector = previousVelocity * bounceScale;
                 if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
@@ -122,18 +124,19 @@ public class Player : MonoBehaviour
             }
             rb.velocity = new Vector2(velocityX, velocityY);
             */
-			}
+			//}
         }
 		if (obj.tag == "Player")
 		{
 			Player enemy = collision.gameObject.GetComponent<Player>();
+            Bumper enemy_bump = collision.gameObject.GetComponent<Bumper>();
 			bool sameDirection = false;
 			float velocityX = previousVelocity.x;
 			float velocityY = previousVelocity.y;
-			if (enemy.bump) {
+			/*if (enemy.bump) {
 				if (!bump) {
 					velocityX = enemy.previousVelocity.x;
-					velocityY = enemy.previousVelocity.y;
+					velocityY = enemy.previousVelocity.y;*/
                     /*
 					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
 						velocityX = enemy.previousVelocity.x;
@@ -147,7 +150,7 @@ public class Player : MonoBehaviour
 						velocityY -= previousVelocity.y - enemy.previousVelocity.y;
 					}
 					*/
-                    GetStunned(stunTimeLength);
+                    /*GetStunned(stunTimeLength);
 				}
 			} else {
 				if (bump) {
@@ -163,7 +166,7 @@ public class Player : MonoBehaviour
 						velocityY = previousVelocity.y - enemy.previousVelocity.y*.1f;
 					}
 				}
-			}
+			}*/
 			rb.velocity = new Vector2(velocityX, velocityY);
 		}
     }
