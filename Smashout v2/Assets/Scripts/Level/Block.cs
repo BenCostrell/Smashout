@@ -6,7 +6,6 @@ public class Block : MonoBehaviour {
     int health = 1;
 
     void Start () {
-
 	}
 
 	void Update () {
