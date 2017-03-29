@@ -41,8 +41,8 @@ public class BlockManager : MonoBehaviour {
         init = _init;
         behaviour = _behaviour;
 
-        blockCount = UnityEngine.Random.Range(blockCountLow, blockCountHigh);
-        patternCount = UnityEngine.Random.Range(patternCountLow, patternCountHigh);
+        blockCount = UnityEngine.Random.Range(blockCountLow, blockCountHigh+1);
+        patternCount = UnityEngine.Random.Range(patternCountLow, patternCountHigh+1);
 
         preInitRNG = UnityEngine.Random.state;
         GetComponent<SpriteRenderer>().enabled = false;
@@ -91,6 +91,14 @@ public class BlockManager : MonoBehaviour {
         return new Vector3(x, y, 0);
     }
 
+    Block Create(Vector3 location, GameObject blockType)
+    {
+        GameObject obj = Instantiate(blockType, location, Quaternion.identity) as GameObject;
+        Block block = obj.GetComponent<Block>();
+        block.GetComponent<SpriteRenderer>().enabled = false;
+        return block;
+    }
+
     Block Create(Vector3 location, int blockType = -1)
     {
         if(blockType == -1)
@@ -99,10 +107,7 @@ public class BlockManager : MonoBehaviour {
             blockType = UnityEngine.Random.Range(0, blockTypes.Count);
             UnityEngine.Random.state = oldState;
         }
-        GameObject obj = Instantiate(blockTypes[blockType], location, Quaternion.identity) as GameObject;
-        Block block = obj.GetComponent<Block>();
-        block.GetComponent<SpriteRenderer>().enabled = false;
-        return block;
+        return Create(location, blockTypes[blockType]);
     }
 
     bool ValidateLocation(Vector3 location)
@@ -204,20 +209,22 @@ public class BlockManager : MonoBehaviour {
 
         foreach (Vector3 loc in Services.GameManager.spawnpoints) blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
 
-        //for (int i = 0; i < patternCount; i++)
-        //{
-        //    GameObject patternType = blockPatterns[UnityEngine.Random.Range(0, blockPatterns.Count)];
-        //    Vector3 location = GenerateValidLocation(patternType);
-        //    if (location == Vector3.forward) continue;
+        for (int i = 0; i < patternCount; i++)
+        {
+            GameObject patternType = blockPatterns[UnityEngine.Random.Range(0, blockPatterns.Count)];
+            Vector3 location = GenerateValidLocation(patternType);
+            if (location == Vector3.forward) continue;
 
-        //    GameObject pattern = Instantiate(patternType, location, Quaternion.identity) as GameObject;
-        //    foreach (Transform b in pattern.GetComponentsInChildren<Transform>())
-        //    {
-        //        b.parent = null;
-        //        blocks.Add(b.GetComponent<Block>());
-        //    }
-        //    Destroy(pattern);
-        //}
+            GameObject pattern = Instantiate(patternType, location, Quaternion.identity) as GameObject;
+            foreach (Transform b in pattern.GetComponentsInChildren<Transform>())
+            {
+                if (b.gameObject == pattern) continue;
+
+                b.parent = null;
+                blocks.Add(b.GetComponent<Block>());
+            }
+            Destroy(pattern);
+        }
 
         for (int i = 0; i < blockCount; i++)
         {
