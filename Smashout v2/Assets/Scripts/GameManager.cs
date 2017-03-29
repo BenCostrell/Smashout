@@ -19,9 +19,17 @@ public class GameManager : MonoBehaviour {
     {
         Services.EventManager.Register<Reset>(Reset);
         Services.EventManager.Register<GameOver>(GameOver);
-        Services.BlockManager.GenerateLevel();
-        InitializePlayers();
         Services.UIManager.SetUpUI();
+
+        ScaleInTitle scaleInTitle = new ScaleInTitle();
+        WaitToStart waitToStart = new WaitToStart();
+        ActionTask startGame = new ActionTask(StartGame);
+
+        scaleInTitle
+            .Then(waitToStart)
+            .Then(startGame);
+
+        Services.TaskManager.AddTask(scaleInTitle);
     }
 
 	// Update is called once per frame
@@ -41,14 +49,38 @@ public class GameManager : MonoBehaviour {
         Services.InputManager = new InputManager();
     }
 
+    void StartGame()
+    {
+        Services.BlockManager.GenerateLevel();
+        InitializePlayers();
+    }
+
     void Reset(Reset e)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void SoftReset()
+    {
+        Destroy(players[0]);
+        Destroy(players[1]);
+        Services.BlockManager.DestroyAllBlocks(false);
+        Services.UIManager.SetUpUI();
+        Services.EventManager.Register<GameOver>(GameOver);
+        StartGame();
+    }
+
     void GameOver(GameOver e)
     {
+        Services.EventManager.Unregister<GameOver>(GameOver);
+        Services.BlockManager.DestroyAllBlocks(true);
+        ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
+        WaitToRestart waitToRestart = new WaitToRestart();
 
+        scaleInCongrats
+            .Then(waitToRestart);
+
+        Services.TaskManager.AddTask(scaleInCongrats);
     }
 
     void InitializePlayers()

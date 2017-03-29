@@ -53,7 +53,7 @@ public class BlockManager : MonoBehaviour {
 
     public void Restart()
     {
-        DestroyAllBlocks();
+        DestroyAllBlocks(false);
         UnityEngine.Random.state = preInitRNG;
         GenerateLevel();
     }
@@ -162,25 +162,32 @@ public class BlockManager : MonoBehaviour {
         }
     }
 
-    public void DestroyBlock(Block block)
+    public void DestroyBlock(Block block, bool animate)
     {
-        Collider2D[] colliders = block.GetComponentsInChildren<Collider2D>();
-        foreach (Collider2D col in colliders)
-        {
-            col.enabled = false;
-        }
-        block.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        block.StartDestructionAnimation();
         blocks.Remove(block);
-        Destroy(block.gameObject, blockDeathTime);
+        if (animate)
+        {
+            Collider2D[] colliders = block.GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D col in colliders)
+            {
+                col.enabled = false;
+            }
+            block.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            block.StartDestructionAnimation();
+            Destroy(block.gameObject, blockDeathTime);
+        }
+        else
+        {
+            Destroy(block.gameObject);
+        }
     }
 
-    public void DestroyAllBlocks()
+    public void DestroyAllBlocks(bool animate)
     {
         for (int i = blocks.Count - 1; i >= 0; i--)
         {
             Block block = blocks[i];
-            DestroyBlock(block);
+            DestroyBlock(block, animate);
         }
     }
 

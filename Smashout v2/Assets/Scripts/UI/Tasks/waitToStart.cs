@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class waitToStart : MonoBehaviour {
+public class WaitToStart : Task {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    protected override void Init()
+    {
+        Services.EventManager.Register<ButtonPressed>(BeginGame);
+        Services.UIManager.startPrompt.SetActive(true);
+    }
+
+    void BeginGame(ButtonPressed e)
+    {
+        if (e.button == "A")
+        {
+            SetStatus(TaskStatus.Success);
+        }
+    }
+
+    protected override void CleanUp()
+    {
+        Services.UIManager.startPrompt.SetActive(false);
+        Services.UIManager.title.SetActive(false);
+        Services.EventManager.Unregister<ButtonPressed>(BeginGame);
+    }
 }

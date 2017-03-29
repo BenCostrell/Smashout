@@ -56,8 +56,8 @@ MonoBehaviour:
   - {fileID: 1733486446908624, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   blockPatterns: []
   blockStatics: []
-  blockDeathTime: 0
-  blockAppearanceTime: 0
+  blockDeathTime: 0.2
+  blockAppearanceTime: 0.4
   minAcceptableDistance: 30
   maxNumTries: 100
   blockCount: 30

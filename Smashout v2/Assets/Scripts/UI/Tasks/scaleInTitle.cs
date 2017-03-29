@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scaleInTitle : Task {
+public class ScaleInTitle : Task {
     private RectTransform title;
     private float timeElapsed;
     private float duration;
@@ -12,18 +12,19 @@ public class scaleInTitle : Task {
         timeElapsed = 0;
         duration = Services.UIManager.titleScaleInTime;
         title = Services.UIManager.title.GetComponent<RectTransform>();
+        title.gameObject.SetActive(true);
     }
 
     internal override void Update()
     {
-        timeElapsed += Time.deltaTime;
+        timeElapsed = Mathf.Min(timeElapsed + Time.deltaTime, duration);
 
-        title.anchoredPosition = Vector2.Lerp(Vector2.zero, Vector2.one, Easing.ExpoEaseOut(timeElapsed / duration));
+        title.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, Easing.QuadEaseOut(timeElapsed / duration));
+        Debug.Log(timeElapsed + " : " + title.localScale + "... " + Easing.QuadEaseOut(timeElapsed/duration));
 
-        if (timeElapsed >= duration)
+        if (timeElapsed == duration)
         {
             SetStatus(TaskStatus.Success);
         }
     }
-
 }

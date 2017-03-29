@@ -24,18 +24,24 @@ public class BlockFadeOut : Task {
 
     internal override void Update()
     {
-        timeElapsed += Time.deltaTime;
-
-        block.transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, Easing.ExpoEaseIn(timeElapsed / duration));
-
-        if (timeElapsed >= duration)
+        if (block != null)
         {
-            SetStatus(TaskStatus.Success);
+            timeElapsed = Mathf.Min(timeElapsed + Time.deltaTime, duration);
+
+            block.transform.localScale = Vector3.LerpUnclamped(initialScale, Vector3.zero, Easing.BackEaseIn(timeElapsed / duration));
+
+            if (timeElapsed == duration)
+            {
+                SetStatus(TaskStatus.Success);
+            }
+        }
+        else
+        {
+            SetStatus(TaskStatus.Aborted);
         }
     }
 
     protected override void OnSuccess()
     {
-        //Services.BlockManager.DestroyBlock(block);
     }
 }

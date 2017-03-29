@@ -18,21 +18,18 @@ public class Block : MonoBehaviour {
 
     public void DestroyThis()
     {
-        Services.BlockManager.DestroyBlock(this);
+        Services.BlockManager.DestroyBlock(this, true);
     }
 
     public void StartDestructionAnimation()
     {
-        Debug.Log("No block destroy animation yet!");
-        //iTween.ScaleTo(gameObject, iTween.Hash("scale", Vector3.zero, "easetype", iTween.EaseType.easeInBack,
-        //    "time", blockManager.blockDeathTime));
+        BlockFadeOut fadeOut = new BlockFadeOut(gameObject, Services.BlockManager.blockDeathTime);
+        Services.TaskManager.AddTask(fadeOut);
     }
 
     public void StartAppearanceAnimation()
     {
-        GetComponent<SpriteRenderer>().enabled = true;
-        Debug.Log("No block appear animation yet!");
-        //iTween.ScaleFrom(gameObject, iTween.Hash("scale", Vector3.zero, "easetype", iTween.EaseType.easeOutBack,
-        //    "time", blockManager.blockAppearanceTime));
+        BlockAppear appear = new BlockAppear(gameObject, Services.BlockManager.blockAppearanceTime);
+        Services.TaskManager.AddTask(appear);
     }
 }

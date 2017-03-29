@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour {
     public GameObject restartPrompt;
 
     public float titleScaleInTime;
+    public float congratsScaleInTime;
     
     // Use this for initialization
 	void Start () {

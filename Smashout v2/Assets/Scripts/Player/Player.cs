@@ -53,6 +53,12 @@ public class Player : MonoBehaviour
         {
             Move();
         }
+
+        // temporary death function
+        if (transform.position.y < -150)
+        {
+            Die();
+        }
     }
 
     void Move()
