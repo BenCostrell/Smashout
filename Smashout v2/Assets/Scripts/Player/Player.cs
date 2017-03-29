@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public float xDrag;
     public float maxVelocity;
     public float bounceScale;
+    public float bounceMinSpd;
+    public float underBumpCut;
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
     private Rigidbody2D rb;
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
     public int bounced = 0;
 
 	public bool stun;
-	public float stunTimeLenght;
+	public float stunTimeLength;
 	public float stunTimeUntil;
 
 	public float bounceTime = 0;
@@ -47,19 +49,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         previousVelocity = rb.velocity;
-        if (actionable && !stun)
+        if (actionable)
         {
             Move();
-			if (bump) {
-				if (Time.time >= bumpTime) {
-					bump = false;
-					GetComponent<SpriteRenderer> ().color = color;
-				}
-				if (Time.time >= stunTimeUntil) {
-					stun = false;
-					GetComponent<SpriteRenderer> ().color = color;
-				}
-			}
         }
     }
 
@@ -67,7 +59,6 @@ public class Player : MonoBehaviour
     {
         //Input Handling with the joysticks of the controllers
         float input = Input.GetAxis("Horizontal_P" + playerNum);
-        Debug.Log(input + " from player " + playerNum);
         Vector2 moveForce = new Vector2(input * moveSpeed, 0);
         rb.AddForce(moveForce);
         /*Vector2 addDrag = new Vector2(-input*xDrag, 0);
@@ -86,14 +77,25 @@ public class Player : MonoBehaviour
         if (obj.tag == "Surface")
         {
 			if (bump) {
-				bounceVector = previousVelocity * bumpBounceScale;
+                Debug.Log("bounce");
+                bounceVector = previousVelocity * bumpBounceScale - Vector2.up * bounceMinSpd;
+                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
+                {
+                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
+                }
 				rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
+                obj.GetComponent<Block>().DestroyThis();
+                Services.EventManager.Fire(new BumpHit(this));
 			} else {
 				//rb.AddForce(new Vector2(0, Mathf.Abs(rb.velocity.y * 200)));
 				bounceVector = previousVelocity * bounceScale;
+                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
+                {
+                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
+                }
 
-				//for more sudden jerk bounce, do bounceVector.x
-				rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
+                //for more sudden jerk bounce, do bounceVector.x
+                rb.velocity = new Vector2 (previousVelocity.x, -bounceVector.y);
 				//rb.velocity = new Vector2(bounceVector.x / 4, -bounceVector.y);
        
 				/*
@@ -126,7 +128,7 @@ public class Player : MonoBehaviour
 				if (!bump) {
 					velocityX = enemy.previousVelocity.x;
 					velocityY = enemy.previousVelocity.y;
-					/*
+                    /*
 					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
 						velocityX = enemy.previousVelocity.x;
 
@@ -139,8 +141,7 @@ public class Player : MonoBehaviour
 						velocityY -= previousVelocity.y - enemy.previousVelocity.y;
 					}
 					*/
-					stun = true;
-					GetComponent<SpriteRenderer> ().color = Color.grey;
+                    GetStunned(stunTimeLength);
 				}
 			} else {
 				if (bump) {
@@ -175,16 +176,13 @@ public class Player : MonoBehaviour
 
     void Bump()
     {
-        LockOutButtonInput bumpCooldownTask = new LockOutButtonInput(bumpCooldown, this);
+        BumpTask bumpCooldownTask = new BumpTask(bumpCooldown, this);
         Services.TaskManager.AddTask(bumpCooldownTask);
-		GetComponent<SpriteRenderer>().color = Color.yellow;
-		bump = true;
-		bumpTime = Time.time + bumpCooldown;
     }
 
     public void GetStunned(float stunDuration)
     {
-        LockOutAllInput hitstunTask = new LockOutAllInput(stunDuration, this);
+        StunTask hitstunTask = new StunTask(stunDuration, this);
         Services.TaskManager.AddTask(hitstunTask);
     }
 

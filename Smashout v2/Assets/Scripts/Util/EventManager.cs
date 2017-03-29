@@ -15,6 +15,15 @@ public class ButtonPressed : Event
     }
 }
 
+public class BumpHit : Event
+{
+    public Player player;
+    public BumpHit(Player pl)
+    {
+        player = pl;
+    }
+}
+
 public class Reset :Event { }
 
 public class GameOver : Event {

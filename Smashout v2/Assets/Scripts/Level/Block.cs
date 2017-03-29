@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Block : MonoBehaviour {
-
-    private BlockManager blockManager;
     int health = 1;
 
     void Start () {
@@ -20,7 +18,7 @@ public class Block : MonoBehaviour {
 
     public void DestroyThis()
     {
-        blockManager.DestroyBlock(this);
+        Services.BlockManager.DestroyBlock(this);
     }
 
     public void StartDestructionAnimation()

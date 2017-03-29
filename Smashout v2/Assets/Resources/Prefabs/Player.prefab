@@ -96,12 +96,14 @@ MonoBehaviour:
   xDrag: 0
   maxVelocity: 200
   bounceScale: 1
-  bumpBounceScale: 1.8
+  bounceMinSpd: 75
+  underBumpCut: 0.5
+  bumpBounceScale: 1.33
   bumpPlayerScale: 1.5
   bump: 0
   bounced: 0
   stun: 0
-  stunTimeLenght: 0.6
+  stunTimeLength: 0.6
   stunTimeUntil: 0
   bounceTime: 0
 --- !u!212 &212146806216633426

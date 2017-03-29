@@ -180,7 +180,7 @@ RectTransform:
   - {fileID: 1567486842}
   - {fileID: 412343844}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -360,7 +360,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4561125054417968, guid: e985d69c0b1f7bc4fb5197e4b28537fa, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843176945687640, guid: e985d69c0b1f7bc4fb5197e4b28537fa, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e985d69c0b1f7bc4fb5197e4b28537fa, type: 2}
@@ -620,7 +624,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812145166
 GameObject:
@@ -705,7 +709,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
-      propertyPath: playerColors.Array.size
+      propertyPath: bumpColors.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4782839498460714, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
@@ -742,27 +746,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
-      propertyPath: playerColors.Array.data[0].r
-      value: 0.11724138
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: playerColors.Array.data[0].g
+      propertyPath: bumpColors.Array.data[0].r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
-      propertyPath: playerColors.Array.data[0].b
+      propertyPath: bumpColors.Array.data[0].g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
-      propertyPath: playerColors.Array.data[0].a
-      value: 1
+      propertyPath: bumpColors.Array.data[0].b
+      value: 0.8758622
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
-      propertyPath: playerColors.Array.data[1].a
+      propertyPath: bumpColors.Array.data[0].a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
@@ -773,12 +772,42 @@ Prefab:
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
       propertyPath: playerColors.Array.data[1].g
-      value: 1
+      value: 0.60294116
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
       propertyPath: playerColors.Array.data[1].b
-      value: 0.17241383
+      value: 0.10395539
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: bumpColors.Array.data[1].r
+      value: 0.034482718
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: bumpColors.Array.data[1].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: bumpColors.Array.data[1].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: bumpColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: spawnpoints.Array.data[1].x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: spawnpoints.Array.data[1].y
+      value: 65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}

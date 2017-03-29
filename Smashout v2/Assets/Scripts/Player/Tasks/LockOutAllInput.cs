@@ -6,7 +6,7 @@ public class LockOutAllInput : Task {
 
     private float duration;
     private float timeElapsed;
-    private Player player;
+    protected Player player;
 
     public LockOutAllInput(float dur, Player pl)
     {

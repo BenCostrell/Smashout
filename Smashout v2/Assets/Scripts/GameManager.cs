@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public Player[] players;
     public Color[] playerColors;
+    public Color[] bumpColors;
     public Vector3[] spawnpoints;
     
     // Use this for initialization
