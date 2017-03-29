@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1843176945687640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: -5, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 250, y: 125, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   blockTypes:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   blockPatterns:
-  - {fileID: 0}
+  - {fileID: 1030431041035670, guid: 5f04ee983876d5f4f85a6b4b35d172d9, type: 2}
   blockStatics: []
   blockDeathTime: 0.2
   blockAppearanceTime: 0.4
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9809621d3ada59e4c88b1ff6c45b66ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5cba7623c6cf73f47b7e59a9babfdaba, type: 3}
   m_Color: {r: 0, g: 0.13103437, b: 1, a: 0.266}
   m_FlipX: 0
   m_FlipY: 0
