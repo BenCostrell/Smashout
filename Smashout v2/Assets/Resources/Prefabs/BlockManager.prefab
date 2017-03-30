@@ -53,9 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockTypes:
-  - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
+  - {fileID: 1172797353499834, guid: 926c2973f5403ea409914620534dc03e, type: 2}
   blockPatterns:
-  - {fileID: 1030431041035670, guid: 5f04ee983876d5f4f85a6b4b35d172d9, type: 2}
+  - {fileID: 1030431041035670, guid: 1535c9b5d73ba7b4bb1f488568941c33, type: 2}
   blockStatics: []
   blockDeathTime: 0.2
   blockAppearanceTime: 0.4
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5cba7623c6cf73f47b7e59a9babfdaba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8823c64afc363da41804b47ffddf9286, type: 3}
   m_Color: {r: 0, g: 0.13103437, b: 1, a: 0.266}
   m_FlipX: 0
   m_FlipY: 0
