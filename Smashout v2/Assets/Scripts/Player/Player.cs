@@ -139,46 +139,11 @@ public class Player : MonoBehaviour
         }
 		if (obj.tag == "Player")
 		{
-			Player enemy = collision.gameObject.GetComponent<Player>();
-            Bumper enemy_bump = collision.gameObject.GetComponent<Bumper>();
-			bool sameDirection = false;
-			float velocityX = previousVelocity.x;
+
+			/*float velocityX = previousVelocity.x;
 			float velocityY = previousVelocity.y;
-			/*if (enemy.bump) {
-				if (!bump) {
-					velocityX = enemy.previousVelocity.x;
-					velocityY = enemy.previousVelocity.y;*/
-                    /*
-					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
-						velocityX = enemy.previousVelocity.x;
-
-					} else {
-						velocityX = enemy.previousVelocity.x;
-					}
-					if (Mathf.Sign (previousVelocity.y) != Mathf.Sign (enemy.previousVelocity.y)) {
-						velocityY = velocityY + enemy.previousVelocity.y;
-					} else {
-						velocityY -= previousVelocity.y - enemy.previousVelocity.y;
-					}
-					*/
-                    /*GetStunned(stunTimeLength);
-				}
-			} else {
-				if (bump) {
-					if (Mathf.Sign (previousVelocity.x) != Mathf.Sign (enemy.previousVelocity.x)) {
-						velocityX = previousVelocity.x + enemy.previousVelocity.x*.1f;
-
-					} else {
-						velocityX -= previousVelocity.x - enemy.previousVelocity.x;
-					}
-					if (Mathf.Sign (previousVelocity.y) != Mathf.Sign (enemy.previousVelocity.y)) {
-						velocityY = velocityY + enemy.previousVelocity.y;
-					} else {
-						velocityY = previousVelocity.y - enemy.previousVelocity.y*.1f;
-					}
-				}
-			}*/
-			rb.velocity = new Vector2(-velocityX/4, -velocityY/4);
+			
+			rb.velocity = new Vector2(-velocityX/4, -velocityY/4);*/
 		}
     }
 
@@ -204,6 +169,12 @@ public class Player : MonoBehaviour
     {
         StunTask hitstunTask = new StunTask(stunDuration, this);
         Services.TaskManager.AddTask(hitstunTask);
+    }
+
+    public void GetHit(Vector3 hitVector)
+    {
+        GetStunned(stunTimeLength);
+        rb.velocity = hitVector;
     }
 
     public void LockButtonInput()
