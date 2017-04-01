@@ -144,7 +144,7 @@ MonoBehaviour:
   bounceScale: 1
   bounceMinSpd: 75
   underBumpCut: 0.5
-  bumpBounceScale: 1.2
+  bumpBounceScale: 1.5
   bumpPlayerScale: 1.5
   rb: {fileID: 0}
   previousVelocity: {x: 0, y: 0}

@@ -79,8 +79,11 @@ public class Player : MonoBehaviour
     {
         //Input Handling with the joysticks of the controllers
         float input = Input.GetAxis("Horizontal_P" + playerNum);
-        Vector2 moveForce = new Vector2(input * moveSpeed, 0);
-        rb.AddForce(moveForce);
+        if (Mathf.Abs(input) > 0.1f)
+        {
+            Vector2 moveForce = new Vector2(input * moveSpeed, 0);
+            rb.AddForce(moveForce);
+        }
         /*Vector2 addDrag = new Vector2(-input*xDrag, 0);
         rb.AddForce(addDrag);
         if(Mathf.Abs(rb.velocity.x) > maxVelocity)
@@ -96,46 +99,7 @@ public class Player : MonoBehaviour
         Vector2 bounceVector;
         if (obj.tag == "Surface")
         {
-            float velocityX = previousVelocity.x;
-            float velocityY = previousVelocity.y;
-                velocityY = previousVelocity.y * bounceScale;
-            
-            //Check if hitting from below
-            if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
-            {
-                velocityY = velocityY * (1.0f - underBumpCut);
-            }
-            //Check if hitting left side of the block
-            //if (GetComponent<SpriteRenderer>().bounds.max.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
-			if (transform.position.x - sideCollisionOffset < obj.GetComponent<SpriteRenderer>().bounds.min.x)
-            {
-                velocityX = -Mathf.Abs(previousVelocity.x * (1.0f - wallKickCut)) - wallKickMinSpeed;
-                //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
-                Debug.Log("hit on the left side");
-            }
-            //Check if hitting right side of the block
-            //else if (GetComponent<SpriteRenderer>().bounds.min.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
-			else if (transform.position.x + sideCollisionOffset > obj.GetComponent<SpriteRenderer>().bounds.max.x)
-            {
-                velocityX = Mathf.Abs(previousVelocity.x * (1.0f - wallKickCut)) + wallKickMinSpeed;
-                //bounceVector = new Vector2 (-previousVelocity.x, bounceVector.y);
-                Debug.Log("hit on the right side");
-            }
-            
-            //Maybe the stun bounce recoil//
-            if (stun)
-            {
-                bounceVector = previousVelocity * bumpBounceScale - Vector2.up * bounceMinSpd;
-                if (transform.position.y < obj.GetComponent<SpriteRenderer>().bounds.min.y)
-                {
-                    bounceVector = new Vector2(bounceVector.x, bounceVector.y * (1.0f - underBumpCut));
-                }
-                rb.velocity = new Vector2(previousVelocity.x, -bounceVector.y);
-                obj.GetComponent<Block>().DestroyThis();
-                Services.EventManager.Fire(new BumpHit(this));
-            }
-            //---------------------------//
-            rb.velocity = new Vector2(velocityX, -velocityY);
+            CollideWithSurface(obj, false);
         }
 		if (obj.tag == "Player")
 		{
@@ -175,6 +139,40 @@ public class Player : MonoBehaviour
     {
         GetStunned(stunTimeLength);
         rb.velocity = hitVector;
+    }
+
+    public void CollideWithSurface(GameObject surface, bool bump)
+    {
+        float velocityX = previousVelocity.x;
+        float velocityY = -previousVelocity.y * bounceScale;
+        float scaling = 1f;
+        if (bump)
+        {
+            scaling = bumpBounceScale;
+            if (transform.position.y > surface.GetComponent<SpriteRenderer>().bounds.min.y)
+            {
+                velocityY = Mathf.Abs(velocityY);
+            }
+        }
+
+        //Check if hitting from below
+        if (transform.position.y < surface.GetComponent<SpriteRenderer>().bounds.min.y)
+        {
+            velocityY = velocityY * (1.0f - underBumpCut);
+        }
+        //Check if hitting left side of the block
+        if (transform.position.x - sideCollisionOffset < surface.GetComponent<SpriteRenderer>().bounds.min.x)
+        {
+            velocityX = -Mathf.Abs(previousVelocity.x * (1.0f - wallKickCut)) - wallKickMinSpeed;
+        }
+        //Check if hitting right side of the block
+        else if (transform.position.x + sideCollisionOffset > surface.GetComponent<SpriteRenderer>().bounds.max.x)
+        {
+            velocityX = Mathf.Abs(previousVelocity.x * (1.0f - wallKickCut)) + wallKickMinSpeed;
+        }
+
+        //---------------------------//
+        rb.velocity = new Vector2(velocityX, velocityY) * scaling;
     }
 
     public void LockButtonInput()
