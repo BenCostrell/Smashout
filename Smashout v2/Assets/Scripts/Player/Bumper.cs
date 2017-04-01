@@ -9,6 +9,7 @@ public class Bumper : MonoBehaviour {
     private Player player;
     public bool active;
     public float playerBumpPower;
+    public float kickback;
 
 	// Use this for initialization
 	void Start () {
@@ -48,24 +49,16 @@ public class Bumper : MonoBehaviour {
             if (active)
             {
                 player.CollideWithSurface(obj, true);
-                obj.GetComponent<Block>().DestroyThis();
-                Services.EventManager.Fire(new BumpHit(player));
-
             }
         }
         if(obj.tag == "Player")
         {
             Player enemy = collision.gameObject.GetComponent<Player>();
-            /* float velocityX = -enemy.previousVelocity.x;
-             float velocityY = -enemy.previousVelocity.y;
-             if (active)
-             {
-                 enemy.GetStunned(enemy.stunTimeLength);
-                 enemy.rb.velocity = new Vector2(velocityX, velocityY);
-                 player.rb.velocity = new Vector2(-player.previousVelocity.x, -player.previousVelocity.y);
-             }*/
+
             Vector3 launchVector = (enemy.transform.position - player.transform.position).normalized * playerBumpPower;
+            Vector2 kickbackVector = -launchVector * kickback;
             enemy.GetHit(launchVector);
+            player.rb.velocity = kickbackVector;
         }
         /*else if (obj.tag == "Bumper")
         {

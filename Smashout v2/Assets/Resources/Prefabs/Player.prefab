@@ -89,7 +89,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 25
+  m_GravityScale: 35
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -142,16 +142,16 @@ MonoBehaviour:
   xDrag: 0
   maxVelocity: 200
   bounceScale: 1
-  bounceMinSpd: 75
+  bumpMinSpd: 50
   underBumpCut: 0.5
-  bumpBounceScale: 1.5
+  bumpBounceScale: 1.1
   bumpPlayerScale: 1.5
   rb: {fileID: 0}
   previousVelocity: {x: 0, y: 0}
   bump: 0
   bounced: 0
-  wallKickCut: 0.25
-  wallKickMinSpeed: 15
+  wallKickCut: 0.5
+  wallKickMinSpeed: 25
   sideCollisionOffset: 0.7
   stun: 0
   stunTimeLength: 0.6
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   playerBumpPower: 100
+  kickback: 1
 --- !u!212 &212115197224848496
 SpriteRenderer:
   m_ObjectHideFlags: 1

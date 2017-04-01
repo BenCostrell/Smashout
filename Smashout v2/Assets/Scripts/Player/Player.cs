@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public float xDrag;
     public float maxVelocity;
     public float bounceScale;
-    public float bounceMinSpd;
+    public float bumpMinSpd;
     public float underBumpCut;
 
 	public float bumpBounceScale;
@@ -96,10 +96,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.collider.gameObject;
-        Vector2 bounceVector;
         if (obj.tag == "Surface")
         {
-            CollideWithSurface(obj, false);
+            CollideWithSurface(obj, stun);
         }
 		if (obj.tag == "Player")
 		{
@@ -151,8 +150,10 @@ public class Player : MonoBehaviour
             scaling = bumpBounceScale;
             if (transform.position.y > surface.GetComponent<SpriteRenderer>().bounds.min.y)
             {
-                velocityY = Mathf.Abs(velocityY);
+                velocityY = Mathf.Abs(velocityY) + bumpMinSpd;
             }
+            surface.GetComponent<Block>().DestroyThis();
+            Services.EventManager.Fire(new BumpHit(this));
         }
 
         //Check if hitting from below
