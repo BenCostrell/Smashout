@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LockOutButtonInput : Task {
 
-    private float duration;
-    private float timeElapsed;
+    protected float duration;
+    protected float timeElapsed;
     protected Player player;
 
     public LockOutButtonInput(float dur, Player pl)

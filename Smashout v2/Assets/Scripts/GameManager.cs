@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public Color[] playerColors;
     public Color[] bumpColors;
     public Vector3[] spawnpoints;
+    public bool gameStarted;
     
     // Use this for initialization
 	void Awake () {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
         Services.EventManager.Register<Reset>(Reset);
         Services.EventManager.Register<GameOver>(GameOver);
         Services.UIManager.SetUpUI();
+        gameStarted = false;
 
         ScaleInTitle scaleInTitle = new ScaleInTitle();
         WaitToStart waitToStart = new WaitToStart();
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour {
     {
         Services.BlockManager.GenerateLevel();
         InitializePlayers();
+        gameStarted = true;
     }
 
     void Reset(Reset e)

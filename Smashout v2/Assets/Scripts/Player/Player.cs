@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public Color color;
     public int playerNum;
     public float bumpCooldown;
-    private float bumpTime;
+    public float bumpActiveTime;
     public float hurtScale;
     private bool actionable;
 
@@ -18,10 +18,12 @@ public class Player : MonoBehaviour
     public float bounceScale;
     public float bumpMinSpd;
     public float underBumpCut;
+    public float dashSpeed;
 
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
     public Rigidbody2D rb;
+    private TrailRenderer tr;
     public Vector2 previousVelocity;
 	public bool bump;
 
@@ -47,12 +49,14 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bumper = GetComponentInChildren<Bumper>();
+        tr = GetComponent<TrailRenderer>();
     }
 
     void Start()
     {
         currentTimeOnTopOfPlatform = 0f;
         GetComponent<SpriteRenderer>().color = color;
+        tr.enabled = false;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
@@ -60,7 +64,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("good");
         CheckIfGrounded();
         previousVelocity = rb.velocity;
         if (actionable)
@@ -124,8 +127,19 @@ public class Player : MonoBehaviour
 
     void Bump()
     {
-        BumpTask bumpCooldownTask = new BumpTask(bumpCooldown, this);
+        /*Vector2 input = new Vector2(Input.GetAxis("Horizontal_P" + playerNum), Input.GetAxis("Vertical_P" + playerNum));
+        if (input.magnitude > 0.1f)
+        {
+            Vector2 dashVector = input.normalized * dashSpeed;
+            rb.velocity = dashVector;
+        }*/
+        BumpTask bumpCooldownTask = new BumpTask(bumpCooldown, this, bumpActiveTime);
         Services.TaskManager.AddTask(bumpCooldownTask);
+    }
+
+    public void SetTrailStatus(bool active)
+    {
+        tr.enabled = active;
     }
 
     public void GetStunned(float stunDuration)
@@ -204,7 +218,6 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * groundDetectionDistance);
         if (hit)
         {
-            Debug.Log(currentTimeOnTopOfPlatform);
             currentTimeOnTopOfPlatform += Time.deltaTime;
             if (currentTimeOnTopOfPlatform >= platformLifetimeWhileStanding)
             {

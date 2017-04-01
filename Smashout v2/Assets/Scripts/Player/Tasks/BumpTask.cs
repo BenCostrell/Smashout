@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BumpTask : LockOutButtonInput {
+    private float activeDuration;
 
-    public BumpTask(float dur, Player pl) : base(dur, pl) { }
+    public BumpTask(float dur, Player pl, float activeDur) : base(dur, pl)
+    {
+        activeDuration = activeDur;
+    }
 
     protected override void Init()
     {
@@ -15,13 +19,31 @@ public class BumpTask : LockOutButtonInput {
         player.GetComponentInChildren<Bumper>().setActiveStatus(true);
         Services.EventManager.Register<BumpHit>(OnBumpHit);
         Services.EventManager.Register<GameOver>(OnGameOver);
+        //player.SetTrailStatus(true);
+    }
+
+    internal override void Update()
+    {
+        base.Update();
+
+        if (timeElapsed >= activeDuration)
+        {
+            SetBumpInactive();
+        }
+    }
+
+    void SetBumpInactive()
+    {
+        player.gameObject.GetComponent<SpriteRenderer>().color = player.color;
+        player.bump = false;
+        player.GetComponentInChildren<Bumper>().setActiveStatus(false);
     }
 
     void OnBumpHit(BumpHit e)
     {
         if (e.player == player)
         {
-            SetStatus(TaskStatus.Success);
+            SetBumpInactive();
         }
     }
 
@@ -34,10 +56,8 @@ public class BumpTask : LockOutButtonInput {
     {
         base.OnSuccess();
         if (player == null) return;
-        player.gameObject.GetComponent<SpriteRenderer>().color = player.color;
-        player.bump = false;
-        player.GetComponentInChildren<Bumper>().setActiveStatus(false);
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         Services.EventManager.Unregister<GameOver>(OnGameOver);
+        //player.SetTrailStatus(false);
     }
 }
