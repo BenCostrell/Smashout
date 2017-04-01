@@ -26,6 +26,15 @@ public class BumpHit : Event
 
 public class Reset :Event { }
 
+public class PlayerLockedOut : Event
+{
+    public Player player;
+    public PlayerLockedOut(Player pl)
+    {
+        player = pl;
+    }
+}
+
 public class GameOver : Event {
     public int losingPlayer;
     public GameOver(int playerNum)

@@ -18,6 +18,8 @@ public class LockOutAllInput : Task {
     {
         timeElapsed = 0;
         player.LockAllInput();
+        Services.EventManager.Fire(new PlayerLockedOut(player));
+        Services.EventManager.Register<PlayerLockedOut>(Interrupt);
     }
 
     internal override void Update()
@@ -30,8 +32,21 @@ public class LockOutAllInput : Task {
         }
     }
 
+    void Interrupt(PlayerLockedOut e)
+    {
+        if (e.player == player)
+        {
+            SetStatus(TaskStatus.Aborted);
+        }
+    }
+
     protected override void OnSuccess()
     {
         player.UnlockAllInput();
+    }
+
+    protected override void CleanUp()
+    {
+        Services.EventManager.Unregister<PlayerLockedOut>(Interrupt);
     }
 }
