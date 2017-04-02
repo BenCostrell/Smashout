@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public Player[] players;
     public Color[] playerColors;
+    public Gradient[] trailColors;
     public Color[] bumpColors;
     public Vector3[] spawnpoints;
     public bool gameStarted;
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour {
     {
         Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[num-1], Quaternion.identity).GetComponent<Player>();
         newPlayer.color = playerColors[num - 1];
+        newPlayer.trailColor = trailColors[num - 1];
         newPlayer.playerNum = num;
         return newPlayer;
     }

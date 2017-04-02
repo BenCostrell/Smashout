@@ -7,9 +7,10 @@ public class Bumper : MonoBehaviour {
     private SpriteRenderer sprite;
     private CircleCollider2D collide;
     private Player player;
-    public bool active;
     public float playerBumpPower;
     public float kickback;
+    public Color activeColor;
+    public Color availableColor;
 
 	// Use this for initialization
 	void Start () {
@@ -17,28 +18,35 @@ public class Bumper : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
         collide = GetComponent<CircleCollider2D>();
         collide.enabled = false;
-        sprite.enabled = false;
-        active = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (collide.enabled)
+        {
+            sprite.enabled = true;
+            sprite.color = activeColor;
+        }
+        else if (player.bumpAvailable)
+        {
+            sprite.enabled = true;
+            sprite.color = availableColor;
+        }
+        else
+        {
+            sprite.enabled = false;
+        }
 	}
 
     internal void setActiveStatus(bool status)
     {
         if (status)
         {
-            sprite.enabled = true;
             collide.enabled = true;
-            active = true;
         }
         else
         {
-            sprite.enabled = false;
             collide.enabled = false;
-            active = false;
         }
     }
 
@@ -46,46 +54,16 @@ public class Bumper : MonoBehaviour {
         GameObject obj = collision.gameObject;
         if (obj.tag == "Surface")
         {
-            if (active)
-            {
-                player.CollideWithSurface(obj, true);
-            }
+            player.CollideWithSurface(obj, true);
         }
         if(obj.tag == "Player")
         {
             Player enemy = collision.gameObject.GetComponent<Player>();
-
+            player.RefreshBumpPrivilege();
             Vector3 launchVector = (enemy.transform.position - player.transform.position).normalized * playerBumpPower;
             Vector2 kickbackVector = -launchVector * kickback;
             enemy.GetHit(launchVector);
             player.rb.velocity = kickbackVector;
         }
-        /*else if (obj.tag == "Bumper")
-        {
-            Bumper bump = collision.gameObject.GetComponent<Bumper>();
-            Player enemy = collision.gameObject.GetComponentInParent<Player>();
-            float velocityX = enemy.previousVelocity.x;
-            float velocityY = enemy.previousVelocity.y;
-            if (active)
-            {
-                if (Mathf.Sign(player.previousVelocity.x) != Mathf.Sign(enemy.previousVelocity.x))
-                {
-                    velocityX = player.previousVelocity.x + enemy.previousVelocity.x * .1f;
-
-                }
-                else
-                {
-                    velocityX -= player.previousVelocity.x - enemy.previousVelocity.x;
-                }
-                if (Mathf.Sign(player.previousVelocity.y) != Mathf.Sign(enemy.previousVelocity.y))
-                {
-                    velocityY = velocityY + enemy.previousVelocity.y;
-                }
-                else
-                {
-                    velocityY = player.previousVelocity.y - enemy.previousVelocity.y * .1f;
-                }
-            }
-        }*/
     }
 }

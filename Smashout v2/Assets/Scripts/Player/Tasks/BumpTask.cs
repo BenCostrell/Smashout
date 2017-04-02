@@ -2,48 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BumpTask : LockOutButtonInput {
+public class BumpTask : Task {
     private float activeDuration;
+    private Player player;
+    private float timeElapsed;
 
-    public BumpTask(float dur, Player pl, float activeDur) : base(dur, pl)
+    public BumpTask(Player pl, float activeDur)
     {
+        player = pl;
         activeDuration = activeDur;
     }
 
     protected override void Init()
     {
-        base.Init();
         if (player == null) return;
+        timeElapsed = 0;
+        player.rb.gravityScale = 0;
         player.gameObject.GetComponent<SpriteRenderer>().color = Services.GameManager.bumpColors[player.playerNum-1];
-        player.bump = true;
         player.GetComponentInChildren<Bumper>().setActiveStatus(true);
         Services.EventManager.Register<BumpHit>(OnBumpHit);
         Services.EventManager.Register<GameOver>(OnGameOver);
-        //player.SetTrailStatus(true);
+        player.SetTrailStatus(true);
     }
 
     internal override void Update()
     {
-        base.Update();
+        timeElapsed += Time.deltaTime;
 
         if (timeElapsed >= activeDuration)
         {
-            SetBumpInactive();
+            SetStatus(TaskStatus.Success);
         }
+
     }
 
     void SetBumpInactive()
     {
         player.gameObject.GetComponent<SpriteRenderer>().color = player.color;
-        player.bump = false;
         player.GetComponentInChildren<Bumper>().setActiveStatus(false);
+        player.rb.gravityScale = player.defaultGravity;
     }
 
     void OnBumpHit(BumpHit e)
     {
         if (e.player == player)
         {
-            SetBumpInactive();
+            SetStatus(TaskStatus.Aborted);
         }
     }
 
@@ -52,12 +56,11 @@ public class BumpTask : LockOutButtonInput {
         SetStatus(TaskStatus.Aborted);
     }
 
-    protected override void OnSuccess()
+    protected override void CleanUp()
     {
-        base.OnSuccess();
-        if (player == null) return;
+        SetBumpInactive();
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         Services.EventManager.Unregister<GameOver>(OnGameOver);
-        //player.SetTrailStatus(false);
+        player.SetTrailStatus(false);
     }
 }

@@ -5,16 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Color color;
+    public Gradient dashingTrailColor;
+    public Gradient trailColor;
     public int playerNum;
-    public float bumpCooldown;
     public float bumpActiveTime;
-    public float hurtScale;
     private bool actionable;
 
     private Bumper bumper;
     public float moveSpeed;
-    public float xDrag;
-    public float maxVelocity;
     public float bounceScale;
     public float bumpMinSpd;
     public float underBumpCut;
@@ -23,11 +21,11 @@ public class Player : MonoBehaviour
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
     public Rigidbody2D rb;
-    private TrailRenderer tr;
+    private GameObject trailObj;
     public Vector2 previousVelocity;
-	public bool bump;
+    public bool bumpAvailable;
+    public float defaultGravity;
 
-    public int bounced = 0;
     public float wallKickCut;
     public float wallKickMinSpeed;
     public float sideCollisionOffset;
@@ -41,22 +39,22 @@ public class Player : MonoBehaviour
     private float currentTimeOnTopOfPlatform;
     public float platformLifetimeWhileStanding;
 
-	public float bounceTime = 0;
-
     // Use this for initialization
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         bumper = GetComponentInChildren<Bumper>();
-        tr = GetComponent<TrailRenderer>();
+        trailObj = GetComponentInChildren<TrailRenderer>().gameObject;
     }
 
     void Start()
     {
         currentTimeOnTopOfPlatform = 0f;
         GetComponent<SpriteRenderer>().color = color;
-        tr.enabled = false;
+        trailObj.GetComponent<TrailRenderer>().colorGradient = trailColor;
+        bumpAvailable = true;
+        defaultGravity = rb.gravityScale;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
@@ -87,13 +85,6 @@ public class Player : MonoBehaviour
             Vector2 moveForce = new Vector2(input * moveSpeed, 0);
             rb.AddForce(moveForce);
         }
-        /*Vector2 addDrag = new Vector2(-input*xDrag, 0);
-        rb.AddForce(addDrag);
-        if(Mathf.Abs(rb.velocity.x) > maxVelocity)
-        {
-            rb.velocity = new Vector2((rb.velocity.x / Mathf.Abs(rb.velocity.x)) * maxVelocity, rb.velocity.y);
-        }*/
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -103,14 +94,6 @@ public class Player : MonoBehaviour
         {
             CollideWithSurface(obj, stun);
         }
-		if (obj.tag == "Player")
-		{
-
-			/*float velocityX = previousVelocity.x;
-			float velocityY = previousVelocity.y;
-			
-			rb.velocity = new Vector2(-velocityX/4, -velocityY/4);*/
-		}
     }
 
     void OnButtonPressed(ButtonPressed e)
@@ -118,7 +101,7 @@ public class Player : MonoBehaviour
         string button = e.button;
         if (e.playerNum == playerNum)
         {
-            if (button == "A")
+            if (button == "A" && bumpAvailable)
             {
                 Bump();
             }
@@ -127,19 +110,34 @@ public class Player : MonoBehaviour
 
     void Bump()
     {
-        /*Vector2 input = new Vector2(Input.GetAxis("Horizontal_P" + playerNum), Input.GetAxis("Vertical_P" + playerNum));
+        bumpAvailable = false;
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal_P" + playerNum), Input.GetAxis("Vertical_P" + playerNum));
         if (input.magnitude > 0.1f)
         {
             Vector2 dashVector = input.normalized * dashSpeed;
             rb.velocity = dashVector;
-        }*/
-        BumpTask bumpCooldownTask = new BumpTask(bumpCooldown, this, bumpActiveTime);
+        }
+        BumpTask bumpCooldownTask = new BumpTask(this, bumpActiveTime);
         Services.TaskManager.AddTask(bumpCooldownTask);
     }
 
-    public void SetTrailStatus(bool active)
+    public void SetTrailStatus(bool dashing)
     {
-        tr.enabled = active;
+        Gradient trailGradient;
+        if (dashing)
+        {
+            trailGradient = dashingTrailColor;
+        }
+        else
+        {
+            trailGradient = trailColor;
+        }
+        trailObj.GetComponent<TrailRenderer>().colorGradient = trailGradient;
+    }
+
+    public void RefreshBumpPrivilege()
+    {
+        bumpAvailable = true;
     }
 
     public void GetStunned(float stunDuration)
@@ -156,6 +154,7 @@ public class Player : MonoBehaviour
 
     public void CollideWithSurface(GameObject surface, bool bump)
     {
+        RefreshBumpPrivilege();
         float velocityX = previousVelocity.x;
         float velocityY = -previousVelocity.y * bounceScale;
         float scaling = 1f;
@@ -232,11 +231,11 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        LockAllInput();
         Services.EventManager.Fire(new GameOver(playerNum));
     }
 
     void OnGameOver(GameOver e)
     {
+        LockAllInput();
     }
 }

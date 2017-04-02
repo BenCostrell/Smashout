@@ -20,7 +20,6 @@ public class ScaleInTitle : Task {
         timeElapsed = Mathf.Min(timeElapsed + Time.deltaTime, duration);
 
         title.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, Easing.QuadEaseOut(timeElapsed / duration));
-        Debug.Log(timeElapsed + " : " + title.localScale + "... " + Easing.QuadEaseOut(timeElapsed/duration));
 
         if (timeElapsed == duration)
         {
