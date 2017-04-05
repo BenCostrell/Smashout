@@ -41,10 +41,6 @@ public class BlockManager : MonoBehaviour {
         init = _init;
         behaviour = _behaviour;
 
-        blockCount = UnityEngine.Random.Range(blockCountLow, blockCountHigh+1);
-        patternCount = UnityEngine.Random.Range(patternCountLow, patternCountHigh+1);
-
-        preInitRNG = UnityEngine.Random.state;
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -104,7 +100,7 @@ public class BlockManager : MonoBehaviour {
         if(blockType == -1)
         {
             UnityEngine.Random.State oldState = UnityEngine.Random.state;
-            blockType = UnityEngine.Random.Range(0, blockTypes.Count);
+            blockType = UnityEngine.Random.Range(0, Math.Max(0, blockTypes.Count-1));
             UnityEngine.Random.state = oldState;
         }
         return Create(location, blockTypes[blockType]);
@@ -204,47 +200,62 @@ public class BlockManager : MonoBehaviour {
 
     public void GenerateInitialBlockSetup()
     {
+        blockCount = UnityEngine.Random.Range(blockCountLow, blockCountHigh);
+        patternCount = UnityEngine.Random.Range(patternCountLow, patternCountHigh);
+
+        preInitRNG = UnityEngine.Random.state;
+
         blocks = new List<Block>();
         Block block;
 
-        foreach (Vector3 loc in Services.GameManager.spawnpoints) blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
-
-        for (int i = 0; i < patternCount; i++)
+        foreach (Vector3 loc in Services.GameManager.spawnpoints)
         {
-            GameObject patternType = blockPatterns[UnityEngine.Random.Range(0, blockPatterns.Count)];
-            Vector3 location = GenerateValidLocation(patternType);
-            if (location == Vector3.forward) continue;
-
-            GameObject pattern = Instantiate(patternType, location, Quaternion.identity) as GameObject;
-            foreach (Transform b in pattern.GetComponentsInChildren<Transform>())
-            {
-                if (b.gameObject == pattern) continue;
-
-                b.parent = null;
-                blocks.Add(b.GetComponent<Block>());
-            }
-            Destroy(pattern);
-        }
-
-        for (int i = 0; i < blockCount; i++)
-        {
-            block = GenerateValidBlock();
-            if (block.transform.position == Vector3.forward)
-            {
-                Destroy(block.gameObject);
-                Debug.Log("only made " + i + "blocks");
-                break;
-            }
-            else
-            {
-                blocks.Add(block);
-            }
+            blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
         }
 
         foreach (Block b in blockStatics)
         {
-            blocks.Add(b);
-            blockStatics.Remove(b);
+            b.gameObject.SetActive(true);
+            blocks.Add(Instantiate(b));
+            b.gameObject.SetActive(false);
+        }
+
+        if(blockPatterns.Count != 0)
+        {
+            for (int i = 0; i < patternCount; i++)
+            {
+                GameObject patternType = blockPatterns[UnityEngine.Random.Range(0, Math.Max(0, blockPatterns.Count - 1))];
+                Vector3 location = GenerateValidLocation(patternType);
+                if (location == Vector3.forward) continue;
+
+                GameObject pattern = Instantiate(patternType, location, Quaternion.identity) as GameObject;
+                foreach (Transform b in pattern.GetComponentsInChildren<Transform>())
+                {
+                    if (b.gameObject == pattern) continue;
+
+                    b.parent = null;
+                    blocks.Add(b.GetComponent<Block>());
+                }
+                Destroy(pattern);
+            }
+        }
+
+        if(blockTypes.Count != 0)
+        {
+            for (int i = 0; i < blockCount; i++)
+            {
+                block = GenerateValidBlock();
+                if (block.transform.position == Vector3.forward)
+                {
+                    Destroy(block.gameObject);
+                    Debug.Log("only made " + i + "blocks");
+                    break;
+                }
+                else
+                {
+                    blocks.Add(block);
+                }
+            }
         }
     }
 

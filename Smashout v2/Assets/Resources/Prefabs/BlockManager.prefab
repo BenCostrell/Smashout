@@ -54,17 +54,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockTypes:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
-  blockPatterns:
-  - {fileID: 1030431041035670, guid: 5f04ee983876d5f4f85a6b4b35d172d9, type: 2}
+  blockPatterns: []
   blockStatics: []
   blockDeathTime: 0.2
   blockAppearanceTime: 0.4
   minAcceptableDistance: 30
   maxNumTries: 100
-  blockCountLow: 20
-  blockCountHigh: 30
+  blockCountLow: 15
+  blockCountHigh: 25
   patternCountLow: 1
-  patternCountHigh: 1
+  patternCountHigh: 4
   playerSpawnPlatformOffset: 25
   pause: 0
 --- !u!212 &212200256428378876

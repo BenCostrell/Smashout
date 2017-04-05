@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Block : MonoBehaviour {
-    int health = 1;
+    public List<Sprite> damageSprites;
+    public List<Color> damageColors;
+    public int damage;
+    private SpriteRenderer spr;
 
     void Start () {
-	}
+        spr = gameObject.GetComponent<SpriteRenderer>();
+        spr.sprite = damageSprites[damage];
+        spr.color = damageColors[damage];
+    }
 
-	void Update () {
-        if(health < 1)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player") DamageThis();
+    }
+
+    public void DamageThis()
+    {
+        if (++damage < damageSprites.Count)
         {
-            StartDestructionAnimation();
+            spr.sprite = damageSprites[damage];
+            spr.color = damageColors[damage];
         }
-	}
+        else DestroyThis();
+    }
 
     public void DestroyThis()
     {
