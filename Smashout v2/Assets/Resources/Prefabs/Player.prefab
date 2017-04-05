@@ -360,6 +360,7 @@ MonoBehaviour:
   playerNum: 0
   bumpActiveTime: 0.35
   moveSpeed: 250
+  dashDriftSpeedFactor: 1.5
   bounceScale: 1
   bumpMinSpd: 75
   underBumpCut: 0.7
@@ -370,6 +371,7 @@ MonoBehaviour:
   previousVelocity: {x: 0, y: 0}
   bumpAvailable: 0
   defaultGravity: 0
+  dashing: 0
   wallKickCut: 0.5
   wallKickMinSpeed: 25
   sideCollisionOffset: 0.7
@@ -392,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef23b9261a18e949b4751360ad0c960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBumpPower: 100
+  playerBumpPower: 125
   kickback: 1
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   availableColor: {r: 0.94482756, g: 1, b: 0, a: 1}

@@ -24,6 +24,7 @@ public class BumpTask : Task {
         Services.EventManager.Register<ButtonPressed>(CancelDash);
         Services.EventManager.Register<GameOver>(OnGameOver);
         player.SetTrailStatus(true);
+        player.dashing = true;
     }
 
     internal override void Update()
@@ -74,5 +75,6 @@ public class BumpTask : Task {
         Services.EventManager.Unregister<GameOver>(OnGameOver);
         Services.EventManager.Unregister<ButtonPressed>(CancelDash);
         player.SetTrailStatus(false);
+        player.dashing = false;
     }
 }
