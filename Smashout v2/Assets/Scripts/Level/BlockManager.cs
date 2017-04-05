@@ -15,6 +15,7 @@ public class BlockManager : MonoBehaviour {
     public int patternCountLow;
     public int patternCountHigh;
     public float playerSpawnPlatformOffset;
+    public bool genPlayerSpawnPlatforms;
     public bool pause;
 
     public Action init
@@ -213,10 +214,13 @@ public class BlockManager : MonoBehaviour {
         blocks = new List<Block>();
         Block block;
 
-        foreach (Vector3 loc in Services.GameManager.spawnpoints)
+        if(genPlayerSpawnPlatforms)
         {
-            blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
-            ++spawnPlatformsGenCount;
+            foreach (Vector3 loc in Services.GameManager.spawnpoints)
+            {
+                blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
+                ++spawnPlatformsGenCount;
+            }
         }
 
         foreach (Block b in blockStatics)
