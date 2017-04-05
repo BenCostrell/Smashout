@@ -1,0 +1,139 @@
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     1136 MB
+    Driver:   20.19.15.4531
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.208 seconds
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Owner\Google Drive\NYU Poly\Year 4\Spring\Game Design\Smashout\Builds\smashout 4-5-17 koth_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.558225 ms
+Attempted to make 2 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, -32.9) to (50, 67.1)
+Max Attempts: 100
+Random Block Gen Target: 11
+Pattern Gen Target: 2
+Blocks Statistics:
+  Random Blocks Generated:	11
+  Patterns Generated:		0
+  Static Blocks Generated:	9
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	22
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 3 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, -32.9) to (50, 67.1)
+Max Attempts: 100
+Random Block Gen Target: 14
+Pattern Gen Target: 3
+Blocks Statistics:
+  Random Blocks Generated:	14
+  Patterns Generated:		0
+  Static Blocks Generated:	9
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	25
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 2 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+After 100 tries, only made 12blocks.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, -32.9) to (50, 67.1)
+Max Attempts: 100
+Random Block Gen Target: 14
+Pattern Gen Target: 2
+Blocks Statistics:
+  Random Blocks Generated:	12
+  Patterns Generated:		0
+  Static Blocks Generated:	9
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	23
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 2 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+After 100 tries, only made 12blocks.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, -32.9) to (50, 67.1)
+Max Attempts: 100
+Random Block Gen Target: 14
+Pattern Gen Target: 2
+Blocks Statistics:
+  Random Blocks Generated:	12
+  Patterns Generated:		0
+  Static Blocks Generated:	9
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	23
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, -32.9) to (50, 67.1)
+Max Attempts: 100
+Random Block Gen Target: 12
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	12
+  Patterns Generated:		0
+  Static Blocks Generated:	9
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	23
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 35d4 -> priority: 1 
