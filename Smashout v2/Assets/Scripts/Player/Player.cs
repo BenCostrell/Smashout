@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     private Bumper bumper;
     public float moveSpeed;
+    public float dashDriftSpeedFactor;
     public float bounceScale;
     public float bumpMinSpd;
     public float underBumpCut;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public Vector2 previousVelocity;
     public bool bumpAvailable;
     public float defaultGravity;
+    public bool dashing;
 
     public float wallKickCut;
     public float wallKickMinSpeed;
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
         trailObj.GetComponent<TrailRenderer>().colorGradient = trailColor;
         bumpAvailable = true;
+        dashing = false;
         defaultGravity = rb.gravityScale;
         UnlockAllInput();
         Services.EventManager.Register<GameOver>(OnGameOver);
@@ -83,6 +86,10 @@ public class Player : MonoBehaviour
         if (Mathf.Abs(input) > 0.1f)
         {
             Vector2 moveForce = new Vector2(input * moveSpeed, 0);
+            if (dashing)
+            {
+                moveForce *= dashDriftSpeedFactor;
+            }
             rb.AddForce(moveForce);
         }
     }
@@ -93,6 +100,13 @@ public class Player : MonoBehaviour
         if (obj.tag == "Surface")
         {
             CollideWithSurface(obj, stun);
+        }
+        else if (obj.tag == "Player")
+        {
+            if (!stun)
+            {
+                RefreshBumpPrivilege();
+            }
         }
     }
 
@@ -117,8 +131,8 @@ public class Player : MonoBehaviour
             Vector2 dashVector = input.normalized * dashSpeed;
             rb.velocity = dashVector;
         }
-        BumpTask bumpCooldownTask = new BumpTask(this, bumpActiveTime);
-        Services.TaskManager.AddTask(bumpCooldownTask);
+        BumpTask bumpTask = new BumpTask(this, bumpActiveTime);
+        Services.TaskManager.AddTask(bumpTask);
     }
 
     public void SetTrailStatus(bool dashing)

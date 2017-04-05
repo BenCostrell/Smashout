@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highestPlayerOffset: 20
-  cameraSpeed: 15
+  cameraSpeed: 20
   minSizeScale: 0.9
 --- !u!124 &124995143611102654
 Behaviour:

@@ -21,8 +21,10 @@ public class BumpTask : Task {
         player.gameObject.GetComponent<SpriteRenderer>().color = Services.GameManager.bumpColors[player.playerNum-1];
         player.GetComponentInChildren<Bumper>().setActiveStatus(true);
         Services.EventManager.Register<BumpHit>(OnBumpHit);
+        Services.EventManager.Register<ButtonPressed>(CancelDash);
         Services.EventManager.Register<GameOver>(OnGameOver);
         player.SetTrailStatus(true);
+        player.dashing = true;
     }
 
     internal override void Update()
@@ -43,6 +45,14 @@ public class BumpTask : Task {
         player.rb.gravityScale = player.defaultGravity;
     }
 
+    void CancelDash(ButtonPressed e)
+    {
+        if (e.playerNum == player.playerNum)
+        {
+            SetStatus(TaskStatus.Aborted);
+        }
+    }
+
     void OnBumpHit(BumpHit e)
     {
         if (e.player == player)
@@ -59,8 +69,12 @@ public class BumpTask : Task {
     protected override void CleanUp()
     {
         SetBumpInactive();
+        Vector2 prevVel = player.rb.velocity;
+        player.rb.velocity = new Vector2(prevVel.x * 0.6f, prevVel.y);
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         Services.EventManager.Unregister<GameOver>(OnGameOver);
+        Services.EventManager.Unregister<ButtonPressed>(CancelDash);
         player.SetTrailStatus(false);
+        player.dashing = false;
     }
 }
