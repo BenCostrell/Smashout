@@ -205,12 +205,18 @@ public class BlockManager : MonoBehaviour {
 
         preInitRNG = UnityEngine.Random.state;
 
+        int blockGenCount = 0;
+        int patternGenCount = 0;
+        int staticsGenCount = 0;
+        int spawnPlatformsGenCount = 0;
+
         blocks = new List<Block>();
         Block block;
 
         foreach (Vector3 loc in Services.GameManager.spawnpoints)
         {
             blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
+            ++spawnPlatformsGenCount;
         }
 
         foreach (Block b in blockStatics)
@@ -218,15 +224,20 @@ public class BlockManager : MonoBehaviour {
             b.gameObject.SetActive(true);
             blocks.Add(Instantiate(b));
             b.gameObject.SetActive(false);
+            ++staticsGenCount;
         }
 
-        if(blockPatterns.Count != 0)
+        if (blockPatterns.Count != 0)
         {
             for (int i = 0; i < patternCount; i++)
             {
                 GameObject patternType = blockPatterns[UnityEngine.Random.Range(0, Math.Max(0, blockPatterns.Count - 1))];
                 Vector3 location = GenerateValidLocation(patternType);
-                if (location == Vector3.forward) continue;
+                if (location == Vector3.forward)
+                {
+                    Debug.Log("After " + maxNumTries + " tries, failed to place pattern \"" + patternType.name + "\". Decreasing pattern count and trying again with a new random pattern.");
+                    continue;
+                }
 
                 GameObject pattern = Instantiate(patternType, location, Quaternion.identity) as GameObject;
                 foreach (Transform b in pattern.GetComponentsInChildren<Transform>())
@@ -237,10 +248,12 @@ public class BlockManager : MonoBehaviour {
                     blocks.Add(b.GetComponent<Block>());
                 }
                 Destroy(pattern);
+                ++patternGenCount;
             }
         }
+        else Debug.Log("Attempted to make " + patternCount + " patterns, but no patterns were available to select.");
 
-        if(blockTypes.Count != 0)
+        if (blockTypes.Count != 0)
         {
             for (int i = 0; i < blockCount; i++)
             {
@@ -248,15 +261,34 @@ public class BlockManager : MonoBehaviour {
                 if (block.transform.position == Vector3.forward)
                 {
                     Destroy(block.gameObject);
-                    Debug.Log("only made " + i + "blocks");
+                    Debug.Log("After " + maxNumTries + " tries, only made " + i + "blocks.");
                     break;
                 }
                 else
                 {
                     blocks.Add(block);
                 }
+                ++blockGenCount;
             }
         }
+        else Debug.Log("Attempted to make " + blockCount + " blocks, but no block types were available to select.");
+
+        Debug.Log("Level Generation Info" + "\n" +
+        "---------------------" + "\n" +
+        "Generation Area: (" + (transform.position.x - transform.localScale.x / 2.0f) + ", " +
+        (transform.position.y - transform.localScale.y / 2.0f) + ") to (" +
+        (transform.position.x + transform.localScale.x / 2.0f) + ", " +
+        (transform.position.y + transform.localScale.y / 2.0f) + ")" + "\n" +
+        "Max Attempts: " + maxNumTries + "\n" +
+        "Random Block Gen Target: " + blockCount + "\n" +
+        "Pattern Gen Target: " + patternCount + "\n" +
+        "Blocks Statistics:" + "\n" +
+        "  Random Blocks Generated:\t" + blockGenCount + "\n" +
+        "  Patterns Generated:\t\t" + patternGenCount + "\n" +
+        "  Static Blocks Generated:\t" + staticsGenCount + "\n" +
+        "  Spawn Platforms Generated:\t" + spawnPlatformsGenCount + "\n" +
+        "    Total Blocks Generated:\t" + blocks.Count + "\n" +
+        "---------------------");
     }
 
     public void DestroyBlock(Block block, bool animate)
