@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour {
     public List<GameObject> blockTypes;
     public List<GameObject> blockPatterns;
-    public List<Block> blockStatics;
+    public List<GameObject> blockStatics;
     public float blockDeathTime;
     public float blockAppearanceTime;
     public float minAcceptableDistance;
@@ -223,11 +223,17 @@ public class BlockManager : MonoBehaviour {
             }
         }
 
-        foreach (Block b in blockStatics)
+        foreach (GameObject o in blockStatics)
         {
-            b.gameObject.SetActive(true);
-            blocks.Add(Instantiate(b));
-            b.gameObject.SetActive(false);
+            GameObject prefab = Instantiate(o) as GameObject;
+            foreach (Transform b in prefab.GetComponentsInChildren<Transform>())
+            {
+                if (b.gameObject == prefab && b.gameObject.GetComponent<Block>() == null) continue;
+
+                b.parent = null;
+                blocks.Add(b.GetComponent<Block>());
+            }
+            Destroy(o);
             ++staticsGenCount;
         }
 
