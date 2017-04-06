@@ -358,7 +358,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   playerNum: 0
-  bumpActiveTime: 0.35
+  bumpActiveTime: 0.25
   moveSpeed: 250
   dashDriftSpeedFactor: 1.5
   bounceScale: 1
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef23b9261a18e949b4751360ad0c960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBumpPower: 125
+  playerBumpPower: 140
   kickback: 1
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   availableColor: {r: 0.94482756, g: 1, b: 0, a: 1}

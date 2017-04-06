@@ -27,11 +27,11 @@ public class Bumper : MonoBehaviour {
             sprite.enabled = true;
             sprite.color = activeColor;
         }
-        else if (player.bumpAvailable)
+        /* else if (player.bumpAvailable)
         {
             sprite.enabled = true;
             sprite.color = availableColor;
-        }
+        }*/
         else
         {
             sprite.enabled = false;

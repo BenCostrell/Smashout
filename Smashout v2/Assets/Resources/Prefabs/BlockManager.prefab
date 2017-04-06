@@ -58,12 +58,12 @@ MonoBehaviour:
   blockStatics: []
   blockDeathTime: 0.2
   blockAppearanceTime: 0.4
-  minAcceptableDistance: 25
+  minAcceptableDistance: 35
   maxNumTries: 100
   blockCountLow: 15
-  blockCountHigh: 30
+  blockCountHigh: 20
   patternCountLow: 1
-  patternCountHigh: 4
+  patternCountHigh: 1
   playerSpawnPlatformOffset: 25
   genPlayerSpawnPlatforms: 1
   pause: 0

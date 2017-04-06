@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         Services.TaskManager.AddTask(bumpTask);
     }
 
-    public void SetTrailStatus(bool dashing)
+    public void SetTrailColor(bool dashing)
     {
         Gradient trailGradient;
         if (dashing)
@@ -149,9 +149,15 @@ public class Player : MonoBehaviour
         trailObj.GetComponent<TrailRenderer>().colorGradient = trailGradient;
     }
 
+    public void SetTrailActiveStatus(bool status)
+    {
+        trailObj.SetActive(status);
+    }
+
     public void RefreshBumpPrivilege()
     {
         bumpAvailable = true;
+        SetTrailActiveStatus(true);
     }
 
     public void GetStunned(float stunDuration)

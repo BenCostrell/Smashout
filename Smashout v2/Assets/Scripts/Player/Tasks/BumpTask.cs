@@ -23,7 +23,7 @@ public class BumpTask : Task {
         Services.EventManager.Register<BumpHit>(OnBumpHit);
         Services.EventManager.Register<ButtonPressed>(CancelDash);
         Services.EventManager.Register<GameOver>(OnGameOver);
-        player.SetTrailStatus(true);
+        player.SetTrailColor(true);
         player.dashing = true;
     }
 
@@ -66,6 +66,11 @@ public class BumpTask : Task {
         SetStatus(TaskStatus.Aborted);
     }
 
+    protected override void OnSuccess()
+    {
+        player.SetTrailActiveStatus(false);
+    }
+
     protected override void CleanUp()
     {
         SetBumpInactive();
@@ -74,7 +79,7 @@ public class BumpTask : Task {
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         Services.EventManager.Unregister<GameOver>(OnGameOver);
         Services.EventManager.Unregister<ButtonPressed>(CancelDash);
-        player.SetTrailStatus(false);
+        player.SetTrailColor(false);
         player.dashing = false;
     }
 }
