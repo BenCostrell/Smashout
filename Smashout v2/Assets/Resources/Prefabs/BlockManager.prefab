@@ -60,8 +60,8 @@ MonoBehaviour:
   blockAppearanceTime: 0.4
   minAcceptableDistance: 35
   maxNumTries: 100
-  blockCountLow: 15
-  blockCountHigh: 20
+  blockCountLow: 10
+  blockCountHigh: 15
   patternCountLow: 1
   patternCountHigh: 1
   playerSpawnPlatformOffset: 25
