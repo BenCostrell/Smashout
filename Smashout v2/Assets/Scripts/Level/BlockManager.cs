@@ -41,7 +41,6 @@ public class BlockManager : MonoBehaviour {
         //Defaults _init and _behaviour if they have not already been set
         init = _init;
         behaviour = _behaviour;
-
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -233,7 +232,6 @@ public class BlockManager : MonoBehaviour {
                 b.parent = null;
                 blocks.Add(b.GetComponent<Block>());
             }
-            Destroy(o);
             ++staticsGenCount;
         }
 

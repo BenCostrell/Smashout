@@ -146,6 +146,9 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0.8758622, a: 1}
   - {r: 0.034482718, g: 1, b: 0, a: 1}
   spawnpoints:
-  - {x: -50, y: 90, z: 0}
-  - {x: 50, y: 90, z: 0}
+  - {x: -50, y: 100, z: 0}
+  - {x: 50, y: 100, z: 0}
+  customSpawns: 0
+  shufflePlayerSpawns: 1
+  numPlayers: 2
   gameStarted: 0

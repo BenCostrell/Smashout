@@ -28,10 +28,13 @@ public class CameraController : MonoBehaviour {
 
     void AdjustView()
     {
-        float height_P1 = Services.GameManager.players[0].transform.position.y;
-        float height_P2 = Services.GameManager.players[1].transform.position.y;
+        if (!Services.GameManager.gameStarted) return;
+        float[] heights = new float[Services.GameManager.numPlayers];
+        for (int i = 0; i < heights.Length; ++i) heights[i] = Services.GameManager.players[i].transform.position.y;
+        //float height_P1 = Services.GameManager.players[0].transform.position.y;
+        //float height_P2 = Services.GameManager.players[1].transform.position.y;
 
-        float topOfView = Mathf.Max(height_P1, height_P2) + highestPlayerOffset;
+        float topOfView = Mathf.Max(heights)/*Mathf.Max(height_P1, height_P2)*/ + highestPlayerOffset;
         float newSize = Mathf.Max(baseSize * minSizeScale, (topOfView + baseSize) / 2);
         Vector3 newPosition = new Vector3(transform.position.x, -baseSize + newSize, transform.position.z);
         camera.orthographicSize = newSize;

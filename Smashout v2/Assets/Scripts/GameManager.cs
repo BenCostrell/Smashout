@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -10,13 +8,16 @@ public class GameManager : MonoBehaviour {
     public Gradient[] trailColors;
     public Color[] bumpColors;
     public Vector3[] spawnpoints;
+    public bool customSpawns;
+    public bool shufflePlayerSpawns;
+    public int numPlayers;
     public bool gameStarted;
-    
+
     // Use this for initialization
-	void Awake () {
+    void Awake() {
         InitializeServices();
-	}
-	
+    }
+
     void Start()
     {
         Services.EventManager.Register<Reset>(Reset);
@@ -27,6 +28,12 @@ public class GameManager : MonoBehaviour {
         ScaleInTitle scaleInTitle = new ScaleInTitle();
         WaitToStart waitToStart = new WaitToStart();
         ActionTask startGame = new ActionTask(StartGame);
+
+        if (!customSpawns) //if spawnpoints are to be generated, generate them equally spaced from each other
+        {
+            spawnpoints = new Vector3[numPlayers];
+            for (int i = 0; i < numPlayers; ++i) spawnpoints[i] = new Vector3(i * 200.0f / (numPlayers - 1) - 100.0f, 100);
+        }
 
         scaleInTitle
             .Then(waitToStart)
@@ -66,8 +73,7 @@ public class GameManager : MonoBehaviour {
 
     public void SoftReset()
     {
-        Destroy(players[0].gameObject);
-        Destroy(players[1].gameObject);
+        foreach(Player p in players) Destroy(p.gameObject);
         Services.BlockManager.DestroyAllBlocks(false);
         Services.UIManager.SetUpUI();
         Services.EventManager.Register<GameOver>(GameOver);
@@ -80,6 +86,7 @@ public class GameManager : MonoBehaviour {
         Services.BlockManager.DestroyAllBlocks(true);
         ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
         WaitToRestart waitToRestart = new WaitToRestart();
+        gameStarted = false;
 
         scaleInCongrats
             .Then(waitToRestart);
@@ -89,14 +96,23 @@ public class GameManager : MonoBehaviour {
 
     void InitializePlayers()
     {
-        players = new Player[2];
-        players[0] = InitializePlayer(1);
-        players[1] = InitializePlayer(2);
+        players = new Player[numPlayers];
+        if (shufflePlayerSpawns)
+        {
+            int i = 0;
+            foreach (int j in new UniqueRandomSample(0, numPlayers))
+            {
+                players[i] = InitializePlayer(i + 1, j);
+                ++i;
+            }
+        }
+        else for (int i = 0; i < numPlayers; ++i) players[i] = InitializePlayer(i + 1);
     }
 
-    Player InitializePlayer(int num)
+    Player InitializePlayer(int num, int spawnNum = -1)
     {
-        Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[num-1], Quaternion.identity).GetComponent<Player>();
+        if (spawnNum == -1) spawnNum = num - 1;
+        Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[spawnNum], Quaternion.identity).GetComponent<Player>();
         newPlayer.color = playerColors[num - 1];
         newPlayer.trailColor = trailColors[num - 1];
         newPlayer.playerNum = num;
