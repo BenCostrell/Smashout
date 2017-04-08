@@ -53,15 +53,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   playerColors:
-  - {r: 0.11724138, g: 0, b: 1, a: 1}
-  - {r: 0, g: 0.60294116, b: 0.10395539, a: 1}
+  - {r: 0, g: 0.6, b: 0.6, a: 1}
+  - {r: 0, g: 0.8, b: 0, a: 1}
   trailColors:
   - key0:
       serializedVersion: 2
-      rgba: 4294901790
+      rgba: 4288256256
     key1:
       serializedVersion: 2
-      rgba: 4292869888
+      rgba: 4289901126
     key2:
       serializedVersion: 2
       rgba: 0
@@ -101,10 +101,10 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   - key0:
       serializedVersion: 2
-      rgba: 4279998976
+      rgba: 4278242304
     key1:
       serializedVersion: 2
-      rgba: 4278845184
+      rgba: 4283750740
     key2:
       serializedVersion: 2
       rgba: 16777215
@@ -143,8 +143,8 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   bumpColors:
-  - {r: 0, g: 1, b: 0.8758622, a: 1}
-  - {r: 0.034482718, g: 1, b: 0, a: 1}
+  - {r: 0.27450982, g: 0.69803923, b: 0.69803923, a: 1}
+  - {r: 0.32941177, g: 0.8509804, b: 0.32941177, a: 1}
   spawnpoints:
   - {x: -50, y: 100, z: 0}
   - {x: 50, y: 100, z: 0}

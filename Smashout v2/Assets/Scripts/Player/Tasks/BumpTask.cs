@@ -49,6 +49,8 @@ public class BumpTask : Task {
     {
         if (e.playerNum == player.playerNum)
         {
+            Vector2 prevVel = player.rb.velocity;
+            player.rb.velocity = new Vector2(prevVel.x * 0f, prevVel.y);
             SetStatus(TaskStatus.Aborted);
         }
     }
@@ -68,7 +70,7 @@ public class BumpTask : Task {
 
     protected override void OnSuccess()
     {
-        player.SetTrailActiveStatus(false);
+        
     }
 
     protected override void CleanUp()
@@ -81,5 +83,6 @@ public class BumpTask : Task {
         Services.EventManager.Unregister<ButtonPressed>(CancelDash);
         player.SetTrailColor(false);
         player.dashing = false;
+        player.SetTrailActiveStatus(false);
     }
 }
