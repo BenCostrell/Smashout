@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     public bool customSpawns;
     public bool shufflePlayerSpawns;
     public int numPlayers;
+    public LevelQueue levels;
+    public bool playQueueInOrder;
     public bool gameStarted;
 
     // Use this for initialization

@@ -151,4 +151,6 @@ MonoBehaviour:
   customSpawns: 0
   shufflePlayerSpawns: 1
   numPlayers: 2
+  levels: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
+  playQueueInOrder: 0
   gameStarted: 0
