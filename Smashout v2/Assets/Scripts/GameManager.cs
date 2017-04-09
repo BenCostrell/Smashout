@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -26,8 +27,8 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Awake() {
-        InitializeServices();
         SceneManager.sceneLoaded += OnSceneLoad;
+        InitializeServices();
     }
 
     void Start()
@@ -66,6 +67,11 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.Update();
 	}
 
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoad;
+    }
+
     void InitializeServices()
     {
         Services.GameManager = this;
@@ -93,7 +99,8 @@ public class GameManager : MonoBehaviour {
 
     void Reset(Reset e)
     {
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("main",LoadSceneMode.Single);
+        gameStarted = false;
     }
 
     public void LevelReset()
@@ -108,12 +115,11 @@ public class GameManager : MonoBehaviour {
     public void NextLevel()
     {
         foreach (Player p in players) Destroy(p.gameObject);
-        Services.BlockManager.DestroyAllBlocks(false);
-        Destroy(Services.BlockManager);
+        SceneManager.UnloadSceneAsync(currentLevel.Current);
         if (!currentLevel.MoveNext())
         {
             //reset currentLevel and reshuffle if need be
-            playQueueInOrder = playQueueInOrder;
+            currentLevel.Reset();
             currentLevel.MoveNext();
         }
         foreach (string l in levels) Debug.Log(l);

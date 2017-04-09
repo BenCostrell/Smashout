@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Master Level Queue
   m_EditorClassIdentifier: 
   settings:
-  - scene: {fileID: 102900000, guid: bbb1c49d5df3da447b68e0521e5ab8f7, type: 3}
+  - level: _lv_koth
     inQueue: 1
-  - scene: {fileID: 102900000, guid: 6073e2e7ede97e14c8f28ff850b907e8, type: 3}
+  - level: _lv_wide
     inQueue: 1

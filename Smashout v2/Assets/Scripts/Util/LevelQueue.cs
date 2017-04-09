@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "Level Queue")]
 public class LevelQueue : ScriptableObject
@@ -11,19 +9,9 @@ public class LevelQueue : ScriptableObject
     [System.Serializable]
     public class LevelQueueField : object
     {
-        public LevelQueueField(LevelQueueField other)
-            : this(other.scene, other.inQueue)
-        {
-        }
-        public LevelQueueField(SceneAsset scene, bool inQueue = true)
-        {
-            this.scene = scene;
-            this.inQueue = inQueue;
-        }
-
-        [SerializeField]
-        public SceneAsset scene;
-        public string level { get { return scene.name; } }
+        //[SerializeField]
+        //public SceneAsset scene;
+        public string level;
         public bool inQueue;
     }
 
