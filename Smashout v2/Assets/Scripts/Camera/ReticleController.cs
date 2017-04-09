@@ -36,7 +36,8 @@ public class ReticleController : MonoBehaviour {
         borderObj.GetComponent<Image>().color = player.color;
         reticleImage.GetComponentInChildren<RawImage>().texture = renderTexture;
         xBound = 800;
-        yBound = 450;
+        yBound = xBound/Camera.main.aspect;
+        Debug.Log(xBound + ", " + yBound);
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
 
@@ -45,7 +46,6 @@ public class ReticleController : MonoBehaviour {
         Vector3 playerPos = Camera.main.WorldToViewportPoint(player.transform.position);
         Vector3 playerTopRight = Camera.main.WorldToViewportPoint(sr.bounds.max);
         Vector3 playerBottomLeft = Camera.main.WorldToViewportPoint(sr.bounds.min);
-        Debug.Log("player " + player.playerNum + " at screen pos " + playerPos.x + ", " + playerPos.y);
         float xPos = Mathf.Clamp(playerPos.x, xOffset, 1 - xOffset) * xBound*2 - xBound;
         float yPos = Mathf.Clamp(playerPos.y, yOffset, 1 - yOffset) * yBound*2 - yBound;
         rectTransform.anchoredPosition = new Vector2(xPos, yPos);
