@@ -59,6 +59,7 @@ public class Bumper : MonoBehaviour {
         if(obj.tag == "Player")
         {
             Player enemy = collision.gameObject.GetComponent<Player>();
+            Services.EventManager.Fire(new BumpHit(player));
             player.RefreshBumpPrivilege();
             Vector3 launchVector = (enemy.transform.position - player.transform.position).normalized * playerBumpPower;
             Vector2 kickbackVector = -launchVector * kickback;

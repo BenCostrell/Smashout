@@ -170,6 +170,7 @@ public class GameManager : MonoBehaviour {
         newPlayer.transform.GetComponentInChildren<Camera>().targetTexture = reticleRenderTextures[num - 1];
 
         ReticleController reticle = Instantiate(Services.PrefabDB.Reticle, canvas.transform).GetComponent<ReticleController>();
+        reticle.GetComponent<RectTransform>().localScale = 1.5f * Vector3.one;
         reticle.InitializeReticle(newPlayer, reticleRenderTextures[num - 1]);
         reticles[num - 1] = reticle;
 

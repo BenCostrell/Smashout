@@ -7,7 +7,8 @@ public class ReticleController : MonoBehaviour {
 
     private Player player;
     private SpriteRenderer sr;
-    private GameObject mask;
+    private GameObject reticleImage;
+    private GameObject borderObj;
     public float xOffset;
     public float yOffset;
     private RectTransform rectTransform;
@@ -28,11 +29,12 @@ public class ReticleController : MonoBehaviour {
     {
         player = pl;
         sr = player.gameObject.GetComponent<SpriteRenderer>();
-        mask = transform.GetChild(0).gameObject;
-        mask.SetActive(false);
+        reticleImage = transform.GetChild(0).gameObject;
+        reticleImage.SetActive(false);
         rectTransform = GetComponent<RectTransform>();
-        mask.GetComponentInChildren<RawImage>().texture = renderTexture;
-        mask.transform.GetChild(1).GetComponent<Image>().color = player.color;
+        borderObj = reticleImage.transform.GetChild(1).gameObject;
+        borderObj.GetComponent<Image>().color = player.color;
+        reticleImage.GetComponentInChildren<RawImage>().texture = renderTexture;
         xBound = 800;
         yBound = 450;
         Services.EventManager.Register<GameOver>(OnGameOver);
@@ -48,13 +50,21 @@ public class ReticleController : MonoBehaviour {
         float yPos = Mathf.Clamp(playerPos.y, yOffset, 1 - yOffset) * yBound*2 - yBound;
         rectTransform.anchoredPosition = new Vector2(xPos, yPos);
 
-        if (playerBottomLeft.x > 1 || playerTopRight.x < 0 || playerBottomLeft.y > 1 || playerTopRight.y < 0)
-        {
-            mask.SetActive(true);
+        reticleImage.SetActive(true);
+        if (playerBottomLeft.x > 1) {
+            borderObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        } else if (playerTopRight.x < 0) {
+            borderObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+        }
+        else if (playerBottomLeft.y > 1) {
+            borderObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+        }
+        else if (playerTopRight.y < 0) {
+            borderObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
         }
         else
         {
-            mask.SetActive(false);
+            reticleImage.SetActive(false);
         }
     }
 
