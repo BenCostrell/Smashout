@@ -3,25 +3,41 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    [HideInInspector]
     public Player[] players;
+    public int numPlayers;
     public Color[] playerColors;
     public Gradient[] trailColors;
     public Color[] bumpColors;
+    [Space(10)]
     public Vector3[] spawnpoints;
     public bool customSpawns;
     public bool shufflePlayerSpawns;
-    public int numPlayers;
-    public LevelQueue levels;
-    public bool playQueueInOrder;
+    [Space(10)]
+    public LevelQueue levelQueue;
+    public bool playQueueInOrder { get { return _orderedQueue; } set { _orderedQueue = value; levels = (value ? levelQueue.levels : levelQueue.levels.shuffle()); currentLevel = levels.GetEnumerator(); } }
+    [SerializeField]
+    private bool _orderedQueue;
+    [Space(10)]
     public bool gameStarted;
+
+    private LevelQueue.Levels levels;
+    private LevelQueue.Levels.Enumerator currentLevel;
 
     // Use this for initialization
     void Awake() {
         InitializeServices();
+        SceneManager.sceneLoaded += OnSceneLoad;
     }
 
     void Start()
     {
+        //should initialize levels and currentLevel
+        playQueueInOrder = playQueueInOrder;
+        currentLevel.MoveNext();
+
+        Cursor.visible = false;
+
         Services.EventManager.Register<Reset>(Reset);
         Services.EventManager.Register<GameOver>(GameOver);
         Services.UIManager.SetUpUI();
@@ -56,13 +72,20 @@ public class GameManager : MonoBehaviour {
         Services.EventManager = new EventManager();
         Services.TaskManager = new TaskManager();
         Services.PrefabDB = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
-        Services.BlockManager = GameObject.FindGameObjectWithTag("BlockManager").GetComponent<BlockManager>();
+        //Services.BlockManager = GameObject.FindGameObjectWithTag("BlockManager").GetComponent<BlockManager>();
         Services.UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Services.InputManager = new InputManager();
     }
 
     void StartGame()
     {
+        SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
+    }
+
+    void OnSceneLoad(Scene s, LoadSceneMode m)
+    {
+        if (s == SceneManager.GetSceneByName("main")) return;
+        Services.BlockManager = FindObjectOfType<BlockManager>();
         Services.BlockManager.GenerateLevel();
         InitializePlayers();
         gameStarted = true;
@@ -70,15 +93,33 @@ public class GameManager : MonoBehaviour {
 
     void Reset(Reset e)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("main");
     }
 
-    public void SoftReset()
+    public void LevelReset()
     {
-        foreach(Player p in players) Destroy(p.gameObject);
+        foreach (Player p in players) Destroy(p.gameObject);
         Services.BlockManager.DestroyAllBlocks(false);
         Services.UIManager.SetUpUI();
         Services.EventManager.Register<GameOver>(GameOver);
+        StartGame();
+    }
+
+    public void NextLevel()
+    {
+        foreach (Player p in players) Destroy(p.gameObject);
+        Services.BlockManager.DestroyAllBlocks(false);
+        Destroy(Services.BlockManager);
+        if (!currentLevel.MoveNext())
+        {
+            //reset currentLevel and reshuffle if need be
+            playQueueInOrder = playQueueInOrder;
+            currentLevel.MoveNext();
+        }
+        foreach (string l in levels) Debug.Log(l);
+        Services.UIManager.SetUpUI();
+        Services.EventManager.Register<GameOver>(GameOver);
+
         StartGame();
     }
 

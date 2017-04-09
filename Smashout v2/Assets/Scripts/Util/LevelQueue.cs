@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,126 +11,100 @@ public class LevelQueue : ScriptableObject
     [System.Serializable]
     public class LevelQueueField : object
     {
-        public LevelQueueField(UnityEngine.Object level, bool inQueue = true)
+        public LevelQueueField(LevelQueueField other)
+            : this(other.scene, other.inQueue)
         {
-            this.level = level;
+        }
+        public LevelQueueField(SceneAsset scene, bool inQueue = true)
+        {
+            this.scene = scene;
             this.inQueue = inQueue;
         }
-        public UnityEngine.Object level;
+
+        [SerializeField]
+        public SceneAsset scene;
+        public string level { get { return scene.name; } }
         public bool inQueue;
     }
+
     [SerializeField]
     private LevelQueueField[] settings;
-    public Levels levels
-    {
-        get { return new Levels(settings); }
-    }
 
     public class Levels : IEnumerable
     {
-        private LevelQueueField[] levels;
-        public Levels(LevelQueueField[] levels)
+        public Levels(LevelQueue outer)
         {
-            this.levels = new LevelQueueField[levels.Length];
-            for(int i = 0; i < levels.Length; ++i)
+            List<string> lst = new List<string>();
+            foreach (LevelQueueField f in outer.settings)
             {
-                this.levels[i] = levels[i];
+                Debug.Log(f.level);
+                if (f.inQueue) lst.Add(f.level);
             }
+            levels = lst.ToArray();
         }
 
         public Levels shuffle()
         {
-            List<LevelQueueField> tmp = new List<LevelQueueField>();
-            foreach (UnityEngine.Object l in this) tmp.Add(new LevelQueueField(l));
-            if (tmp.Count == 0) return this;
-
-            int index = 0;
-            foreach (int i in new UniqueRandomSample(1, tmp.Count))
-            {
-                while (index < levels.Length && !levels[index].inQueue) ++index;
-                levels[index] = new LevelQueueField(tmp[i].level);
-            }
+            List<string> lst = new List<string>();
+            foreach (int i in new UniqueRandomSample(0, levels.Length)) lst.Add(levels[i]);
+            for (int i = 0; i < levels.Length; ++i) levels[i] = lst[i];
             return this;
         }
 
-        public int Length
+        public int Length { get { return levels.Length; } }
+
+        public string this[int key]
         {
-            get
-            {
-                int count = 0;
-                Enumerator e = GetEnumerator();
-                while (e.MoveNext()) ++count;
-                return count;
-            }
+            get { return levels[key]; }
         }
 
-        public UnityEngine.Object this[int key]
-        {
-            get
-            {
-                Enumerator e = GetEnumerator();
-                for(int i = 0; i <= key; ++i)
-                {
-                    if (!e.MoveNext()) throw new IndexOutOfRangeException();
-                }
-                return e.Current;
-            }
-        }
-
-        public UnityEngine.Object this[string name]
-        {
-            get
-            {
-                foreach(LevelQueueField l in levels)
-                {
-                    if(name == l.level.name)
-                    {
-                        if (!l.inQueue) throw new KeyNotFoundException();
-                        return l.level; 
-                    }
-                }
-                throw new KeyNotFoundException();
-            }
-        }
+        private string[] levels;
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return (IEnumerator)GetEnumerator();
         }
-
         public Enumerator GetEnumerator()
         {
-            return new Enumerator(levels);
+            return new Enumerator(this);
         }
-
         public class Enumerator : IEnumerator
         {
-            private LevelQueueField[] levels;
-            private int position = -1;
-
-            public Enumerator(LevelQueueField[] levels) { this.levels = levels; }
-
-            public bool MoveNext()
+            public Enumerator(Levels outer)
             {
-                do
-                {
-                    ++position;
-                    if (position >= levels.Length) return false;
-                } while (!levels[position].inQueue);
-                return true;
+                this.outer = outer;
+                Reset();
             }
 
-            public void Reset() { position = -1; }
-
             object IEnumerator.Current { get { return Current; } }
-            public UnityEngine.Object Current
+            public string Current
             {
                 get
                 {
-                    try { return levels[position].level; }
+                    try { return outer.levels[position]; }
                     catch (IndexOutOfRangeException) { throw new InvalidOperationException(); }
                 }
             }
+            bool IEnumerator.MoveNext() { return MoveNext(); }
+            public bool MoveNext()
+            {
+                ++position;
+                return position < outer.levels.Length;
+            }
+
+            void IEnumerator.Reset() { Reset(); }
+            public void Reset()
+            {
+                position = -1;
+            }
+
+            private int position;
+            private Levels outer;
         }
+    }
+
+    public Levels levels
+    {
+        get { return new Levels(this); }
     }
 }

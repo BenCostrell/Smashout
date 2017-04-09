@@ -5,7 +5,8 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour {
     public List<GameObject> blockTypes;
     public List<GameObject> blockPatterns;
-    public List<GameObject> blockStatics;
+    public HashSet<GameObject> blockStatics;
+    public bool findLooseStatics;
     public float blockDeathTime;
     public float blockAppearanceTime;
     public float minAcceptableDistance;
@@ -36,6 +37,12 @@ public class BlockManager : MonoBehaviour {
     private int blockCount;
     private int patternCount;
 
+    void Awake()
+    {
+        blockStatics = new HashSet<GameObject>();
+        if (findLooseStatics) claimStatics();
+    }
+
     void Start()
     {
         //Defaults _init and _behaviour if they have not already been set
@@ -47,6 +54,20 @@ public class BlockManager : MonoBehaviour {
     void Update()
     {
         if (!pause) _behaviour();
+    }
+
+    private void OnDestroy()
+    {
+        foreach (GameObject o in blockStatics) Destroy(o);
+    }
+
+    public void claimStatics()
+    {
+        foreach(Block b in GameObject.FindObjectsOfType<Block>())
+        {
+            blockStatics.Add(b.transform.root.gameObject);
+            b.transform.root.gameObject.SetActive(false);
+        }
     }
 
     public void GenerateLevel()
@@ -228,10 +249,12 @@ public class BlockManager : MonoBehaviour {
             foreach (Transform b in prefab.GetComponentsInChildren<Transform>())
             {
                 if (b.gameObject == prefab && b.gameObject.GetComponent<Block>() == null) continue;
+                else if (b.gameObject.GetComponent<Block>() == null) continue;
 
                 b.parent = null;
                 blocks.Add(b.GetComponent<Block>());
             }
+            Destroy(prefab);
             ++staticsGenCount;
         }
 
