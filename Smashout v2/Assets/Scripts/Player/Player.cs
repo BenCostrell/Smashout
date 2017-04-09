@@ -174,7 +174,6 @@ public class Player : MonoBehaviour
 
     public void CollideWithSurface(GameObject surface, bool bump)
     {
-        RefreshBumpPrivilege();
         float velocityX = previousVelocity.x;
         float velocityY = -previousVelocity.y * bounceScale;
         float scaling = 1f;
@@ -188,6 +187,8 @@ public class Player : MonoBehaviour
             surface.GetComponent<Block>().DestroyThis();
             Services.EventManager.Fire(new BumpHit(this));
         }
+
+        RefreshBumpPrivilege();
 
         //Check if hitting from below
         if (transform.position.y < surface.GetComponent<SpriteRenderer>().bounds.min.y)
