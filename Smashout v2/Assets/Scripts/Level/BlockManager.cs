@@ -351,6 +351,11 @@ public class BlockManager : MonoBehaviour {
         }
     }
 
+    public void Suicide()
+    {
+        Destroy(transform.gameObject);
+    }
+
     public void StartAppearanceOfAllBlocks()
     {
         foreach (Block block in blocks)
