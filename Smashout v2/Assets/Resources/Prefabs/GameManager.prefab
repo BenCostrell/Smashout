@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  numPlayers: 2
   playerColors:
   - {r: 0, g: 0.6, b: 0.6, a: 1}
   - {r: 0, g: 0.8, b: 0, a: 1}
@@ -150,5 +151,6 @@ MonoBehaviour:
   - {x: 50, y: 100, z: 0}
   customSpawns: 0
   shufflePlayerSpawns: 1
-  numPlayers: 2
+  levelQueue: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
+  _orderedQueue: 1
   gameStarted: 0

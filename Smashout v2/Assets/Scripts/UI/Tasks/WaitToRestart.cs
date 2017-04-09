@@ -20,7 +20,7 @@ public class WaitToRestart : Task {
 
     protected override void OnSuccess()
     {
-        Services.GameManager.SoftReset();
+        Services.GameManager.NextLevel();
     }
 
     protected override void CleanUp()
