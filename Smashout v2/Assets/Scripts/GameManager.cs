@@ -5,10 +5,14 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector]
     public Player[] players;
+    [HideInInspector]
+    public ReticleController[] reticles;
     public int numPlayers;
     public Color[] playerColors;
     public Gradient[] trailColors;
     public Color[] bumpColors;
+    public RenderTexture[] reticleRenderTextures;
+    private GameObject canvas;
     [Space(10)]
     public Vector3[] spawnpoints;
     public bool customSpawns;
@@ -87,6 +91,7 @@ public class GameManager : MonoBehaviour {
         if (s == SceneManager.GetSceneByName("main")) return;
         Services.BlockManager = FindObjectOfType<BlockManager>();
         Services.BlockManager.GenerateLevel();
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
         InitializePlayers();
         gameStarted = true;
     }
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour {
     public void LevelReset()
     {
         foreach (Player p in players) Destroy(p.gameObject);
+        foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
         Services.BlockManager.DestroyAllBlocks(false);
         Services.UIManager.SetUpUI();
         Services.EventManager.Register<GameOver>(GameOver);
@@ -108,6 +114,7 @@ public class GameManager : MonoBehaviour {
     public void NextLevel()
     {
         foreach (Player p in players) Destroy(p.gameObject);
+        foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
         Services.BlockManager.DestroyAllBlocks(false);
         Destroy(Services.BlockManager);
         if (!currentLevel.MoveNext())
@@ -140,6 +147,7 @@ public class GameManager : MonoBehaviour {
     void InitializePlayers()
     {
         players = new Player[numPlayers];
+        reticles = new ReticleController[numPlayers];
         if (shufflePlayerSpawns)
         {
             int i = 0;
@@ -159,6 +167,12 @@ public class GameManager : MonoBehaviour {
         newPlayer.color = playerColors[num - 1];
         newPlayer.trailColor = trailColors[num - 1];
         newPlayer.playerNum = num;
+        newPlayer.transform.GetComponentInChildren<Camera>().targetTexture = reticleRenderTextures[num - 1];
+
+        ReticleController reticle = Instantiate(Services.PrefabDB.Reticle, canvas.transform).GetComponent<ReticleController>();
+        reticle.InitializeReticle(newPlayer, reticleRenderTextures[num - 1]);
+        reticles[num - 1] = reticle;
+
         return newPlayer;
     }
 }

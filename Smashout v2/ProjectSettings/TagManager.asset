@@ -9,6 +9,7 @@ TagManager:
   - DeathBox
   - BlockManager
   - Bumper
+  - Canvas
   layers:
   - Default
   - TransparentFX

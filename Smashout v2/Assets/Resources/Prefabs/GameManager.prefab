@@ -146,11 +146,15 @@ MonoBehaviour:
   bumpColors:
   - {r: 0.27450982, g: 0.69803923, b: 0.69803923, a: 1}
   - {r: 0.32941177, g: 0.8509804, b: 0.32941177, a: 1}
+  reticleRenderTextures:
+  - {fileID: 8400000, guid: 1a0da0ca81d0197429ac6b4010243c1d, type: 2}
+  - {fileID: 8400000, guid: a52284d8536b20649ab309e4b6c720f6, type: 2}
+  canvas: {fileID: 0}
   spawnpoints:
   - {x: -50, y: 100, z: 0}
   - {x: 50, y: 100, z: 0}
   customSpawns: 0
   shufflePlayerSpawns: 1
   levelQueue: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
-  _orderedQueue: 1
+  _orderedQueue: 0
   gameStarted: 0
