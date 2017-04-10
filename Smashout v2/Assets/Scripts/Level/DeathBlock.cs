@@ -14,4 +14,12 @@ public class DeathBlock : Block
     {
         collision.gameObject.GetComponent<Player>().Die();
     }
+
+    public override void StartAppearanceAnimation()
+    {
+    }
+
+    public override void StartDestructionAnimation()
+    {
+    }
 }

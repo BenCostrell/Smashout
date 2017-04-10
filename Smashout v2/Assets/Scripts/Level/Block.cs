@@ -44,13 +44,13 @@ public class Block : MonoBehaviour {
         Services.BlockManager.DestroyBlock(this, true);
     }
 
-    public void StartDestructionAnimation()
+    public virtual void StartDestructionAnimation()
     {
         BlockFadeOut fadeOut = new BlockFadeOut(gameObject, Services.BlockManager.blockDeathTime);
         Services.TaskManager.AddTask(fadeOut);
     }
 
-    public void StartAppearanceAnimation()
+    public virtual void StartAppearanceAnimation()
     {
         BlockAppear appear = new BlockAppear(gameObject, Services.BlockManager.blockAppearanceTime);
         Services.TaskManager.AddTask(appear);
