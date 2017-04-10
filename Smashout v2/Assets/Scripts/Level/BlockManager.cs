@@ -347,7 +347,15 @@ public class BlockManager : MonoBehaviour {
         for (int i = blocks.Count - 1; i >= 0; i--)
         {
             Block block = blocks[i];
-            DestroyBlock(block, animate);
+            if (block.GetType() != typeof(DeathBlock))
+            {
+                DestroyBlock(block, animate);
+            }
+            else
+            {
+                DestroyBlock(block, false);
+            }
+            
         }
     }
 
@@ -360,7 +368,10 @@ public class BlockManager : MonoBehaviour {
     {
         foreach (Block block in blocks)
         {
-            block.StartAppearanceAnimation();
+            if (block.GetType() != typeof(DeathBlock))
+            {
+                block.StartAppearanceAnimation();
+            }
         }
     }
 

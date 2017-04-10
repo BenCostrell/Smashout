@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         // temporary death function
         if (transform.position.y < -150)
         {
-            Die();
+            //Die();
         }
     }
 
@@ -99,7 +99,10 @@ public class Player : MonoBehaviour
         GameObject obj = collision.collider.gameObject;
         if (obj.tag == "Surface")
         {
-            CollideWithSurface(obj, stun);
+            if (obj.GetComponent<Block>().GetType() != typeof(DeathBlock))
+            {
+                CollideWithSurface(obj, stun);
+            }
         }
         else if (obj.tag == "Player")
         {
@@ -250,8 +253,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
+        gameObject.SetActive(false);
         Services.EventManager.Fire(new GameOver(playerNum));
     }
 

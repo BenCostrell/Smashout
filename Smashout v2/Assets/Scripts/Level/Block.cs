@@ -9,14 +9,24 @@ public class Block : MonoBehaviour {
     private SpriteRenderer spr;
 
     void Start () {
-        spr = gameObject.GetComponent<SpriteRenderer>();
-        spr.sprite = damageSprites[damage];
-        spr.color = damageColors[damage];
+        Init();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") DamageThis();
+        if (collision.gameObject.tag == "Player") OnCollideWithPlayer(collision);
+    }
+
+    protected virtual void OnCollideWithPlayer(Collision2D collision)
+    {
+         DamageThis();
+    }
+
+    protected virtual void Init()
+    {
+        spr = gameObject.GetComponent<SpriteRenderer>();
+        spr.sprite = damageSprites[damage];
+        spr.color = damageColors[damage];
     }
 
     public void DamageThis()
