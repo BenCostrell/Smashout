@@ -41,8 +41,8 @@ public class BlockManager : MonoBehaviour {
 
     void Start()
     {
-        if (init.GetPersistentEventCount() == 0) init.AddListener(DefaultInit);
-        if (behaviour.GetPersistentEventCount() == 0) behaviour.AddListener(DefaultBehaviour);
+        init.AddListener(DefaultInit);
+        behaviour.AddListener(DefaultBehaviour);
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -84,13 +84,13 @@ public class BlockManager : MonoBehaviour {
         Restart();
     }
 
-    private void DefaultInit()
+    public void DefaultInit()
     {
         GenerateInitialBlockSetup();
         StartAppearanceOfAllBlocks();
     }
 
-    private void DefaultBehaviour()
+    public void DefaultBehaviour()
     {
 
     }
