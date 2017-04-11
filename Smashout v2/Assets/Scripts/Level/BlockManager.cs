@@ -332,7 +332,6 @@ public class BlockManager : MonoBehaviour {
             {
                 col.enabled = false;
             }
-            block.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             block.StartDestructionAnimation();
             Destroy(block.gameObject, blockDeathTime);
         }

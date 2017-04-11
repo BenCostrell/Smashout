@@ -46,6 +46,7 @@ public class Block : MonoBehaviour {
 
     public virtual void StartDestructionAnimation()
     {
+        GetComponent<SpriteRenderer>().color = Color.red;
         BlockFadeOut fadeOut = new BlockFadeOut(gameObject, Services.BlockManager.blockDeathTime);
         Services.TaskManager.AddTask(fadeOut);
     }
