@@ -54,7 +54,10 @@ public class Bumper : MonoBehaviour {
         GameObject obj = collision.gameObject;
         if (obj.tag == "Surface")
         {
-            player.CollideWithSurface(obj, true);
+            if (obj.GetComponent<Block>().GetType() != typeof(DeathBlock))
+            {
+                player.CollideWithSurface(obj, true);
+            }
         }
         if(obj.tag == "Player")
         {
