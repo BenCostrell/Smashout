@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Color color;
     public Gradient dashingTrailColor;
     public Gradient trailColor;
+	public Gradient fireColor;
     public int playerNum;
     public float bumpActiveTime;
     private bool actionable;
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour
     private float currentTimeOnTopOfPlatform;
     public float platformLifetimeWhileStanding;
 
+	public GameObject fireObj;
+
     // Use this for initialization
 
     void Awake()
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bumper = GetComponentInChildren<Bumper>();
         trailObj = GetComponentInChildren<TrailRenderer>().gameObject;
+		fireObj = GetComponentInChildren<ParticleSystem> ().gameObject;
     }
 
     void Start()
@@ -65,6 +69,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		Debug.Log(Mathf.Atan2(rb.velocity.x, rb.velocity.y)*180/Mathf.PI);
         CheckIfGrounded();
         previousVelocity = rb.velocity;
         if (actionable)
@@ -157,10 +162,16 @@ public class Player : MonoBehaviour
         trailObj.SetActive(status);
     }
 
+	public void SetFireActiveStatus(bool status)
+	{
+		fireObj.SetActive(status);
+	}
+
     public void RefreshBumpPrivilege()
     {
         bumpAvailable = true;
         SetTrailActiveStatus(true);
+		SetFireActiveStatus (true);
     }
 
     public void GetStunned(float stunDuration)

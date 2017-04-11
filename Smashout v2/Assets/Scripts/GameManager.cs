@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     public int numPlayers;
     public Color[] playerColors;
     public Gradient[] trailColors;
+	//public Color[] fireStartColors;
+	public Gradient[] fireColors;
     public Color[] bumpColors;
     public RenderTexture[] reticleRenderTextures;
     private GameObject canvas;
@@ -172,6 +174,7 @@ public class GameManager : MonoBehaviour {
         Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[spawnNum], Quaternion.identity).GetComponent<Player>();
         newPlayer.color = playerColors[num - 1];
         newPlayer.trailColor = trailColors[num - 1];
+		newPlayer.fireColor = fireColors [num - 1];
         newPlayer.playerNum = num;
         newPlayer.transform.GetComponentInChildren<Camera>().targetTexture = reticleRenderTextures[num - 1];
 

@@ -84,5 +84,6 @@ public class BumpTask : Task {
         player.SetTrailColor(false);
         player.dashing = false;
         player.SetTrailActiveStatus(false);
+		player.SetFireActiveStatus (false);
     }
 }
