@@ -1,37 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BlockManager : MonoBehaviour {
     public List<GameObject> blockTypes;
     public List<GameObject> blockPatterns;
     public HashSet<GameObject> blockStatics;
     public bool findLooseStatics;
+    [Space(10)]
+    public UnityEvent init;
+    public UnityEvent behaviour;
+    [Space(10)]
     public float blockDeathTime;
     public float blockAppearanceTime;
+    [Space(10)]
     public float minAcceptableDistance;
     public int maxNumTries;
     public int blockCountLow;
     public int blockCountHigh;
     public int patternCountLow;
     public int patternCountHigh;
+    [Space(10)]
     public float playerSpawnPlatformOffset;
     public bool genPlayerSpawnPlatforms;
+    [Space(10)]
+    [HideInInspector]
     public bool pause;
 
-    public Action init
-    {
-        get { return _init; }
-        set { _init = (value == null ? DefaultInit : value); }
-    }
-    public Action behaviour
-    {
-        get { return _behaviour; }
-        set { _behaviour = (value == null ? DefaultBehaviour : value); }
-    }
-
-    private Action _init;
-    private Action _behaviour;
     private List<Block> blocks;
     private UnityEngine.Random.State preInitRNG;
     private int blockCount;
@@ -45,15 +41,14 @@ public class BlockManager : MonoBehaviour {
 
     void Start()
     {
-        //Defaults _init and _behaviour if they have not already been set
-        init = _init;
-        behaviour = _behaviour;
+        if (init.GetPersistentEventCount() == 0) init.AddListener(DefaultInit);
+        if (behaviour.GetPersistentEventCount() == 0) behaviour.AddListener(DefaultBehaviour);
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Update()
     {
-        if (!pause) _behaviour();
+        if (!pause) behaviour.Invoke();
     }
 
     private void OnDestroy()
@@ -72,8 +67,7 @@ public class BlockManager : MonoBehaviour {
 
     public void GenerateLevel()
     {
-        init = _init;
-        _init();
+        init.Invoke();
     }
 
     public void Restart()
