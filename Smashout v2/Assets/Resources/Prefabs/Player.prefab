@@ -544,6 +544,7 @@ MonoBehaviour:
     m_Bits: 512
   platformLifetimeWhileStanding: 0.3
   fireObj: {fileID: 0}
+  fire: {fileID: 0}
 --- !u!114 &114763017142639038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1184,6 +1185,12 @@ ParticleSystem:
           value: 0.972973
           inSlope: 0
           outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 0.47276646
+          value: 0.25539666
+          inSlope: -0.35524368
+          outSlope: -0.35524368
           tangentMode: 0
         - serializedVersion: 2
           time: 1
