@@ -249,7 +249,7 @@ Prefab:
     - target: {fileID: 114710618839059030, guid: b4e6283245e841d4b9a2c6414d0ddc13,
         type: 2}
       propertyPath: titleScaleInTime
-      value: 0.19
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4e6283245e841d4b9a2c6414d0ddc13, type: 2}
@@ -500,7 +500,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 63907e1ee475c454293797492c89aa77, type: 3}
-    m_FontSize: 300
+    m_FontSize: 200
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -772,6 +772,11 @@ Prefab:
         type: 2}
       propertyPath: trailColors.Array.data[1].key1.rgba
       value: 5560660
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: matchSet
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}

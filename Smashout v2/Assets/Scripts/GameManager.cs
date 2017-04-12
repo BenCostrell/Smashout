@@ -28,6 +28,12 @@ public class GameManager : MonoBehaviour {
     [Space(10)]
     public bool gameStarted;
 
+    public int blueTrack = 0;
+    public int greenTrack = 0;
+    public int matchSet = 3;
+    public bool won = false;
+    public int round = 0;
+
     private LevelQueue.Levels levels;
     private LevelQueue.Levels.Enumerator currentLevel;
 
@@ -91,7 +97,19 @@ public class GameManager : MonoBehaviour {
 
     void StartGame()
     {
-        SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
+        round++;
+        if (won == true)
+        {
+            round = 0;
+            greenTrack = 0;
+            blueTrack = 0;
+            won = false;
+            Start();
+        }
+        else
+        {
+            SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
+        }
     }
 
     void OnSceneLoad(Scene s, LoadSceneMode m)
