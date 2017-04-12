@@ -246,6 +246,11 @@ Prefab:
       propertyPath: restartPrompt
       value: 
       objectReference: {fileID: 412343843}
+    - target: {fileID: 114710618839059030, guid: b4e6283245e841d4b9a2c6414d0ddc13,
+        type: 2}
+      propertyPath: titleScaleInTime
+      value: 0.19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4e6283245e841d4b9a2c6414d0ddc13, type: 2}
   m_IsPrefabParent: 0
