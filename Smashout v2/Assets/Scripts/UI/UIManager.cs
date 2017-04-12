@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
     public GameObject startPrompt;
     public GameObject congrats;
     public GameObject restartPrompt;
+    public GameObject matchCount;
 
     public float titleScaleInTime;
     public float congratsScaleInTime;
@@ -27,5 +28,6 @@ public class UIManager : MonoBehaviour {
         startPrompt.SetActive(false);
         congrats.SetActive(false);
         restartPrompt.SetActive(false);
+        matchCount.SetActive(false);
     }
 }
