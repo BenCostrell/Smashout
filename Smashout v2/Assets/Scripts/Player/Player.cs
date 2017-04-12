@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     public float platformLifetimeWhileStanding;
 
 	public GameObject fireObj;
+	public Fire fire;
 
     // Use this for initialization
 
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
         bumper = GetComponentInChildren<Bumper>();
         trailObj = GetComponentInChildren<TrailRenderer>().gameObject;
 		fireObj = GetComponentInChildren<ParticleSystem> ().gameObject;
+		fire = GetComponentInChildren<Fire> ();
     }
 
     void Start()
@@ -69,7 +71,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Debug.Log(Mathf.Atan2(rb.velocity.x, rb.velocity.y)*180/Mathf.PI);
         CheckIfGrounded();
         previousVelocity = rb.velocity;
         if (actionable)
@@ -156,6 +157,20 @@ public class Player : MonoBehaviour
         }
         trailObj.GetComponent<TrailRenderer>().colorGradient = trailGradient;
     }
+
+	public void SetFireColor(bool dashing)
+	{
+		Gradient fireGradient;
+		if (dashing)
+		{
+			fireGradient = dashingTrailColor;
+		}
+		else
+		{
+			fireGradient = fireColor;
+		}
+		fire.changeColor (fireGradient);
+	}
 
     public void SetTrailActiveStatus(bool status)
     {

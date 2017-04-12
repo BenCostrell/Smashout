@@ -24,6 +24,7 @@ public class BumpTask : Task {
         Services.EventManager.Register<ButtonPressed>(CancelDash);
         Services.EventManager.Register<GameOver>(OnGameOver);
         player.SetTrailColor(true);
+		player.SetFireColor(true);
         player.dashing = true;
     }
 
@@ -82,6 +83,7 @@ public class BumpTask : Task {
         Services.EventManager.Unregister<GameOver>(OnGameOver);
         Services.EventManager.Unregister<ButtonPressed>(CancelDash);
         player.SetTrailColor(false);
+		player.SetFireColor(false);
         player.dashing = false;
         player.SetTrailActiveStatus(false);
 		player.SetFireActiveStatus (false);
