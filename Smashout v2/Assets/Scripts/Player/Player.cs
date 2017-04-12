@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
         bumper = GetComponentInChildren<Bumper>();
         trailObj = GetComponentInChildren<TrailRenderer>().gameObject;
 		fireObj = GetComponentInChildren<ParticleSystem> ().gameObject;
+		fireObj.SetActive (true);
 		fire = GetComponentInChildren<Fire> ();
     }
 
@@ -283,6 +284,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         gameObject.SetActive(false);
+		fireObj.SetActive(false);
         Services.EventManager.Fire(new GameOver(playerNum));
     }
 
