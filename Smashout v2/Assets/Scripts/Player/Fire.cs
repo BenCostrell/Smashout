@@ -25,4 +25,13 @@ public class Fire : MonoBehaviour {
 
 		col.color = newColor;
 	}
+
+	public void controlFlow(bool on) {
+		ParticleSystem ps = GetComponent<ParticleSystem> ();
+		if (on) {
+			ps.Play();
+		} else {
+			ps.Stop();
+		}
+	}
 }

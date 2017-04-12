@@ -179,7 +179,8 @@ public class Player : MonoBehaviour
 
 	public void SetFireActiveStatus(bool status)
 	{
-		fireObj.SetActive(status);
+		//fireObj.SetActive(status);
+		fire.controlFlow(status);
 	}
 
     public void RefreshBumpPrivilege()
