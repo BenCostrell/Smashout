@@ -37,7 +37,6 @@ public class ReticleController : MonoBehaviour {
         reticleImage.GetComponentInChildren<RawImage>().texture = renderTexture;
         xBound = 800;
         yBound = xBound/Camera.main.aspect;
-        Debug.Log(xBound + ", " + yBound);
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
 
