@@ -28,7 +28,14 @@ public class ScaleInCongrats : Task {
             if (Services.GameManager.blueTrack == (Services.GameManager.matchSet / 2 + 1))
             {
                 Services.GameManager.won = true;
-                congrats.gameObject.GetComponent<Text>().text = "MATCH SET: BLUE";
+                if (Services.GameManager.greenTrack == 0)
+                {
+                    congrats.gameObject.GetComponent<Text>().text = "PERFECT MATCH: BLUE";
+                }
+                else
+                {
+                    congrats.gameObject.GetComponent<Text>().text = "MATCH SET: BLUE";
+                }
             }
             else
             {
@@ -41,7 +48,14 @@ public class ScaleInCongrats : Task {
             if (Services.GameManager.greenTrack == (Services.GameManager.matchSet / 2 + 1))
             {
                 Services.GameManager.won = true;
-                congrats.gameObject.GetComponent<Text>().text = "MATCH SET: GREEN";
+                if (Services.GameManager.blueTrack == 0)
+                {
+                    congrats.gameObject.GetComponent<Text>().text = "PERFECT MATCH: GREEN";
+                }
+                else
+                {
+                    congrats.gameObject.GetComponent<Text>().text = "MATCH SET: GREEN";
+                }
             }
             else
             {
