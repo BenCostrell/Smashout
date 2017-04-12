@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/_lv_wide.unity
   - enabled: 1
     path: Assets/Scenes/_lv_koth.unity
+  - enabled: 1
+    path: Assets/Scenes/_lv_koth_alt.unity

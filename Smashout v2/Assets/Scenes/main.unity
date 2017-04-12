@@ -661,11 +661,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4782839498460714, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -698,85 +693,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 20806056}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[0].ctime1
-      value: 15998
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[0].atime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[0].m_NumColorKeys
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[0].m_NumAlphaKeys
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[1].ctime1
-      value: 15998
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[1].atime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[1].m_NumColorKeys
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[1].m_NumAlphaKeys
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[0].key0.rgba
-      value: 4293810960
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[0].key1.rgba
-      value: 16182663
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[1].key0.rgba
-      value: 4282743811
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: fireColors.Array.data[1].key1.rgba
-      value: 10086808
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: trailColors.Array.data[0].key1.rgba
-      value: 11711046
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: trailColors.Array.data[1].key1.rgba
-      value: 5560660
-      objectReference: {fileID: 0}
-    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
-        type: 2}
-      propertyPath: matchSet
-      value: 5
+    - target: {fileID: 1177539189712572, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}

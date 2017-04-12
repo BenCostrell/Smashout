@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class BlockManager : MonoBehaviour {
-    public List<GameObject> blockTypes;
-    public List<GameObject> blockPatterns;
-    public HashSet<GameObject> blockStatics;
-    public bool findLooseStatics;
+    [Serializable]
+    public class Event : UnityEvent<BlockManager> { }
+
+    public List<GameObject> blockTypes = new List<GameObject>();
+    public List<GameObject> blockPatterns = new List<GameObject>();
+    public HashSet<GameObject> blockStatics = new HashSet<GameObject>();
+    public bool findLooseStatics = true;
+
     [Space(10)]
-    public UnityEvent init;
-    public UnityEvent behaviour;
+    public Event Init = new Event();
+    public Event Behaviour = new Event();
     [Space(10)]
     public float blockDeathTime;
     public float blockAppearanceTime;
@@ -28,27 +32,40 @@ public class BlockManager : MonoBehaviour {
     [HideInInspector]
     public bool pause;
 
-    private List<Block> blocks;
+    private List<Block> blocks = new List<Block>();
     private UnityEngine.Random.State preInitRNG;
     private int blockCount;
     private int patternCount;
 
     void Awake()
     {
-        blockStatics = new HashSet<GameObject>();
-        if (findLooseStatics) claimStatics();
+        if (findLooseStatics) ClaimStatics();
+
+        if (Init.GetPersistentEventCount() == 0)
+        {
+            Debug.Log("Defaulting Init");
+            Init.AddListener(DefaultInit);
+        }
+        if (Behaviour.GetPersistentEventCount() == 0)
+        {
+            Debug.Log("Defaulting Behaviour");
+            Behaviour.AddListener(DefaultBehaviour);
+        }
     }
 
     void Start()
     {
-        init.AddListener(DefaultInit);
-        behaviour.AddListener(DefaultBehaviour);
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Update()
     {
-        if (!pause) behaviour.Invoke();
+        if (!pause) Behaviour.Invoke(this);
+    }
+
+    public void GenerateLevel()
+    {
+        Init.Invoke(this);
     }
 
     private void OnDestroy()
@@ -56,18 +73,14 @@ public class BlockManager : MonoBehaviour {
         foreach (GameObject o in blockStatics) Destroy(o);
     }
 
-    public void claimStatics()
+    public void ClaimStatics()
     {
+        blockStatics.Clear();
         foreach(Block b in GameObject.FindObjectsOfType<Block>())
         {
             blockStatics.Add(b.transform.root.gameObject);
             b.transform.root.gameObject.SetActive(false);
         }
-    }
-
-    public void GenerateLevel()
-    {
-        init.Invoke();
     }
 
     public void Restart()
@@ -84,15 +97,14 @@ public class BlockManager : MonoBehaviour {
         Restart();
     }
 
-    public void DefaultInit()
+    public void DefaultInit(BlockManager m)
     {
-        GenerateInitialBlockSetup();
-        StartAppearanceOfAllBlocks();
+        m.GenerateInitialBlockSetup();
+        m.StartAppearanceOfAllBlocks();
     }
 
-    public void DefaultBehaviour()
+    public void DefaultBehaviour(BlockManager m)
     {
-
     }
 
     Vector3 GenerateLocation()
@@ -215,6 +227,8 @@ public class BlockManager : MonoBehaviour {
 
     public void GenerateInitialBlockSetup()
     {
+        blocks.Clear();
+
         blockCount = UnityEngine.Random.Range(blockCountLow, blockCountHigh);
         patternCount = UnityEngine.Random.Range(patternCountLow, patternCountHigh);
 
@@ -225,7 +239,6 @@ public class BlockManager : MonoBehaviour {
         int staticsGenCount = 0;
         int spawnPlatformsGenCount = 0;
 
-        blocks = new List<Block>();
         Block block;
 
         if(genPlayerSpawnPlatforms)
@@ -318,7 +331,7 @@ public class BlockManager : MonoBehaviour {
 
     public void DestroyBlock(Block block, bool animate)
     {
-        blocks.Remove(block);
+        if(blocks.Contains(block)) blocks.Remove(block);
         if (animate)
         {
             Collider2D[] colliders = block.GetComponentsInChildren<Collider2D>();

@@ -3,11 +3,15 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    public int matchSet = 3;
+    [Space(10)]
 
-    [HideInInspector]
-    public Player[] players;
-    [HideInInspector]
-    public ReticleController[] reticles;
+    public LevelQueue levelQueue;
+    public bool playQueueInOrder { get { return _orderedQueue; } set { _orderedQueue = value; levels = (value ? levelQueue.levels : levelQueue.levels.shuffle()); currentLevel = levels.GetEnumerator(); } }
+    [SerializeField]
+    private bool _orderedQueue;
+    [Space(10)]
+
     public int numPlayers;
     public Color[] playerColors;
     public Gradient[] trailColors;
@@ -17,21 +21,24 @@ public class GameManager : MonoBehaviour {
     public RenderTexture[] reticleRenderTextures;
     private GameObject canvas;
     [Space(10)]
+
     public Vector3[] spawnpoints;
     public bool customSpawns;
     public bool shufflePlayerSpawns;
-    [Space(10)]
-    public LevelQueue levelQueue;
-    public bool playQueueInOrder { get { return _orderedQueue; } set { _orderedQueue = value; levels = (value ? levelQueue.levels : levelQueue.levels.shuffle()); currentLevel = levels.GetEnumerator(); } }
-    [SerializeField]
-    private bool _orderedQueue;
-    [Space(10)]
-    public bool gameStarted;
 
+    [HideInInspector]
+    public Player[] players;
+    [HideInInspector]
+    public ReticleController[] reticles;
+    [HideInInspector]
+    public bool gameStarted;
+    [HideInInspector]
     public int blueTrack = 0;
+    [HideInInspector]
     public int greenTrack = 0;
-    public int matchSet = 3;
+    [HideInInspector]
     public bool won = false;
+    [HideInInspector]
     public int round = 0;
 
     private LevelQueue.Levels levels;
@@ -90,7 +97,7 @@ public class GameManager : MonoBehaviour {
         Services.EventManager = new EventManager();
         Services.TaskManager = new TaskManager();
         Services.PrefabDB = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
-        //Services.BlockManager = GameObject.FindGameObjectWithTag("BlockManager").GetComponent<BlockManager>();
+        Services.BlockManager = gameObject.transform.GetComponentInChildren<BlockManager>();
         Services.UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Services.InputManager = new InputManager();
     }
@@ -114,8 +121,17 @@ public class GameManager : MonoBehaviour {
 
     void OnSceneLoad(Scene s, LoadSceneMode m)
     {
+        Debug.Log("Loaded " + s.name);
+
+        transform.Find("DefaultBlockManager").gameObject.SetActive(false);
         if (s == SceneManager.GetSceneByName("main")) return;
         Services.BlockManager = FindObjectOfType<BlockManager>();
+        if (Services.BlockManager == null)
+        {
+            Debug.Log("No Block Manager detected. Using Default.");
+            transform.Find("DefaultBlockManager").gameObject.SetActive(true);
+            Services.BlockManager = GetComponentInChildren<BlockManager>();
+        }
         Services.BlockManager.GenerateLevel();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         InitializePlayers();

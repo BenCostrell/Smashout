@@ -16,3 +16,5 @@ MonoBehaviour:
     inQueue: 1
   - level: _lv_wide
     inQueue: 1
+  - level: _lv_koth_alt
+    inQueue: 1
