@@ -17,7 +17,7 @@ public class WaitToRestart : Task {
         }
         else
         {
-            restartPrompt.gameObject.GetComponent<Text>().text = "Press A to restart";
+            restartPrompt.gameObject.GetComponent<Text>().text = "Press A to continue";
         }
     }
 
