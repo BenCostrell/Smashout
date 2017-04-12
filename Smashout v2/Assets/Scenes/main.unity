@@ -758,6 +758,16 @@ Prefab:
       propertyPath: fireColors.Array.data[1].key1.rgba
       value: 10086808
       objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: trailColors.Array.data[0].key1.rgba
+      value: 11711046
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: trailColors.Array.data[1].key1.rgba
+      value: 5560660
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
   m_IsPrefabParent: 0
