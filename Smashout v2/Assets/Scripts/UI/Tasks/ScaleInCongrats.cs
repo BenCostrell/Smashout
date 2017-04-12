@@ -24,11 +24,29 @@ public class ScaleInCongrats : Task {
         congrats.gameObject.GetComponent<Text>().color = Services.GameManager.playerColors[winningPlayer - 1];
         if (winningPlayer == 1)
         {
-            congrats.gameObject.GetComponent<Text>().text = "BLUE WINS";
+            Services.GameManager.blueTrack++;
+            if (Services.GameManager.blueTrack == (Services.GameManager.matchSet / 2 + 1))
+            {
+                Services.GameManager.won = true;
+                congrats.gameObject.GetComponent<Text>().text = "MATCH SET: BLUE";
+            }
+            else
+            {
+                congrats.gameObject.GetComponent<Text>().text = "ROUND " + Services.GameManager.round + ": BLUE";
+            }
         }
         else
         {
-            congrats.gameObject.GetComponent<Text>().text = "GREEN WINS";
+            Services.GameManager.greenTrack++;
+            if (Services.GameManager.greenTrack == (Services.GameManager.matchSet / 2 + 1))
+            {
+                Services.GameManager.won = true;
+                congrats.gameObject.GetComponent<Text>().text = "MATCH SET: GREEN";
+            }
+            else
+            {
+                congrats.gameObject.GetComponent<Text>().text = "ROUND " + Services.GameManager.round + ": GREEN";
+            }
         }
     }
 

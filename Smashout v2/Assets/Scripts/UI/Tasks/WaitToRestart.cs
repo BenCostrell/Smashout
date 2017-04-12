@@ -1,13 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaitToRestart : Task {
 
+    private RectTransform restartPrompt;
     protected override void Init()
     {
+        restartPrompt = Services.UIManager.restartPrompt.GetComponent<RectTransform>();
         Services.EventManager.Register<ButtonPressed>(Restart);
-        Services.UIManager.restartPrompt.SetActive(true);
+        restartPrompt.gameObject.SetActive(true);
+        if (Services.GameManager.won == true)
+        {
+            restartPrompt.gameObject.GetComponent<Text>().text = "Press A to return";
+        }
+        else
+        {
+            restartPrompt.gameObject.GetComponent<Text>().text = "Press A to restart";
+        }
     }
 
     void Restart(ButtonPressed e)
