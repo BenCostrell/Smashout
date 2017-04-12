@@ -18,12 +18,10 @@ public class ScaleInMatch : Task {
     {
         if (Services.GameManager.blueTrack == 1)
         {
-            Debug.Log("works");
             matchCount.GetChild(0).GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
         }
         else if (Services.GameManager.blueTrack == 2)
         {
-            Debug.Log("works");
             matchCount.GetChild(1).GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
         }
         else if (Services.GameManager.blueTrack == 3)
@@ -33,7 +31,6 @@ public class ScaleInMatch : Task {
 
         if (Services.GameManager.greenTrack == 1)
         {
-            Debug.Log("works");
             matchCount.GetChild(4).GetComponent<Image>().color = new Color(0f, 204.0f, 0f);
         }
         else if (Services.GameManager.greenTrack == 2)
