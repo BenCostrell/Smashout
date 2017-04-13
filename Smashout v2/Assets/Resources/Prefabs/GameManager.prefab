@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4436833630739944
 Transform:
   m_ObjectHideFlags: 1
@@ -82,8 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2f1f785c2779249b62c015df4cda7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  reticles: []
+  matchSet: 5
+  levelQueue: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
+  _orderedQueue: 1
   numPlayers: 2
   playerColors:
   - {r: 0, g: 0.6, b: 0.6, a: 1}
@@ -273,12 +274,11 @@ MonoBehaviour:
   - {x: 50, y: 100, z: 0}
   customSpawns: 0
   shufflePlayerSpawns: 1
-  levelQueue: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
-  _orderedQueue: 1
+  players: []
+  reticles: []
   gameStarted: 0
   blueTrack: 0
   greenTrack: 0
-  matchSet: 5
   won: 0
   round: 0
 --- !u!114 &114004918031666680
@@ -328,7 +328,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: BlockManager+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  blockDeathTime: 0.2
+  blockDeathTime: 0.45
   blockAppearanceTime: 0.4
   minAcceptableDistance: 0
   maxNumTries: 0

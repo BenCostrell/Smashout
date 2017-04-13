@@ -181,13 +181,15 @@ public class GameManager : MonoBehaviour {
         Services.EventManager.Unregister<GameOver>(GameOver);
         Services.BlockManager.DestroyAllBlocks(true);
         ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
+        WaitForTime waitForBlocksToDie = new WaitForTime(Services.BlockManager.blockDeathTime);
         WaitToRestart waitToRestart = new WaitToRestart();
         gameStarted = false;
 
-        scaleInCongrats
+        waitForBlocksToDie
             .Then(waitToRestart);
 
         Services.TaskManager.AddTask(scaleInCongrats);
+        Services.TaskManager.AddTask(waitForBlocksToDie);
     }
 
     void InitializePlayers()

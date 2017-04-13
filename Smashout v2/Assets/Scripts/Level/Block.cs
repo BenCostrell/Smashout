@@ -36,19 +36,23 @@ public class Block : MonoBehaviour {
             spr.sprite = damageSprites[damage];
             spr.color = damageColors[damage];
         }
-        else DestroyThis();
+        else DestroyThis(true);
     }
 
-    public void DestroyThis()
+    public void DestroyThis(bool playSound)
     {
-        Services.BlockManager.DestroyBlock(this, true);
+        Services.BlockManager.DestroyBlock(this, true, playSound);
     }
 
-    public virtual void StartDestructionAnimation()
+    public virtual void StartDestructionAnimation(bool playSound)
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
         BlockFadeOut fadeOut = new BlockFadeOut(gameObject, Services.BlockManager.blockDeathTime);
         Services.TaskManager.AddTask(fadeOut);
+        foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Play();
+        if (playSound)
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     public virtual void StartAppearanceAnimation()

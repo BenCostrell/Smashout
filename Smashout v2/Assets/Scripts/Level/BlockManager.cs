@@ -257,9 +257,20 @@ public class BlockManager : MonoBehaviour {
             {
                 if (b.gameObject == prefab && b.gameObject.GetComponent<Block>() == null) continue;
                 else if (b.gameObject.GetComponent<Block>() == null) continue;
-
-                b.parent = null;
-                blocks.Add(b.GetComponent<Block>());
+                Block blk = b.GetComponent<Block>();
+                if (blk.GetType() != typeof(DeathBlock))
+                {
+                    Vector3 location = b.transform.position;
+                    Block replacementBlock = Instantiate(blockTypes[0], location, Quaternion.identity).GetComponent<Block>();
+                    Destroy(b.gameObject);
+                    Debug.Log("replaced block at " + location);
+                    blocks.Add(replacementBlock);
+                }
+                else
+                {
+                    b.parent = null;
+                    blocks.Add(blk);
+                }
             }
             Destroy(prefab);
             ++staticsGenCount;
@@ -329,7 +340,7 @@ public class BlockManager : MonoBehaviour {
         "---------------------");
     }
 
-    public void DestroyBlock(Block block, bool animate)
+    public void DestroyBlock(Block block, bool animate, bool playSound)
     {
         if(blocks.Contains(block)) blocks.Remove(block);
         if (animate)
@@ -339,7 +350,7 @@ public class BlockManager : MonoBehaviour {
             {
                 col.enabled = false;
             }
-            block.StartDestructionAnimation();
+            block.StartDestructionAnimation(playSound);
             Destroy(block.gameObject, blockDeathTime);
         }
         else
@@ -353,7 +364,7 @@ public class BlockManager : MonoBehaviour {
         for (int i = blocks.Count - 1; i >= 0; i--)
         {
             Block block = blocks[i];
-            DestroyBlock(block, animate);
+            DestroyBlock(block, animate, false);
         }
     }
 

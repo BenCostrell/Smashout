@@ -19,7 +19,7 @@ public class DeathBlock : Block
     {
     }
 
-    public override void StartDestructionAnimation()
+    public override void StartDestructionAnimation(bool playSound)
     {
     }
 }

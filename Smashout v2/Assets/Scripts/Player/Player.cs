@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
 
     public void SetTrailActiveStatus(bool status)
     {
-        trailObj.SetActive(status);
+        trailObj.SetActive(false);
     }
 
 	public void SetFireActiveStatus(bool status)
@@ -215,7 +215,7 @@ public class Player : MonoBehaviour
             {
                 velocityY = Mathf.Abs(velocityY) + bumpMinSpd;
             }
-            surface.GetComponent<Block>().DestroyThis();
+            surface.GetComponent<Block>().DestroyThis(true);
             Services.EventManager.Fire(new BumpHit(this));
         }
 
@@ -273,7 +273,7 @@ public class Player : MonoBehaviour
             if (currentTimeOnTopOfPlatform >= platformLifetimeWhileStanding)
             {
                 Block block = hit.collider.gameObject.GetComponent<Block>();
-                block.DestroyThis();
+                block.DestroyThis(true);
             }
         }
         else {
