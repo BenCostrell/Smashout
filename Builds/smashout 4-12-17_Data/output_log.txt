@@ -1,0 +1,424 @@
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 765M (ID=0x11e2)
+    Vendor:   NVIDIA
+    VRAM:     2019 MB
+    Driver:   20.19.15.4444
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.029 seconds
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Ben\Documents\School\NYU\Semester 2\Minimalist Game Design\Smashout\Builds\smashout 4-12-17_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 4800x1350 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 3.442623 ms
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded main
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Init
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+After 100 tries, only made 5blocks.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, 10) to (50, 70)
+Max Attempts: 100
+Random Block Gen Target: 12
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	5
+  Patterns Generated:		0
+  Static Blocks Generated:	2
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	14
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Init
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+After 100 tries, only made 16blocks.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-125, -45.4) to (125, 79.6)
+Max Attempts: 100
+Random Block Gen Target: 18
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	16
+  Patterns Generated:		0
+  Static Blocks Generated:	1
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	19
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+No Block Manager detected. Using Default.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 0 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (0, 0) to (0, 0)
+Max Attempts: 0
+Random Block Gen Target: 0
+Pattern Gen Target: 0
+Blocks Statistics:
+  Random Blocks Generated:	0
+  Patterns Generated:		0
+  Static Blocks Generated:	3
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	15
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Init
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+After 100 tries, only made 5blocks.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, 10) to (50, 70)
+Max Attempts: 100
+Random Block Gen Target: 10
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	5
+  Patterns Generated:		0
+  Static Blocks Generated:	2
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	14
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Init
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-125, -45.4) to (125, 79.6)
+Max Attempts: 100
+Random Block Gen Target: 15
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	15
+  Patterns Generated:		0
+  Static Blocks Generated:	1
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	18
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+No Block Manager detected. Using Default.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 0 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (0, 0) to (0, 0)
+Max Attempts: 0
+Random Block Gen Target: 0
+Pattern Gen Target: 0
+Blocks Statistics:
+  Random Blocks Generated:	0
+  Patterns Generated:		0
+  Static Blocks Generated:	3
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	15
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Init
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+After 100 tries, only made 6blocks.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-50, 10) to (50, 70)
+Max Attempts: 100
+Random Block Gen Target: 14
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	6
+  Patterns Generated:		0
+  Static Blocks Generated:	2
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	15
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+_lv_koth_alt
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Init
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Defaulting Behaviour
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Loaded _lv_wide
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempted to make 1 patterns, but no patterns were available to select.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Level Generation Info
+---------------------
+Generation Area: (-125, -45.4) to (125, 79.6)
+Max Attempts: 100
+Random Block Gen Target: 16
+Pattern Gen Target: 1
+Blocks Statistics:
+  Random Blocks Generated:	16
+  Patterns Generated:		0
+  Static Blocks Generated:	1
+  Spawn Platforms Generated:	2
+    Total Blocks Generated:	19
+---------------------
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 4768 -> priority: 1 
+  Thread -> id: 56d0 -> priority: 1 
