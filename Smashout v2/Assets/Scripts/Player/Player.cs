@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
     public Gradient dashingTrailColor;
     public Gradient trailColor;
 	public Gradient fireColor;
+    public float fireGlowIntensity;
+    public float fireGlowRange;
+    public float dashGlowIntensity;
+    public float dashGlowRange;
     public int playerNum;
     public float bumpActiveTime;
     private bool actionable;
@@ -172,6 +176,23 @@ public class Player : MonoBehaviour
 		}
 		fire.changeColor (fireGradient);
 	}
+
+    public void SetFireGlow(bool dashing)
+    {
+        float intensity;
+        float range;
+        if (dashing)
+        {
+            intensity = dashGlowIntensity;
+            range = dashGlowRange;
+        }
+        else
+        {
+            intensity = fireGlowIntensity;
+            range = fireGlowRange;
+        }
+        fire.changeGlow(intensity, range);
+    }
 
     public void SetTrailActiveStatus(bool status)
     {

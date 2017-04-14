@@ -44,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backdrop
+    uniqueID: 2519317019
+    locked: 0
   - name: Fire
     uniqueID: 1816649967
     locked: 0

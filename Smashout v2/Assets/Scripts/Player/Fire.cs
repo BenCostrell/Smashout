@@ -11,6 +11,7 @@ public class Fire : MonoBehaviour {
 	void Start () {
 		player = GetComponentInParent<Player> ();
 		changeColor (player.fireColor);
+        changeGlow(player.fireGlowIntensity, player.fireGlowRange);
 	}
 	
 	// Update is called once per frame
@@ -25,6 +26,14 @@ public class Fire : MonoBehaviour {
 
 		col.color = newColor;
 	}
+
+    public void changeGlow(float intensity, float range)
+    {
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        var lights = ps.lights;
+        lights.intensityMultiplier = intensity;
+        lights.rangeMultiplier = range;
+    }
 
 	public void controlFlow(bool on) {
 		ParticleSystem ps = GetComponent<ParticleSystem> ();
