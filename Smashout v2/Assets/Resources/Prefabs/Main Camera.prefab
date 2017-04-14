@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac713366a4ec6240b2cee155443bda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highestPlayerOffset: 20
-  cameraSpeed: 20
+  highestPlayerOffset: 50
+  cameraSpeed: 25
   minSizeScale: 0.9
 --- !u!124 &124995143611102654
 Behaviour:
