@@ -519,7 +519,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   playerNum: 0
   bumpActiveTime: 0.25
-  moveSpeed: 250
+  moveSpeed: 275
   dashDriftSpeedFactor: 1.5
   bounceScale: 1
   bumpMinSpd: 75
