@@ -48,6 +48,24 @@ public class Player : MonoBehaviour
 
 	public GameObject fireObj;
 	public Fire fire;
+    public int basePower;
+    public int maxPower;
+    public float baseRadius;
+    public float radiusPerPowerUnit;
+
+    [HideInInspector]
+    public int power
+    {
+        get { return _power; }
+        set
+        {
+            _power = Mathf.Clamp(value, 0, maxPower);
+            float rad = baseRadius + _power * radiusPerPowerUnit;
+            transform.localScale = new Vector3(rad, rad, transform.localScale.z);
+            fire.updateSize();
+        }
+    }
+    private int _power;
 
     // Use this for initialization
 
@@ -63,6 +81,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        power = basePower;
         currentTimeOnTopOfPlatform = 0f;
         GetComponent<SpriteRenderer>().color = color;
         trailObj.GetComponent<TrailRenderer>().colorGradient = trailColor;
@@ -76,6 +95,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("P" + playerNum + "_Power_Up")) power = power + 1;
+        if (Input.GetButtonDown("P" + playerNum + "_Power_Down")) power = power - 1;
+
         CheckIfGrounded();
         previousVelocity = rb.velocity;
         if (actionable)

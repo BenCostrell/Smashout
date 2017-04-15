@@ -176,7 +176,7 @@ Transform:
   m_GameObject: {fileID: 1895401377067606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4670639497306296}
   - {fileID: 4214497043878138}
@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90044a864010cfb49b88d25a0e667a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRadiusRatio: 3
 --- !u!114 &114748878799219768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,6 +614,10 @@ MonoBehaviour:
   platformLifetimeWhileStanding: 0.3
   fireObj: {fileID: 0}
   fire: {fileID: 0}
+  basePower: 1
+  maxPower: 5
+  baseRadius: 1.5
+  radiusPerPowerUnit: 0.5
 --- !u!114 &114763017142639038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1098,7 +1103,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     type: 10
-    radius: 6
+    radius: 4.5
     angle: 10
     length: 5
     boxX: 1
