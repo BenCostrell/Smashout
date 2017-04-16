@@ -260,8 +260,16 @@ public class BlockManager : MonoBehaviour {
                 Block blk = b.GetComponent<Block>();
                 if (blk.GetType() != typeof(DeathBlock))
                 {
+                    GameObject blockPrefab = blockTypes[0];
+                    foreach (GameObject blockType in blockTypes)
+                    {
+                        if (blockType.GetComponent<Block>().GetType() == blk.GetType())
+                        {
+                            blockPrefab = blockType;
+                        }
+                    }                
                     Vector3 location = b.transform.position;
-                    Block replacementBlock = Instantiate(blockTypes[0], location, Quaternion.identity).GetComponent<Block>();
+                    Block replacementBlock = Instantiate(blockPrefab, location, Quaternion.identity).GetComponent<Block>();
                     Destroy(b.gameObject);
                     Debug.Log("replaced block at " + location);
                     blocks.Add(replacementBlock);

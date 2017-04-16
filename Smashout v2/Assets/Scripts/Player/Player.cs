@@ -6,12 +6,15 @@ public class Player : MonoBehaviour
 {
     public Color color;
     public Gradient dashingTrailColor;
+    [HideInInspector]
     public Gradient trailColor;
+    [HideInInspector]
 	public Gradient fireColor;
     public float fireGlowIntensity;
     public float fireGlowRange;
     public float dashGlowIntensity;
     public float dashGlowRange;
+    [HideInInspector]
     public int playerNum;
     public float bumpActiveTime;
     private bool actionable;
@@ -26,19 +29,26 @@ public class Player : MonoBehaviour
 
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
+    [HideInInspector]
     public Rigidbody2D rb;
     private GameObject trailObj;
+    [HideInInspector]
     public Vector2 previousVelocity;
+    [HideInInspector]
     public bool bumpAvailable;
+    [HideInInspector]
     public float defaultGravity;
+    [HideInInspector]
     public bool dashing;
 
     public float wallKickCut;
     public float wallKickMinSpeed;
     public float sideCollisionOffset;
 
+    [HideInInspector]
     public bool stun;
     public float stunTimeLength;
+    [HideInInspector]
     public float stunTimeUntil;
 
     public float groundDetectionDistance;
@@ -46,7 +56,9 @@ public class Player : MonoBehaviour
     private float currentTimeOnTopOfPlatform;
     public float platformLifetimeWhileStanding;
 
+    [HideInInspector]
 	public GameObject fireObj;
+    [HideInInspector]
 	public Fire fire;
     public int basePower;
     public int maxPower;
@@ -258,7 +270,7 @@ public class Player : MonoBehaviour
             {
                 velocityY = Mathf.Abs(velocityY) + bumpMinSpd;
             }
-            surface.GetComponent<Block>().DestroyThis(true);
+            surface.GetComponent<Block>().OnBumpedByPlayer(this);
             Services.EventManager.Fire(new BumpHit(this));
         }
 

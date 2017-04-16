@@ -273,7 +273,7 @@ MonoBehaviour:
   - {x: -50, y: 100, z: 0}
   - {x: 50, y: 100, z: 0}
   customSpawns: 0
-  shufflePlayerSpawns: 1
+  shufflePlayerSpawns: 0
   players: []
   reticles: []
   gameStarted: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockTypes:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
+  - {fileID: 1364896463435884, guid: 3301e68beab34344987281b3f26528ac, type: 2}
   blockPatterns: []
   findLooseStatics: 1
   Init:

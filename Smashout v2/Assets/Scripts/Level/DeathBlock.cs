@@ -22,4 +22,8 @@ public class DeathBlock : Block
     public override void StartDestructionAnimation(bool playSound)
     {
     }
+
+    public override void OnBumpedByPlayer(Player player)
+    {
+    }
 }

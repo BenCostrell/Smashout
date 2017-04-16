@@ -8,6 +8,7 @@ public class Bumper : MonoBehaviour {
     private CircleCollider2D collide;
     private Player player;
     public float playerBumpPower;
+    public float powerBumpRatio;
     public float kickback;
     public Color activeColor;
     public Color availableColor;
@@ -64,7 +65,8 @@ public class Bumper : MonoBehaviour {
             Player enemy = collision.gameObject.GetComponent<Player>();
             Services.EventManager.Fire(new BumpHit(player));
             player.RefreshBumpPrivilege();
-            Vector3 launchVector = (enemy.transform.position - player.transform.position).normalized * playerBumpPower;
+            Vector3 launchVector = 
+                (enemy.transform.position - player.transform.position).normalized * (playerBumpPower + (player.power * powerBumpRatio));
             Vector2 kickbackVector = -launchVector * kickback;
             enemy.GetHit(launchVector);
             player.rb.velocity = kickbackVector;

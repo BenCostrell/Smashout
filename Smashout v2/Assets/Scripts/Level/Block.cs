@@ -7,6 +7,8 @@ public class Block : MonoBehaviour {
     public List<Color> damageColors;
     public int damage;
     private SpriteRenderer spr;
+    public float shiftDuration;
+    public float shiftFactor;
 
     void Start () {
         Init();
@@ -19,7 +21,14 @@ public class Block : MonoBehaviour {
 
     protected virtual void OnCollideWithPlayer(Collision2D collision)
     {
-         DamageThis();
+        DamageThis();
+        BlockShift shift = new BlockShift(this, collision.gameObject.GetComponent<Player>().previousVelocity * shiftFactor, shiftDuration);
+        Services.TaskManager.AddTask(shift);          
+    }
+    
+    public virtual void OnBumpedByPlayer(Player player)
+    {
+        DestroyThis(true);
     }
 
     protected virtual void Init()

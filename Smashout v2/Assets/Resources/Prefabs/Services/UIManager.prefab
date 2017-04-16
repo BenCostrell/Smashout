@@ -55,5 +55,6 @@ MonoBehaviour:
   startPrompt: {fileID: 0}
   congrats: {fileID: 0}
   restartPrompt: {fileID: 0}
+  matchCount: {fileID: 0}
   titleScaleInTime: 0.2
   congratsScaleInTime: 0.3

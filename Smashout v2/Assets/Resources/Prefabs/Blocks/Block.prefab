@@ -219,6 +219,8 @@ MonoBehaviour:
   - {r: 1, g: 0.47843137, b: 0.47843137, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   damage: 0
+  shiftDuration: 0.1
+  shiftFactor: 0.02
 --- !u!198 &198039731290823032
 ParticleSystem:
   m_ObjectHideFlags: 1
