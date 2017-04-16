@@ -676,6 +676,8 @@ MonoBehaviour:
   underBumpCut: 0.7
   dashSpeed: 200
   squashAndStretchFactor: 0.000425
+  hitSlowIntensity: 0
+  hitSlowDuration: 0.06666667
   bumpBounceScale: 1.1
   bumpPlayerScale: 1.5
   rb: {fileID: 0}

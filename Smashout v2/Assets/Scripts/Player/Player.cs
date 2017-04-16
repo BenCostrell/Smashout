@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     public float underBumpCut;
     public float dashSpeed;
     public float squashAndStretchFactor;
+    public float hitSlowIntensity;
+    public float hitSlowDuration;
 
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
