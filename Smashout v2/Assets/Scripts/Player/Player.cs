@@ -26,11 +26,14 @@ public class Player : MonoBehaviour
     public float bumpMinSpd;
     public float underBumpCut;
     public float dashSpeed;
+    public float squashAndStretchFactor;
 
 	public float bumpBounceScale;
 	public float bumpPlayerScale;
     [HideInInspector]
     public Rigidbody2D rb;
+    [HideInInspector]
+    public AudioSource audioSrc;
     private GameObject trailObj;
     [HideInInspector]
     public Vector2 previousVelocity;
@@ -64,6 +67,10 @@ public class Player : MonoBehaviour
     public int maxPower;
     public float baseRadius;
     public float radiusPerPowerUnit;
+    public float powerUpAnimationLength;
+    private bool powerInitialized;
+    public AudioClip powerUpAudio;
+    public AudioClip bumpPlayerHitAudio;
 
     [HideInInspector]
     public int power
@@ -71,7 +78,15 @@ public class Player : MonoBehaviour
         get { return _power; }
         set
         {
-            _power = Mathf.Clamp(value, 0, maxPower);
+            int newPower = Mathf.Clamp(value, 0, maxPower);
+            if (newPower > _power && powerInitialized)
+            {
+                PowerUpAnimation powerUpAnim = new PowerUpAnimation(this, powerUpAnimationLength);
+                Services.TaskManager.AddTask(powerUpAnim);
+                audioSrc.clip = powerUpAudio;
+                audioSrc.Play();
+            }
+            _power = newPower;
             float rad = baseRadius + _power * radiusPerPowerUnit;
             transform.localScale = new Vector3(rad, rad, transform.localScale.z);
             fire.updateSize();
@@ -84,6 +99,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSrc = GetComponent<AudioSource>();
         bumper = GetComponentInChildren<Bumper>();
         trailObj = GetComponentInChildren<TrailRenderer>().gameObject;
 		fireObj = GetComponentInChildren<ParticleSystem> ().gameObject;
@@ -94,6 +110,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         power = basePower;
+        powerInitialized = true;
         currentTimeOnTopOfPlatform = 0f;
         GetComponent<SpriteRenderer>().color = color;
         trailObj.GetComponent<TrailRenderer>().colorGradient = trailColor;
@@ -107,21 +124,28 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("P" + playerNum + "_Power_Up")) power = power + 1;
-        if (Input.GetButtonDown("P" + playerNum + "_Power_Down")) power = power - 1;
-
         CheckIfGrounded();
         previousVelocity = rb.velocity;
+        Turn();
         if (actionable)
         {
             Move();
         }
+        SquashAndStretch();
+    }
 
-        // temporary death function
-        if (transform.position.y < -150)
-        {
-            //Die();
-        }
+    void Turn()
+    {
+        float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    void SquashAndStretch()
+    {
+        transform.localScale = new Vector3(
+            (baseRadius + power * radiusPerPowerUnit) * (1 + (rb.velocity.magnitude * squashAndStretchFactor)),
+            (baseRadius + power * radiusPerPowerUnit) * (1 - (rb.velocity.magnitude * squashAndStretchFactor)), 
+            transform.localScale.z);
     }
 
     void Move()

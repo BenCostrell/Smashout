@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 114748878799219768}
   - component: {fileID: 50130271390040778}
   - component: {fileID: 58167789853856218}
+  - component: {fileID: 82371130487517684}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -281,6 +282,86 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
+--- !u!82 &82371130487517684
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1895401377067606}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!92 &92494310043360872
 Behaviour:
   m_ObjectHideFlags: 1
@@ -594,9 +675,11 @@ MonoBehaviour:
   bumpMinSpd: 75
   underBumpCut: 0.7
   dashSpeed: 200
+  squashAndStretchFactor: 0.000425
   bumpBounceScale: 1.1
   bumpPlayerScale: 1.5
   rb: {fileID: 0}
+  audioSrc: {fileID: 0}
   previousVelocity: {x: 0, y: 0}
   bumpAvailable: 0
   defaultGravity: 0
@@ -618,6 +701,9 @@ MonoBehaviour:
   maxPower: 5
   baseRadius: 1.5
   radiusPerPowerUnit: 0.5
+  powerUpAnimationLength: 0.3
+  powerUpAudio: {fileID: 8300000, guid: 3c26fd1dddd9b944a945d6bbb20e1978, type: 3}
+  bumpPlayerHitAudio: {fileID: 8300000, guid: d136685d6c932f544b1a5a39e103572a, type: 3}
 --- !u!114 &114763017142639038
 MonoBehaviour:
   m_ObjectHideFlags: 1

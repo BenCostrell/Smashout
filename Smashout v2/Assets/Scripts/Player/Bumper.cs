@@ -70,6 +70,10 @@ public class Bumper : MonoBehaviour {
             Vector2 kickbackVector = -launchVector * kickback;
             enemy.GetHit(launchVector);
             player.rb.velocity = kickbackVector;
+            SlowMoTask slowMo = new SlowMoTask(0.1f, 0.4f);
+            Services.TaskManager.AddTask(slowMo);
+            player.audioSrc.clip = player.bumpPlayerHitAudio;
+            player.audioSrc.Play();
         }
     }
 }
