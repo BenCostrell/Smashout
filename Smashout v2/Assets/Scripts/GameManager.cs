@@ -136,9 +136,6 @@ public class GameManager : MonoBehaviour {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         InitializePlayers();
         Services.UIManager.matchCount.SetActive(true);
-        ScaleInMatch scaleInMatch = new ScaleInMatch();
-
-        Services.TaskManager.AddTask(scaleInMatch);
         gameStarted = true;
     }
 

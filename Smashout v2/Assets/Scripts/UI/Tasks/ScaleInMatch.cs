@@ -3,52 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScaleInMatch : Task {
+public class ScaleInMatch : MonoBehaviour {
     private List<GameObject> circles;
     private RectTransform matchCount;
+    private GameObject centerCount;
+    private GameObject[] roundCircles;
     // Use this for initialization
-    protected override void Init()
+    void Start()
     {
         matchCount = Services.UIManager.matchCount.GetComponent<RectTransform>();
-        matchCount.gameObject.SetActive(true);
+        centerCount = matchCount.GetChild(0).gameObject;
+        roundCircles = new GameObject[Services.GameManager.matchSet];
+        float x = -10f - Services.GameManager.matchSet/2*40;
+        for(int i = 0; i < roundCircles.Length; i++)
+        {
+            roundCircles[i] = Instantiate(centerCount);
+            roundCircles[i].transform.SetParent(matchCount.gameObject.transform);
+            roundCircles[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(x, 0);
+            x += 40f;
+            if(i == Services.GameManager.matchSet / 2)
+            {
+                roundCircles[i].gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.35f, 0.35f, 1.0f);
+            }
+        }
     }
 
     // Update is called once per frame
-    internal override void Update()
+    void Update()
     {
-        if (Services.GameManager.blueTrack == 1)
+        for(int i = 0; i < Services.GameManager.blueTrack; i++)
         {
-            matchCount.GetChild(0).GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
+            roundCircles[i].GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
         }
-        else if (Services.GameManager.blueTrack == 2)
+        for(int i = roundCircles.Length-1; i > roundCircles.Length - 1 - Services.GameManager.greenTrack; i--)
         {
-            matchCount.GetChild(1).GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
-        }
-        else if (Services.GameManager.blueTrack == 3)
-        {
-            matchCount.GetChild(2).GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
-        }
-
-        if (Services.GameManager.greenTrack == 1)
-        {
-            matchCount.GetChild(4).GetComponent<Image>().color = new Color(0f, 204.0f, 0f);
-        }
-        else if (Services.GameManager.greenTrack == 2)
-        {
-            matchCount.GetChild(3).GetComponent<Image>().color = new Color(0f, 204.0f, 0f);
-        }
-        else if (Services.GameManager.greenTrack == 3)
-        {
-            matchCount.GetChild(2).GetComponent<Image>().color = new Color(0f, 204.0f, 0f);
+            roundCircles[i].GetComponent<Image>().color = new Color(0f, 204.0f, 0f);
         }
 
         if (Services.GameManager.blueTrack == 0 && Services.GameManager.greenTrack == 0)
         {
-            matchCount.GetChild(0).GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f);
-            matchCount.GetChild(1).GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f);
-            matchCount.GetChild(2).GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f);
-            matchCount.GetChild(3).GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f);
-            matchCount.GetChild(4).GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f);
+            for(int i =0; i < roundCircles.Length; i++)
+            {
+                roundCircles[i].GetComponent<Image>().color = new Color(255.0f, 255.0f, 255.0f);
+            }
         }
     }
 }
