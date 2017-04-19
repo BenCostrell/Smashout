@@ -9,6 +9,7 @@ public class SlowMoTask :Task
     private float scale;
     private float duration;
     private float timeElapsed;
+    private float trackSlowMoTime;
     public SlowMoTask(float scl, float dur)
     {
         scale = scl;
@@ -18,11 +19,13 @@ public class SlowMoTask :Task
     protected override void Init()
     {
         timeElapsed = 0;
+        trackSlowMoTime = 0;
     }
 
     internal override void Update()
     {
         timeElapsed += Time.unscaledDeltaTime;
+        trackSlowMoTime += Time.deltaTime;
 
         if (timeElapsed <= duration / 2)
         {
@@ -42,5 +45,6 @@ public class SlowMoTask :Task
     protected override void OnSuccess()
     {
         Time.timeScale = 1;
+        Debug.Log(trackSlowMoTime);
     }
 }

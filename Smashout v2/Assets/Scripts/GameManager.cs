@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour {
             .Then(startGame);
 
         Services.TaskManager.AddTask(scaleInTitle);
+        ///temporary, just play music all the time
+        Services.MusicManager.PlayMainTrack();
     }
 
 	// Update is called once per frame
@@ -100,6 +102,7 @@ public class GameManager : MonoBehaviour {
         Services.BlockManager = gameObject.transform.GetComponentInChildren<BlockManager>();
         Services.UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Services.InputManager = new InputManager();
+        Services.MusicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
     }
 
     void StartGame()
@@ -116,7 +119,9 @@ public class GameManager : MonoBehaviour {
         else
         {
             SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
+            //Services.MusicManager.PlayMainTrack();
         }
+        
     }
 
     void OnSceneLoad(Scene s, LoadSceneMode m)
@@ -187,6 +192,8 @@ public class GameManager : MonoBehaviour {
 
         Services.TaskManager.AddTask(scaleInCongrats);
         Services.TaskManager.AddTask(waitForBlocksToDie);
+
+        //Services.MusicManager.FadeOutTrack();
     }
 
     void InitializePlayers()

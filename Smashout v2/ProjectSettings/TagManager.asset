@@ -10,6 +10,7 @@ TagManager:
   - BlockManager
   - Bumper
   - Canvas
+  - MusicManager
   layers:
   - Default
   - TransparentFX

@@ -10,4 +10,5 @@ public static class Services {
     public static BlockManager BlockManager { get; set; }
     public static UIManager UIManager { get; set; }
     public static InputManager InputManager { get; set; }
+    public static MusicManager MusicManager { get; set; }
 }

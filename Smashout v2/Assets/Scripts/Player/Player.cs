@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
 	public GameObject fireObj;
     [HideInInspector]
 	public Fire fire;
+    private ParticleSystem sparks;
     public int basePower;
     public int maxPower;
     public float baseRadius;
@@ -104,9 +105,10 @@ public class Player : MonoBehaviour
         audioSrc = GetComponent<AudioSource>();
         bumper = GetComponentInChildren<Bumper>();
         trailObj = GetComponentInChildren<TrailRenderer>().gameObject;
-		fireObj = GetComponentInChildren<ParticleSystem> ().gameObject;
+		fireObj = GetComponentsInChildren<ParticleSystem> ()[0].gameObject;
 		fireObj.SetActive (true);
 		fire = GetComponentInChildren<Fire> ();
+        sparks = GetComponentsInChildren<ParticleSystem>()[1];
     }
 
     void Start()
@@ -189,9 +191,16 @@ public class Player : MonoBehaviour
         string button = e.button;
         if (e.playerNum == playerNum)
         {
-            if (button == "A" && bumpAvailable)
+            if (button == "A")
             {
-                Bump();
+                if (sparks != null)
+                {
+                    sparks.Play();
+                }
+                if (bumpAvailable)
+                {
+                    Bump();
+                }
             }
         }
     }
