@@ -67,8 +67,8 @@ public class Bumper : MonoBehaviour {
         {
             Player enemy = obj.GetComponent<Bumper>().player;
             Services.EventManager.Fire(new BumpHit(player));
-            player.RefreshBumpPrivilege();
-            enemy.RefreshBumpPrivilege(); //not sure if this line is needed or not (I think not), but just in case
+            if(player.dashing) player.RefreshBumpPrivilege();
+            if(enemy.dashing) enemy.RefreshBumpPrivilege(); //not sure if this line is needed or not (I think not), but just in case
             Vector3 launchVector =
                 (enemy.transform.position - player.transform.position).normalized * (playerBumpPower + (player.power * powerBumpRatio));
             Vector2 kickbackVector = -launchVector * kickback;
@@ -85,7 +85,7 @@ public class Bumper : MonoBehaviour {
         {
             Player enemy = obj.GetComponent<Player>();
             Services.EventManager.Fire(new BumpHit(player));
-            player.RefreshBumpPrivilege();
+            if(player.dashing || (!player.dashing && !enemy.dashing)) player.RefreshBumpPrivilege();
             Vector3 launchVector =
                 (enemy.transform.position - player.transform.position).normalized * (playerBumpPower + (player.power * powerBumpRatio));
             Vector2 kickbackVector = -launchVector * kickback;
