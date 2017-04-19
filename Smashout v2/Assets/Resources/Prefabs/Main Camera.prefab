@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highestPlayerOffset: 50
-  cameraSpeed: 25
-  minSizeScale: 0.9
+  cameraSpeed: 20
+  minSizeScale: 1
 --- !u!124 &124995143611102654
 Behaviour:
   m_ObjectHideFlags: 1

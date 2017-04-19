@@ -33,7 +33,8 @@ public class CameraController : MonoBehaviour {
         for (int i = 0; i < heights.Length; ++i) heights[i] = Services.GameManager.players[i].transform.position.y;
 
         float topOfView = Mathf.Max(heights) + highestPlayerOffset;
-        float bottomOfView = Mathf.Min(heights) - highestPlayerOffset;
+        //float bottomOfView = Mathf.Min(heights) - highestPlayerOffset;
+        float bottomOfView = -150f;
         float newSize = Mathf.Max(baseSize * minSizeScale, (topOfView + baseSize) / 2, (bottomOfView + baseSize) / 2);
         Vector3 newPosition = new Vector3(transform.position.x, -baseSize + newSize, transform.position.z);
         cameraComp.orthographicSize = newSize;

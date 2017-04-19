@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
 	public Fire fire;
     private ParticleSystem sparks;
+    private Camera offscreenCamera;
     public int basePower;
     public int maxPower;
     public float baseRadius;
@@ -109,6 +110,7 @@ public class Player : MonoBehaviour
 		fireObj.SetActive (true);
 		fire = GetComponentInChildren<Fire> ();
         sparks = GetComponentsInChildren<ParticleSystem>()[1];
+        offscreenCamera = GetComponentInChildren<Camera>();
     }
 
     void Start()
@@ -142,6 +144,7 @@ public class Player : MonoBehaviour
     {
         float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+        offscreenCamera.transform.localRotation = Quaternion.Euler(0, 0, -angle);
     }
 
     void SquashAndStretch()
