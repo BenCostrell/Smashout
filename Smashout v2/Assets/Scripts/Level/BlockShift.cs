@@ -27,22 +27,29 @@ public class BlockShift : Task
 
     internal override void Update()
     {
-        timeElapsed += Time.deltaTime;
-
-        if (timeElapsed <= duration / 2)
+        if (block != null)
         {
-            block.transform.position = Vector3.Lerp(initialPosition, initialPosition + shift, 
-                Easing.QuadEaseOut(timeElapsed / (duration / 2)));
+            timeElapsed += Time.deltaTime;
+
+            if (timeElapsed <= duration / 2)
+            {
+                block.transform.position = Vector3.Lerp(initialPosition, initialPosition + shift,
+                    Easing.QuadEaseOut(timeElapsed / (duration / 2)));
+            }
+            else
+            {
+                block.transform.position = Vector3.Lerp(initialPosition + shift, initialPosition,
+                    Easing.QuadEaseIn((timeElapsed - (duration / 2)) / (duration / 2)));
+            }
+
+            if (timeElapsed >= duration)
+            {
+                SetStatus(TaskStatus.Success);
+            }
         }
         else
         {
-            block.transform.position = Vector3.Lerp(initialPosition + shift, initialPosition,
-                Easing.QuadEaseIn((timeElapsed - (duration / 2)) / (duration / 2)));
-        }
-
-        if (timeElapsed >= duration)
-        {
-            SetStatus(TaskStatus.Success);
+            SetStatus(TaskStatus.Aborted);
         }
     }
 }

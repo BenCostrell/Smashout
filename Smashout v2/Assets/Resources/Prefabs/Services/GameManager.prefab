@@ -87,15 +87,15 @@ MonoBehaviour:
   _orderedQueue: 1
   numPlayers: 2
   playerColors:
-  - {r: 0, g: 0.6, b: 0.6, a: 1}
-  - {r: 0, g: 0.8, b: 0, a: 1}
+  - {r: 0.5596351, g: 0, b: 0.9117647, a: 1}
+  - {r: 0, g: 0.9191176, b: 0, a: 1}
   trailColors:
   - key0:
       serializedVersion: 2
-      rgba: 4288256256
+      rgba: 4294901938
     key1:
       serializedVersion: 2
-      rgba: 11711046
+      rgba: 16750303
     key2:
       serializedVersion: 2
       rgba: 0
@@ -135,10 +135,10 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   - key0:
       serializedVersion: 2
-      rgba: 4278242304
+      rgba: 4278255360
     key1:
       serializedVersion: 2
-      rgba: 5560660
+      rgba: 8322942
     key2:
       serializedVersion: 2
       rgba: 16777215
@@ -179,10 +179,10 @@ MonoBehaviour:
   fireColors:
   - key0:
       serializedVersion: 2
-      rgba: 4293810960
+      rgba: 4290248817
     key1:
       serializedVersion: 2
-      rgba: 16182663
+      rgba: 16748001
     key2:
       serializedVersion: 2
       rgba: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   bumpColors:
-  - {r: 0.27450982, g: 0.69803923, b: 0.69803923, a: 1}
+  - {r: 0.55196273, g: 0.25951555, b: 0.7058823, a: 1}
   - {r: 0.32941177, g: 0.8509804, b: 0.32941177, a: 1}
   reticleRenderTextures:
   - {fileID: 8400000, guid: 1a0da0ca81d0197429ac6b4010243c1d, type: 2}

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Block : MonoBehaviour {
-    public List<Sprite> damageSprites;
-    public List<Color> damageColors;
+    //public List<Sprite> damageSprites;
+    //public List<Color> damageColors;
+    public List<GameObject> damageStates;
     public int damage;
-    private SpriteRenderer spr;
     public float shiftDuration;
     public float shiftFactor;
 
@@ -33,17 +33,13 @@ public class Block : MonoBehaviour {
 
     protected virtual void Init()
     {
-        spr = gameObject.GetComponent<SpriteRenderer>();
-        spr.sprite = damageSprites[damage];
-        spr.color = damageColors[damage];
     }
 
     public void DamageThis()
     {
-        if (++damage < damageSprites.Count)
+        if (++damage < damageStates.Count)
         {
-            spr.sprite = damageSprites[damage];
-            spr.color = damageColors[damage];
+            Services.TaskManager.AddTask(new BlockDamage(this, shiftDuration));
         }
         else DestroyThis(true);
     }

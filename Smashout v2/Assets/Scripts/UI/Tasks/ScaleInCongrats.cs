@@ -30,16 +30,16 @@ public class ScaleInCongrats : Task {
                 Services.GameManager.won = true;
                 if (Services.GameManager.greenTrack == 0)
                 {
-                    congrats.gameObject.GetComponent<Text>().text = "PERFECT MATCH: BLUE";
+                    congrats.gameObject.GetComponent<Text>().text = "PERFECT MATCH: PURPLE";
                 }
                 else
                 {
-                    congrats.gameObject.GetComponent<Text>().text = "MATCH SET: BLUE";
+                    congrats.gameObject.GetComponent<Text>().text = "MATCH SET: PURPLE";
                 }
             }
             else
             {
-                congrats.gameObject.GetComponent<Text>().text = "ROUND " + Services.GameManager.round + ": BLUE";
+                congrats.gameObject.GetComponent<Text>().text = "ROUND " + Services.GameManager.round + ": PURPLE";
             }
         }
         else

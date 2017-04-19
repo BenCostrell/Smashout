@@ -8,6 +8,9 @@ public class ScaleInMatch : MonoBehaviour {
     private RectTransform matchCount;
     private GameObject centerCount;
     private GameObject[] roundCircles;
+    public Color blueMatchCountColor;
+    public Color greenMatchCountColor;
+
     // Use this for initialization
     void Start()
     {
@@ -33,11 +36,11 @@ public class ScaleInMatch : MonoBehaviour {
     {
         for(int i = 0; i < Services.GameManager.blueTrack; i++)
         {
-            roundCircles[i].GetComponent<Image>().color = new Color(0f, 153.0f, 153.0f);
+            roundCircles[i].GetComponent<Image>().color = blueMatchCountColor;
         }
         for(int i = roundCircles.Length-1; i > roundCircles.Length - 1 - Services.GameManager.greenTrack; i--)
         {
-            roundCircles[i].GetComponent<Image>().color = new Color(0f, 204.0f, 0f);
+            roundCircles[i].GetComponent<Image>().color = greenMatchCountColor;
         }
 
         if (Services.GameManager.blueTrack == 0 && Services.GameManager.greenTrack == 0)
