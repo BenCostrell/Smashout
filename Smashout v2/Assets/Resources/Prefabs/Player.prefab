@@ -737,7 +737,7 @@ MonoBehaviour:
   powerUpAnimationLength: 0.3
   powerUpAudio: {fileID: 8300000, guid: 3c26fd1dddd9b944a945d6bbb20e1978, type: 3}
   bumpPlayerHitAudio: {fileID: 8300000, guid: d136685d6c932f544b1a5a39e103572a, type: 3}
-  bounce: {fileID: 8300000, guid: 0f108b85e42b6c2478df7f4f11f440f0, type: 3}
+  bounce: {fileID: 8300000, guid: be1310975743dc7428f949ba7062b057, type: 3}
 --- !u!114 &114763017142639038
 MonoBehaviour:
   m_ObjectHideFlags: 1

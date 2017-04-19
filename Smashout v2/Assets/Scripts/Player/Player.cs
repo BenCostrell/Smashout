@@ -89,7 +89,6 @@ public class Player : MonoBehaviour
                 PowerUpAnimation powerUpAnim = new PowerUpAnimation(this, powerUpAnimationLength);
                 Services.TaskManager.AddTask(powerUpAnim);
                 audioSrc.clip = powerUpAudio;
-                audioSrc.volume = 1.0f;
                 audioSrc.Play();
             }
             _power = newPower;
@@ -316,7 +315,6 @@ public class Player : MonoBehaviour
         else
         {
             audioSrc.clip = bounce;
-            audioSrc.volume = 0.375f;
             audioSrc.Play();
         }
 
