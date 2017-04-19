@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4782839498460714}
   - component: {fileID: 114004488586353830}
-  - component: {fileID: 82042720408675768}
+  - component: {fileID: 82600609838238112}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -72,7 +72,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82042720408675768
+--- !u!82 &82600609838238112
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -81,7 +81,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f33d3c41e13832e4abc23eff746d79f8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -89,7 +89,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -139,7 +139,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -355,7 +355,7 @@ MonoBehaviour:
   - {x: 50, y: 100, z: 0}
   customSpawns: 0
   shufflePlayerSpawns: 0
-  deathClip: {fileID: 8300000, guid: 1fc87cdfa49a8de49b89cdc78256a74d, type: 3}
+  deathClip: {fileID: 0}
   players: []
   reticles: []
   gameStarted: 0

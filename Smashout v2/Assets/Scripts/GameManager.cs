@@ -201,14 +201,10 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.AddTask(scaleInCongrats);
         Services.TaskManager.AddTask(waitForBlocksToDie);
 
-<<<<<<< HEAD
         Services.MusicManager.PauseMainTrack();
-=======
-        audioSrc.clip = deathClip;
-        audioSrc.Play();
+
 
         //Services.MusicManager.FadeOutTrack();
->>>>>>> master
     }
 
     void InitializePlayers()
