@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour {
     public bool customSpawns;
     public bool shufflePlayerSpawns;
 
+    private AudioSource audioSrc;
+    public AudioClip deathClip;
+   
+
     [HideInInspector]
     public Player[] players;
     [HideInInspector]
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         SceneManager.sceneLoaded += OnSceneLoad;
         InitializeServices();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -196,7 +201,14 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.AddTask(scaleInCongrats);
         Services.TaskManager.AddTask(waitForBlocksToDie);
 
+<<<<<<< HEAD
         Services.MusicManager.PauseMainTrack();
+=======
+        audioSrc.clip = deathClip;
+        audioSrc.Play();
+
+        //Services.MusicManager.FadeOutTrack();
+>>>>>>> master
     }
 
     void InitializePlayers()
