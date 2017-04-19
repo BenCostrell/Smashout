@@ -114,12 +114,12 @@ public class GameManager : MonoBehaviour {
             greenTrack = 0;
             blueTrack = 0;
             won = false;
+            Services.MusicManager.StopMainTrack();
             Start();
         }
         else
         {
             SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
-            //Services.MusicManager.PlayMainTrack();
         }
         
     }
@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         InitializePlayers();
         Services.UIManager.matchCount.SetActive(true);
+        Services.MusicManager.UnpauseMainTrack();
         gameStarted = true;
     }
 
@@ -157,6 +158,7 @@ public class GameManager : MonoBehaviour {
         Services.BlockManager.DestroyAllBlocks(false);
         Services.UIManager.SetUpUI();
         Services.EventManager.Register<GameOver>(GameOver);
+
         StartGame();
     }
 
@@ -180,6 +182,7 @@ public class GameManager : MonoBehaviour {
 
     void GameOver(GameOver e)
     {
+        GetComponent<AudioSource>().Play();
         Services.EventManager.Unregister<GameOver>(GameOver);
         Services.BlockManager.DestroyAllBlocks(true);
         ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
@@ -193,7 +196,7 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.AddTask(scaleInCongrats);
         Services.TaskManager.AddTask(waitForBlocksToDie);
 
-        //Services.MusicManager.FadeOutTrack();
+        Services.MusicManager.PauseMainTrack();
     }
 
     void InitializePlayers()

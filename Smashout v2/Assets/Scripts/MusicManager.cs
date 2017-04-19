@@ -43,6 +43,19 @@ public class MusicManager : MonoBehaviour {
         audioSrc.Play();
         fadeOut = false;
     }
+    
+    public void UnpauseMainTrack()
+    {
+        audioSrc.UnPause();
+    }
+    public void PauseMainTrack()
+    {
+        audioSrc.Pause();
+    }
+    public void StopMainTrack()
+    {
+        audioSrc.Stop();
+    }
 
     public void FadeOutTrack()
     {

@@ -311,6 +311,10 @@ public class Player : MonoBehaviour
             surface.GetComponent<Block>().OnBumpedByPlayer(this);
             Services.EventManager.Fire(new BumpHit(this));
         }
+        else
+        {
+            GetComponent<AudioSource>().Play();
+        }
 
         RefreshBumpPrivilege();
 
@@ -375,7 +379,7 @@ public class Player : MonoBehaviour
     }
 
     public void Die()
-    {
+    { 
         gameObject.SetActive(false);
 		fireObj.SetActive(false);
         Services.EventManager.Fire(new GameOver(playerNum));
