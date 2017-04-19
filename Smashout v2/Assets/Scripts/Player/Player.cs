@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
     private bool powerInitialized;
     public AudioClip powerUpAudio;
     public AudioClip bumpPlayerHitAudio;
+    public AudioClip bounce;
 
     [HideInInspector]
     public int power
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
                 PowerUpAnimation powerUpAnim = new PowerUpAnimation(this, powerUpAnimationLength);
                 Services.TaskManager.AddTask(powerUpAnim);
                 audioSrc.clip = powerUpAudio;
+                audioSrc.volume = 1.0f;
                 audioSrc.Play();
             }
             _power = newPower;
@@ -313,7 +315,9 @@ public class Player : MonoBehaviour
         }
         else
         {
-            GetComponent<AudioSource>().Play();
+            audioSrc.clip = bounce;
+            audioSrc.volume = 0.375f;
+            audioSrc.Play();
         }
 
         RefreshBumpPrivilege();

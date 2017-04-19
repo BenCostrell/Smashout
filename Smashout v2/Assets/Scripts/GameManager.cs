@@ -119,7 +119,6 @@ public class GameManager : MonoBehaviour {
             greenTrack = 0;
             blueTrack = 0;
             won = false;
-            Services.MusicManager.StopMainTrack();
             Start();
         }
         else
@@ -146,7 +145,7 @@ public class GameManager : MonoBehaviour {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         InitializePlayers();
         Services.UIManager.matchCount.SetActive(true);
-        Services.MusicManager.UnpauseMainTrack();
+        //Services.MusicManager.UnpauseMainTrack();
         gameStarted = true;
     }
 
@@ -201,7 +200,7 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.AddTask(scaleInCongrats);
         Services.TaskManager.AddTask(waitForBlocksToDie);
 
-        Services.MusicManager.PauseMainTrack();
+        //Services.MusicManager.PauseMainTrack();
 
 
         //Services.MusicManager.FadeOutTrack();

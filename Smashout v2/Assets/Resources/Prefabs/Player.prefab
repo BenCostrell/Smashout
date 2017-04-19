@@ -322,9 +322,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0f108b85e42b6c2478df7f4f11f440f0, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -529,7 +529,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 1
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -737,6 +737,7 @@ MonoBehaviour:
   powerUpAnimationLength: 0.3
   powerUpAudio: {fileID: 8300000, guid: 3c26fd1dddd9b944a945d6bbb20e1978, type: 3}
   bumpPlayerHitAudio: {fileID: 8300000, guid: d136685d6c932f544b1a5a39e103572a, type: 3}
+  bounce: {fileID: 8300000, guid: 0f108b85e42b6c2478df7f4f11f440f0, type: 3}
 --- !u!114 &114763017142639038
 MonoBehaviour:
   m_ObjectHideFlags: 1

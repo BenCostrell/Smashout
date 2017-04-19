@@ -27,6 +27,7 @@ public class ScaleInCongrats : Task {
             Services.GameManager.blueTrack++;
             if (Services.GameManager.blueTrack == (Services.GameManager.matchSet / 2 + 1))
             {
+                Services.MusicManager.FadeOutTrack();
                 Services.GameManager.won = true;
                 if (Services.GameManager.greenTrack == 0)
                 {
@@ -47,6 +48,7 @@ public class ScaleInCongrats : Task {
             Services.GameManager.greenTrack++;
             if (Services.GameManager.greenTrack == (Services.GameManager.matchSet / 2 + 1))
             {
+                Services.MusicManager.FadeOutTrack();
                 Services.GameManager.won = true;
                 if (Services.GameManager.blueTrack == 0)
                 {
