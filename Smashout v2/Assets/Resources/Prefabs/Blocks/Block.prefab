@@ -432,6 +432,8 @@ MonoBehaviour:
   shiftFactor: 0.03
   explosionSound: {fileID: 8300000, guid: 66e89eb5e49933642b4d2e550470b194, type: 3}
   bounceSound: {fileID: 8300000, guid: 836f84e945af1944780f6ce74c983768, type: 3}
+  deathTime: 0.3
+  appearanceTime: 0.4
 --- !u!198 &198039731290823032
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -487,12 +489,12 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 967741506
+  randomSeed: -16308328
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.35
+      scalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3076,7 +3078,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1954733643429178}
   serializedVersion: 5
-  lengthInSec: 0.15
+  lengthInSec: 0.1
   simulationSpeed: 1
   looping: 0
   prewarm: 0
@@ -3124,12 +3126,12 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2062705595
+  randomSeed: 1889048769
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.35
+      scalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3168,7 +3170,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 120
+      scalar: 200
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3300,7 +3302,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 0, b: 0, a: 1}
       minMaxState: 1
     startSize:
-      scalar: 6
+      scalar: 12
       maxCurve:
         serializedVersion: 2
         m_Curve:

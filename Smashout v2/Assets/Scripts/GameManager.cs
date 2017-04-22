@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour {
 
     public int numPlayers;
     public Color[] playerColors;
-    public Gradient[] trailColors;
-	//public Color[] fireStartColors;
 	public Gradient[] fireColors;
     public Color[] bumpColors;
     public RenderTexture[] reticleRenderTextures;
@@ -190,7 +188,7 @@ public class GameManager : MonoBehaviour {
         Services.EventManager.Unregister<GameOver>(GameOver);
         Services.BlockManager.DestroyAllBlocks(true);
         ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
-        WaitForTime waitForBlocksToDie = new WaitForTime(Services.BlockManager.blockDeathTime);
+        WaitForTime waitForBlocksToDie = new WaitForTime(Services.BlockManager.blockTypes[0].GetComponent<Block>().deathTime);
         WaitToRestart waitToRestart = new WaitToRestart();
         gameStarted = false;
 
@@ -227,7 +225,6 @@ public class GameManager : MonoBehaviour {
         if (spawnNum == -1) spawnNum = num - 1;
         Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[spawnNum], Quaternion.identity).GetComponent<Player>();
         newPlayer.color = playerColors[num - 1];
-        newPlayer.trailColor = trailColors[num - 1];
 		newPlayer.fireColor = fireColors [num - 1];
         newPlayer.playerNum = num;
         newPlayer.transform.GetComponentInChildren<Camera>().targetTexture = reticleRenderTextures[num - 1];

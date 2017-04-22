@@ -9,7 +9,9 @@ public class CameraController : MonoBehaviour {
     public float highestPlayerOffset;
     private float baseSize;
     public float cameraSpeed;
+    public float sizeChangeSpeed;
     public float minSizeScale;
+    public float maxSizeScale;
 
     // Use this for initialization
 	void Start () {
@@ -35,7 +37,10 @@ public class CameraController : MonoBehaviour {
         float topOfView = Mathf.Max(heights) + highestPlayerOffset;
         //float bottomOfView = Mathf.Min(heights) - highestPlayerOffset;
         float bottomOfView = -150f;
-        float newSize = Mathf.Max(baseSize * minSizeScale, (topOfView + baseSize) / 2, (bottomOfView + baseSize) / 2);
+        float targetSize = Mathf.Max(baseSize * minSizeScale, (topOfView + baseSize) / 2, (bottomOfView + baseSize) / 2);
+        targetSize = Mathf.Min(targetSize, baseSize * maxSizeScale);
+        float sizeDiff = targetSize - cameraComp.orthographicSize;
+        float newSize = cameraComp.orthographicSize + (sizeDiff * sizeChangeSpeed);
         Vector3 newPosition = new Vector3(transform.position.x, -baseSize + newSize, transform.position.z);
         cameraComp.orthographicSize = newSize;
         transform.position = Vector3.MoveTowards(transform.position, newPosition, cameraSpeed * Time.deltaTime);

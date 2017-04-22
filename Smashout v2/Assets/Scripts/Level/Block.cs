@@ -12,6 +12,8 @@ public class Block : MonoBehaviour {
     public AudioClip explosionSound;
     public AudioClip bounceSound;
     private AudioSource audioSrc;
+    public float deathTime;
+    public float appearanceTime;
 
     void Awake()
     {
@@ -61,7 +63,7 @@ public class Block : MonoBehaviour {
 
     public virtual void StartDestructionAnimation(bool playSound)
     {
-        BlockFadeOut fadeOut = new BlockFadeOut(gameObject, Services.BlockManager.blockDeathTime);
+        BlockFadeOut fadeOut = new BlockFadeOut(gameObject, deathTime);
         Services.TaskManager.AddTask(fadeOut);
         foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Play();
         if (playSound)
@@ -73,7 +75,7 @@ public class Block : MonoBehaviour {
 
     public virtual void StartAppearanceAnimation()
     {
-        BlockAppear appear = new BlockAppear(gameObject, Services.BlockManager.blockAppearanceTime);
+        BlockAppear appear = new BlockAppear(gameObject, appearanceTime);
         Services.TaskManager.AddTask(appear);
     }
 }

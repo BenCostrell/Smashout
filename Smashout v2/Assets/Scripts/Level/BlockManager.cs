@@ -16,9 +16,6 @@ public class BlockManager : MonoBehaviour {
     public Event Init = new Event();
     public Event Behaviour = new Event();
     [Space(10)]
-    public float blockDeathTime;
-    public float blockAppearanceTime;
-    [Space(10)]
     public float minAcceptableDistance;
     public int maxNumTries;
     public int blockCountLow;
@@ -359,7 +356,7 @@ public class BlockManager : MonoBehaviour {
                 col.enabled = false;
             }
             block.StartDestructionAnimation(playSound);
-            Destroy(block.gameObject, blockDeathTime);
+            Destroy(block.gameObject, block.deathTime);
         }
         else
         {

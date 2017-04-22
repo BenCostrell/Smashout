@@ -186,11 +186,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
-        type: 2}
-      propertyPath: blockTypes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4561125054417968, guid: e985d69c0b1f7bc4fb5197e4b28537fa, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -225,44 +220,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
         type: 2}
-      propertyPath: findLooseStatics
-      value: 1
+      propertyPath: blockCountHigh
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
         type: 2}
-      propertyPath: init.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 836224708}
-    - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
-        type: 2}
-      propertyPath: init.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DefaultInit
+      propertyPath: blockCountLow
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
-        type: 2}
-      propertyPath: behaviour.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 836224708}
-    - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
-        type: 2}
-      propertyPath: behaviour.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DefaultBehaviour
-      objectReference: {fileID: 0}
-    - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
-        type: 2}
-      propertyPath: blockTypes.Array.data[1]
-      value: 
-      objectReference: {fileID: 1364896463435884, guid: 3301e68beab34344987281b3f26528ac,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e985d69c0b1f7bc4fb5197e4b28537fa, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &836224708 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
-    type: 2}
-  m_PrefabInternal: {fileID: 836224707}
-  m_Script: {fileID: 11500000, guid: dce8316bd36f02541ae7b5c5dc1581a6, type: 3}
 --- !u!1001 &1902274270
 Prefab:
   m_ObjectHideFlags: 0
