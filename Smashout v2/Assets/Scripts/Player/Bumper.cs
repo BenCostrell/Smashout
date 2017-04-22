@@ -101,6 +101,7 @@ public class Bumper : MonoBehaviour {
         if (obj.tag != "Surface")
         {
             Player enemy = obj.GetComponent<Player>();
+            if (enemy == null) enemy = obj.GetComponentInParent<Player>();
             //if this player is dashing or neither the player or enemey are dashing 
             if (player.dashing || !enemy.dashing)
             {
