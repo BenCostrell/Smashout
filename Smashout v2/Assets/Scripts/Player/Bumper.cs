@@ -69,9 +69,11 @@ public class Bumper : MonoBehaviour {
             Services.EventManager.Fire(new BumpHit(player));
             if(player.dashing) player.RefreshBumpPrivilege();
             if(enemy.dashing) enemy.RefreshBumpPrivilege(); //not sure if this line is needed or not (I think not), but just in case
-            Vector3 launchVector =
-                (enemy.transform.position - player.transform.position).normalized * (playerBumpPower + (player.power * powerBumpRatio));
-            Vector2 kickbackVector = -launchVector * kickback;
+            Vector3 baseLaunchVector = (enemy.transform.position - player.transform.position).normalized 
+                * (playerBumpPower + (player.basePower * powerBumpRatio));
+            Vector3 launchVector = (enemy.transform.position - player.transform.position).normalized
+                * (playerBumpPower + (player.power * powerBumpRatio));
+            Vector2 kickbackVector = -baseLaunchVector * kickback;
             enemy.GetHit(-kickbackVector);
             player.rb.velocity = kickbackVector;
             SlowMoTask slowMo = new SlowMoTask(player.hitSlowIntensity, player.hitSlowDuration);

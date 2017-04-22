@@ -310,7 +310,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 35
+  m_GravityScale: 42.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -825,7 +825,9 @@ MonoBehaviour:
   dashGlowRange: 50
   playerNum: 0
   bumpActiveTime: 0.25
-  moveSpeed: 275
+  accel: 350
+  maxSpeed: 200
+  slowdownRate: 0.2
   dashDriftSpeedFactor: 2.25
   bounceScale: 1
   bumpMinSpd: 75
@@ -858,7 +860,7 @@ MonoBehaviour:
   basePower: 1
   maxPower: 5
   baseRadius: 1.5
-  radiusPerPowerUnit: 0.6
+  radiusPerPowerUnit: 0.4
   powerUpAnimationLength: 0.3
   powerUpAudio: {fileID: 8300000, guid: 3c26fd1dddd9b944a945d6bbb20e1978, type: 3}
   bumpPlayerHitAudio: {fileID: 8300000, guid: d136685d6c932f544b1a5a39e103572a, type: 3}
@@ -874,8 +876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef23b9261a18e949b4751360ad0c960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBumpPower: 110
-  powerBumpRatio: 30
+  playerBumpPower: 80
+  powerBumpRatio: 60
   kickback: 1
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   availableColor: {r: 0.94482756, g: 1, b: 0, a: 1}

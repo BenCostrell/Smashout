@@ -20,7 +20,9 @@ public class Player : MonoBehaviour
     private bool actionable;
 
     private Bumper bumper;
-    public float moveSpeed;
+    public float accel;
+    public float maxSpeed;
+    public float slowdownRate;
     public float dashDriftSpeedFactor;
     public float bounceScale;
     public float bumpMinSpd;
@@ -162,10 +164,10 @@ public class Player : MonoBehaviour
         float[] input = { Input.GetAxis("Horizontal_P" + playerNum), Input.GetAxis("Vertical_P" + playerNum) };
         if (Mathf.Sqrt(input[0]* input[0] + input[1]*input[1]) > 0.1f)
         {
-            Vector2 moveForce = new Vector2(input[0] * moveSpeed, 0);
+            Vector2 moveForce = new Vector2(input[0] * accel, 0);
             if (dashing)
             {
-                moveForce += new Vector2(0, input[1] * moveSpeed);
+                moveForce += new Vector2(0, input[1] * accel);
                 Vector2 ortho = rb.velocity;
                 ortho = new Vector2(-ortho.y, ortho.x);
                 if (Vector2.Dot(ortho, moveForce) < 0) ortho *= -1.0f;
@@ -173,6 +175,15 @@ public class Player : MonoBehaviour
                 moveForce *= dashDriftSpeedFactor;
             }
             rb.AddForce(moveForce);
+        }
+        if (!dashing && !stun && rb.velocity.magnitude > maxSpeed)
+        {
+            Vector2 difference = rb.velocity - rb.velocity.normalized * maxSpeed;
+            if(rb.velocity.y <= 0)
+            {
+                rb.velocity -= new Vector2(difference.x * slowdownRate, 0);
+            }
+            else rb.velocity -= difference * slowdownRate;
         }
     }
 

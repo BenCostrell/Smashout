@@ -45,6 +45,5 @@ public class SlowMoTask :Task
     protected override void OnSuccess()
     {
         Time.timeScale = 1;
-        Debug.Log(trackSlowMoTime);
     }
 }
