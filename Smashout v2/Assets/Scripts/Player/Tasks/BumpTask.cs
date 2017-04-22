@@ -54,9 +54,14 @@ public class BumpTask : Task {
         if (player == null) return;
         if (e.playerNum == player.playerNum)
         {
+            Vector2 aimVel = new Vector2(Input.GetAxis("Horizontal_P" + e.playerNum), Input.GetAxis("Vertical_P" + e.playerNum));
             Vector2 prevVel = player.rb.velocity;
-            player.rb.velocity = new Vector2(prevVel.x * 0f, prevVel.y);
-            SetStatus(TaskStatus.Aborted);
+            //only cancel the dash if the player is not aiming the joystick or is aiming it in a direction that goes against the dash velocity vector
+            if (Vector2.Dot(aimVel, prevVel) <= 0)
+            {
+                player.rb.velocity = new Vector2(prevVel.x * 0f, prevVel.y);
+                SetStatus(TaskStatus.Aborted);
+            }
         }
     }
 
