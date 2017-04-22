@@ -312,11 +312,6 @@ public class Player : MonoBehaviour
             surface.GetComponent<Block>().OnBumpedByPlayer(this);
             Services.EventManager.Fire(new BumpHit(this));
         }
-        else
-        {
-            audioSrc.clip = bounce;
-            audioSrc.Play();
-        }
 
         RefreshBumpPrivilege();
 

@@ -9,6 +9,14 @@ public class Block : MonoBehaviour {
     public int damage;
     public float shiftDuration;
     public float shiftFactor;
+    public AudioClip explosionSound;
+    public AudioClip bounceSound;
+    private AudioSource audioSrc;
+
+    void Awake()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
 
     void Start () {
         Init();
@@ -23,7 +31,9 @@ public class Block : MonoBehaviour {
     {
         DamageThis();
         BlockShift shift = new BlockShift(this, collision.gameObject.GetComponent<Player>().previousVelocity * shiftFactor, shiftDuration);
-        Services.TaskManager.AddTask(shift);          
+        Services.TaskManager.AddTask(shift);
+        audioSrc.clip = bounceSound;
+        audioSrc.Play();       
     }
     
     public virtual void OnBumpedByPlayer(Player player)
@@ -56,7 +66,8 @@ public class Block : MonoBehaviour {
         foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Play();
         if (playSound)
         {
-            GetComponent<AudioSource>().Play();
+            audioSrc.clip = explosionSound;
+            audioSrc.Play();
         }
     }
 

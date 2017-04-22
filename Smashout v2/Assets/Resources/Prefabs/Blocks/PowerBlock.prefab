@@ -97,7 +97,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 66e89eb5e49933642b4d2e550470b194, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -183,6 +183,8 @@ MonoBehaviour:
   damage: 0
   shiftDuration: 0.1
   shiftFactor: 0.03
+  explosionSound: {fileID: 8300000, guid: 836f84e945af1944780f6ce74c983768, type: 3}
+  bounceSound: {fileID: 8300000, guid: 836f84e945af1944780f6ce74c983768, type: 3}
 --- !u!198 &198066390969509686
 ParticleSystem:
   m_ObjectHideFlags: 1
