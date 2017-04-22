@@ -159,12 +159,17 @@ public class Player : MonoBehaviour
     void Move()
     {
         //Input Handling with the joysticks of the controllers
-        float input = Input.GetAxis("Horizontal_P" + playerNum);
-        if (Mathf.Abs(input) > 0.1f)
+        float[] input = { Input.GetAxis("Horizontal_P" + playerNum), Input.GetAxis("Vertical_P" + playerNum) };
+        if (Mathf.Sqrt(input[0]* input[0] + input[1]*input[1]) > 0.1f)
         {
-            Vector2 moveForce = new Vector2(input * moveSpeed, 0);
+            Vector2 moveForce = new Vector2(input[0] * moveSpeed, 0);
             if (dashing)
             {
+                moveForce += new Vector2(0, input[1] * moveSpeed);
+                Vector2 ortho = rb.velocity;
+                ortho = new Vector2(-ortho.y, ortho.x);
+                if (Vector2.Dot(ortho, moveForce) < 0) ortho *= -1.0f;
+                moveForce = Vector3.Project(moveForce, ortho);
                 moveForce *= dashDriftSpeedFactor;
             }
             rb.AddForce(moveForce);
