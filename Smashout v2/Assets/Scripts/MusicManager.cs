@@ -36,7 +36,6 @@ public class MusicManager : MonoBehaviour {
 
     public void PlayMainTrack()
     {
-        Debug.Log("playing");
         audioSrc.volume = baseVolume;
         audioSrc.clip = mainTrack;
         audioSrc.loop = true;

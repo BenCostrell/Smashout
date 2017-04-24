@@ -7,22 +7,27 @@ public class CameraController : MonoBehaviour {
     private Rigidbody2D rb;
     private Camera cameraComp;
     public float highestPlayerOffset;
-    private float baseSize;
+    [HideInInspector]
+    public float baseSize;
     public float cameraSpeed;
     public float sizeChangeSpeed;
     public float minSizeScale;
     public float maxSizeScale;
+    public bool viewAdjustEnabled;
+    public float onHitZoomSizeFactor;
+    public float onHitZoomPositionFactor;
 
     // Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         cameraComp = GetComponent<Camera>();
         baseSize = cameraComp.orthographicSize;
+        viewAdjustEnabled = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Services.GameManager.gameStarted)
+        if (Services.GameManager.gameStarted && viewAdjustEnabled)
         {
             AdjustView();
         }
@@ -31,6 +36,15 @@ public class CameraController : MonoBehaviour {
     void AdjustView()
     {
         if (!Services.GameManager.gameStarted) return;
+        float newSize = CalculateAppropriateSize();
+        Vector3 newPosition = CalculateAppropriateLocation(newSize);
+        cameraComp.orthographicSize = newSize;
+        transform.position = Vector3.MoveTowards(transform.position, newPosition, cameraSpeed * Time.deltaTime);
+
+    }
+
+    public float CalculateAppropriateSize()
+    {
         float[] heights = new float[Services.GameManager.numPlayers];
         for (int i = 0; i < heights.Length; ++i) heights[i] = Services.GameManager.players[i].transform.position.y;
 
@@ -41,9 +55,11 @@ public class CameraController : MonoBehaviour {
         targetSize = Mathf.Min(targetSize, baseSize * maxSizeScale);
         float sizeDiff = targetSize - cameraComp.orthographicSize;
         float newSize = cameraComp.orthographicSize + (sizeDiff * sizeChangeSpeed);
-        Vector3 newPosition = new Vector3(transform.position.x, -baseSize + newSize, transform.position.z);
-        cameraComp.orthographicSize = newSize;
-        transform.position = Vector3.MoveTowards(transform.position, newPosition, cameraSpeed * Time.deltaTime);
+        return newSize;
+    }
 
+    public Vector3 CalculateAppropriateLocation(float size)
+    {
+        return new Vector3(0, -baseSize + size, transform.position.z);
     }
 }

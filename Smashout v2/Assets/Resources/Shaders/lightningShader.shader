@@ -16,8 +16,8 @@ Shader "Custom/lightningShader"
 		_ColorMask("Color Mask", Float) = 15
 
 		_NoiseTex("Noise Texture", 2D) = "white" {}
-		_DistortionDamper("Distortion Damper", Float) = 30
-		_DistortionSpreader("Distortion Spreader", Float) = 20
+		_DistortionMagnitude("Distortion Magnitude", Float) = 0.03
+		_DistortionFrequency("Distortion Frequency", Float) = 0.05
 		_DistortionSpeed("Distortion Speed", Float) = 5
 
 		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip("Use Alpha Clip", Float) = 0
@@ -100,17 +100,17 @@ Shader "Custom/lightningShader"
 
 	sampler2D _MainTex;
 	sampler2D _NoiseTex;
-	float _DistortionDamper;
-	float _DistortionSpreader;
+	float _DistortionMagnitude;
+	float _DistortionFrequency;
 	float _DistortionSpeed;
 
 	fixed4 frag(v2f IN) : SV_Target
 	{
 		
 		float2 offset = float2(0, tex2D(_NoiseTex, 
-			float2(_Time[1]*_DistortionSpeed,IN.worldPosition.x/_DistortionSpreader + _Time[1]* _DistortionSpeed)).r);
+			float2(_Time[1]*_DistortionSpeed,IN.worldPosition.x*_DistortionFrequency + _Time[1]* _DistortionSpeed)).r);
 
-		half4 color = (tex2D(_MainTex, IN.texcoord + offset/_DistortionDamper) + _TextureSampleAdd) * IN.color;
+		half4 color = (tex2D(_MainTex, IN.texcoord + offset*_DistortionMagnitude) + _TextureSampleAdd) * IN.color;
 
 		color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
 

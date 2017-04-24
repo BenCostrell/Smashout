@@ -55,9 +55,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool stun;
     public float stunTimeLength;
-    [HideInInspector]
-    public float stunTimeUntil;
-
+    
     public float groundDetectionDistance;
     public LayerMask groundLayer;
     private float currentTimeOnTopOfPlatform;
@@ -199,7 +197,7 @@ public class Player : MonoBehaviour
         }
         else if (obj.tag == "Player")
         {
-            if (!stun)
+            if (!stun && !obj.GetComponent<Player>().dashing)
             {
                 RefreshBumpPrivilege();
             }
@@ -225,7 +223,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Bump()
+    public void Bump()
     {
         bumpAvailable = false;
         Vector2 input = new Vector2(Input.GetAxis("Horizontal_P" + playerNum), Input.GetAxis("Vertical_P" + playerNum));
@@ -290,9 +288,14 @@ public class Player : MonoBehaviour
 
 	public void SetFireActiveStatus(bool status)
 	{
-		//fireObj.SetActive(status);
 		fire.controlFlow(status);
 	}
+
+    public void PlayHitAudio()
+    {
+        audioSrc.clip = bumpPlayerHitAudio;
+        audioSrc.Play();
+    }
 
     public void RefreshBumpPrivilege()
     {
@@ -311,6 +314,62 @@ public class Player : MonoBehaviour
     {
         GetStunned(stunTimeLength);
         rb.velocity = hitVector;
+    }
+
+    public void InitiateBumpHit(Player enemy)
+    {
+        Services.EventManager.Fire(new BumpHit(this));
+        PlayHitAudio();
+        /*Vector3 collisionPoint = player.transform.position + (enemy.transform.position - transform.position) / 2;
+        ZoomInOnHit zoomIn = new ZoomInOnHit(hitSlowDuration, collisionPoint);
+        ReturnCameraToNormal returnCameraToNormal = new ReturnCameraToNormal(hitSlowDuration);*/
+        enemy.stun = true;
+
+        ListenToQueueUpDash listenToQueueDash = new ListenToQueueUpDash(this, hitSlowDuration);
+        SlowMoTask slowMo = new SlowMoTask(hitSlowIntensity, hitSlowDuration);
+        ResolveBumpHit resolveHit = new ResolveBumpHit(this, enemy);
+        slowMo.Then(resolveHit);
+        //zoomIn.Then(returnCameraToNormal);
+        //Services.TaskManager.AddTask(zoomIn);
+        Services.TaskManager.AddTask(slowMo);
+        Services.TaskManager.AddTask(listenToQueueDash);
+    }
+
+    public void ResolveBumpHit(Player enemy)
+    {
+        Vector3 baseLaunchVector = (enemy.transform.position - transform.position).normalized
+            * (bumper.playerBumpPower + (basePower * bumper.powerBumpRatio));
+        Vector2 kickbackVector = -baseLaunchVector * bumper.kickback;
+        Vector3 launchVector;
+
+        if (!enemy.dashing)
+        {
+            launchVector = (enemy.transform.position - transform.position).normalized
+            * (bumper.playerBumpPower + (power * bumper.powerBumpRatio));
+        }
+        else
+        {
+            launchVector = -kickbackVector;
+        }
+
+        if (transform.position.y < enemy.GetComponent<SpriteRenderer>().bounds.min.y)
+        {
+            kickbackVector = new Vector3(kickbackVector.x, kickbackVector.y * (1 - underBumpCut));
+        }
+
+        OnBumperHittingOpponent(kickbackVector);
+        enemy.OnHitByBumper(launchVector);
+    }
+
+    public void OnHitByBumper(Vector3 launchVector)
+    {
+        GetHit(launchVector);
+    }
+
+    public void OnBumperHittingOpponent(Vector3 kickbackVector)
+    {
+        RefreshBumpPrivilege();
+        rb.velocity = kickbackVector;
     }
 
     public void CollideWithSurface(GameObject surface, bool bump)

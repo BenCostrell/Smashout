@@ -99,13 +99,19 @@ Material:
       second: 1
     - first:
         name: _DistortionDamper
-      second: 30.1
+      second: 35
+    - first:
+        name: _DistortionFrequency
+      second: 0.05
+    - first:
+        name: _DistortionMagnitude
+      second: 0.04
     - first:
         name: _DistortionSpeed
-      second: 3.68
+      second: 4
     - first:
         name: _DistortionSpreader
-      second: 82
+      second: 10
     - first:
         name: _DstBlend
       second: 0
