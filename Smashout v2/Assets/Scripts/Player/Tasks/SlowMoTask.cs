@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class SlowMoTask :Task          
+public class SlowMoTask : Task          
 {
     private float scale;
     private float duration;

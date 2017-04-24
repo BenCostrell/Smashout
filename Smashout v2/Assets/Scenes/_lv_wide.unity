@@ -228,6 +228,11 @@ Prefab:
       propertyPath: blockCountLow
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114693460184072476, guid: e985d69c0b1f7bc4fb5197e4b28537fa,
+        type: 2}
+      propertyPath: minAcceptableDistance
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e985d69c0b1f7bc4fb5197e4b28537fa, type: 2}
   m_IsPrefabParent: 0

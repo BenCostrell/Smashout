@@ -343,11 +343,15 @@ public class Player : MonoBehaviour
 
         ListenToQueueUpDash listenToQueueDash = new ListenToQueueUpDash(this, hitSlowDuration);
         SlowMoTask slowMo = new SlowMoTask(hitSlowIntensity, hitSlowDuration);
+        WaitForTime waitToResolveHit = new WaitForTime(hitSlowDuration / 2);
         ResolveBumpHit resolveHit = new ResolveBumpHit(this, enemy);
-        slowMo.Then(resolveHit);
+        ActionTask refreshBump = new ActionTask(RefreshBumpPrivilege);
+        waitToResolveHit.Then(resolveHit);
+        slowMo.Then(refreshBump);
         //zoomIn.Then(returnCameraToNormal);
         //Services.TaskManager.AddTask(zoomIn);
         Services.TaskManager.AddTask(slowMo);
+        Services.TaskManager.AddTask(waitToResolveHit);
         Services.TaskManager.AddTask(listenToQueueDash);
     }
 
@@ -384,7 +388,7 @@ public class Player : MonoBehaviour
 
     public void OnBumperHittingOpponent(Vector3 kickbackVector)
     {
-        RefreshBumpPrivilege();
+        //RefreshBumpPrivilege();
         rb.velocity = kickbackVector;
     }
 

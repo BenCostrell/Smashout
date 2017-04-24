@@ -19,6 +19,7 @@ public class PlayParticleSystemUnscaledTime : Task
     {
         timeElapsed = 0;
         duration = ps.main.duration + ps.main.startLifetime.constant;
+        Services.EventManager.Register<BumpHit>(OnBumpHit);
     }
 
     internal override void Update()
@@ -33,8 +34,14 @@ public class PlayParticleSystemUnscaledTime : Task
         }
     }
 
-    protected override void OnSuccess()
+    void OnBumpHit(BumpHit e)
     {
+        SetStatus(TaskStatus.Aborted);
+    }
+
+    protected override void CleanUp()
+    {
+        Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         GameObject.Destroy(ps.gameObject);
     }
 }
