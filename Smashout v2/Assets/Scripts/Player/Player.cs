@@ -297,6 +297,21 @@ public class Player : MonoBehaviour
         audioSrc.Play();
     }
 
+    void PlayHitShockwave(Player enemy)
+    {
+        Vector3 differenceVector = enemy.transform.position - transform.position;
+        Vector3 collisionPoint = transform.position + differenceVector / 2;
+        float collisionAngle = Mathf.Atan2(differenceVector.y, differenceVector.x) * Mathf.Rad2Deg;
+
+        ParticleSystem hitShockwave = 
+            Instantiate(Services.PrefabDB.HitShockwave, collisionPoint, Quaternion.identity).GetComponent<ParticleSystem>();
+
+        var psMain = hitShockwave.main;
+        psMain.startRotation = collisionAngle;
+        PlayParticleSystemUnscaledTime playHitShockwave = new PlayParticleSystemUnscaledTime(hitShockwave);
+        Services.TaskManager.AddTask(playHitShockwave);
+    }
+
     public void RefreshBumpPrivilege()
     {
         bumpAvailable = true;
@@ -319,10 +334,11 @@ public class Player : MonoBehaviour
     public void InitiateBumpHit(Player enemy)
     {
         Services.EventManager.Fire(new BumpHit(this));
+        PlayHitShockwave(enemy);
         PlayHitAudio();
-        /*Vector3 collisionPoint = player.transform.position + (enemy.transform.position - transform.position) / 2;
-        ZoomInOnHit zoomIn = new ZoomInOnHit(hitSlowDuration, collisionPoint);
-        ReturnCameraToNormal returnCameraToNormal = new ReturnCameraToNormal(hitSlowDuration);*/
+        
+        //ZoomInOnHit zoomIn = new ZoomInOnHit(hitSlowDuration, collisionPoint);
+        //ReturnCameraToNormal returnCameraToNormal = new ReturnCameraToNormal(hitSlowDuration); 
         enemy.stun = true;
 
         ListenToQueueUpDash listenToQueueDash = new ListenToQueueUpDash(this, hitSlowDuration);

@@ -13,3 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1895401377067606, guid: fb1e6a1645388084c9f30a21dd891154, type: 2}
   reticle: {fileID: 1606140940844608, guid: 2f2eb3837ff534840b703f0637a67a11, type: 2}
+  hitShockwave: {fileID: 1913642773000192, guid: ef787ee22c5a2944b9a44782ac992042,
+    type: 2}
