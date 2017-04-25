@@ -19,14 +19,14 @@ public class BlockAppear : Task {
         block.GetComponent<SpriteRenderer>().enabled = true;
         timeElapsed = 0;
         baseScale = block.transform.localScale;
-        block.transform.localScale = Vector3.zero;
+		block.transform.localScale = Vector3.zero;
     }
 
     internal override void Update()
     {
         timeElapsed = Mathf.Min(timeElapsed + Time.deltaTime, duration);
 
-        block.transform.localScale = Vector3.LerpUnclamped(Vector3.zero, baseScale, Easing.BackEaseOut(timeElapsed / duration));
+		if (block.tag != "Border") block.transform.localScale = Vector3.LerpUnclamped(Vector3.zero, baseScale, Easing.BackEaseOut(timeElapsed / duration));
 
         if (timeElapsed == duration)
         {

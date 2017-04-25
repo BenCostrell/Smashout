@@ -266,7 +266,8 @@ public class BlockManager : MonoBehaviour {
                         }
                     }                
                     Vector3 location = b.transform.position;
-                    Block replacementBlock = Instantiate(blockPrefab, location, Quaternion.identity).GetComponent<Block>();
+					Block replacementBlock = Instantiate(blockPrefab, location, b.rotation).GetComponent<Block>();
+					replacementBlock.transform.localScale = b.localScale;
                     Destroy(b.gameObject);
                     Debug.Log("replaced block at " + location);
                     blocks.Add(replacementBlock);

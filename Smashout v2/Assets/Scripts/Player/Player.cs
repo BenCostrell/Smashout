@@ -395,15 +395,15 @@ public class Player : MonoBehaviour
     public void CollideWithSurface(GameObject surface, bool bump)
     {
         float velocityX = previousVelocity.x;
-        float velocityY = -previousVelocity.y * bounceScale;
+        float velocityY = previousVelocity.y * bounceScale;
         float scaling = 1f;
         if (bump)
         {
             scaling = bumpBounceScale;
-            if (transform.position.y > surface.GetComponent<SpriteRenderer>().bounds.min.y)
-            {
-                velocityY = Mathf.Abs(velocityY) + bumpMinSpd;
-            }
+//            if (transform.position.y > surface.GetComponent<SpriteRenderer>().bounds.min.y)
+//            {
+//				velocityY = (velocityY == 0 ? dashSpeed : Mathf.Abs(velocityY) + bumpMinSpd);
+//            }
             surface.GetComponent<Block>().OnBumpedByPlayer(this);
             Services.EventManager.Fire(new BumpHit(this));
         }
@@ -411,10 +411,13 @@ public class Player : MonoBehaviour
         RefreshBumpPrivilege();
 
         //Check if hitting from below
-        if (transform.position.y < surface.GetComponent<SpriteRenderer>().bounds.min.y)
-        {
-            velocityY = velocityY * (1.0f - underBumpCut);
-        }
+		if (transform.position.y < surface.GetComponent<SpriteRenderer> ().bounds.min.y) {
+			velocityY = -velocityY * (1.0f - underBumpCut);
+		}
+		else if (transform.position.y > surface.GetComponent<SpriteRenderer> ().bounds.max.y) {
+			velocityY *= -1.0f;
+		}
+
         //Check if hitting left side of the block
         if (transform.position.x - sideCollisionOffset < surface.GetComponent<SpriteRenderer>().bounds.min.x)
         {

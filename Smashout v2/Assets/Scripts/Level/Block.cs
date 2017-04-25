@@ -47,7 +47,7 @@ public class Block : MonoBehaviour {
     {
     }
 
-    public void DamageThis()
+    public virtual void DamageThis()
     {
         if (++damage < damageStates.Count)
         {
@@ -56,7 +56,7 @@ public class Block : MonoBehaviour {
         else DestroyThis(true);
     }
 
-    public void DestroyThis(bool playSound)
+    public virtual void DestroyThis(bool playSound)
     {
         Services.BlockManager.DestroyBlock(this, true, playSound);
     }

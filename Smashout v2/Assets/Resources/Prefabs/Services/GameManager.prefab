@@ -276,6 +276,7 @@ MonoBehaviour:
   greenTrack: 0
   won: 0
   round: 0
+  preMatch: 1
 --- !u!114 &114004918031666680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,6 +291,7 @@ MonoBehaviour:
   blockTypes:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   - {fileID: 1364896463435884, guid: 3301e68beab34344987281b3f26528ac, type: 2}
+  - {fileID: 1585335431340584, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
   blockPatterns: []
   findLooseStatics: 1
   Init:

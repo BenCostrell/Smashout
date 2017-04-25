@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public int round = 0;
 
+	public bool preMatch = true;
+
     private LevelQueue.Levels levels;
     private LevelQueue.Levels.Enumerator currentLevel;
 
@@ -111,14 +113,17 @@ public class GameManager : MonoBehaviour {
     void StartGame()
     {
         round++;
-        if (won == true)
-        {
-            round = 0;
-            greenTrack = 0;
-            blueTrack = 0;
-            won = false;
-            Start();
-        }
+		if (won == true) {
+			round = 0;
+			greenTrack = 0;
+			blueTrack = 0;
+			won = false;
+			Start ();
+		} else if (preMatch)
+		{
+			SceneManager.LoadScene ("_pre_match", LoadSceneMode.Additive);
+			preMatch = false;
+		}
         else
         {
             SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
