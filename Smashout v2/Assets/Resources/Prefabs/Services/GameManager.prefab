@@ -277,6 +277,7 @@ MonoBehaviour:
   won: 0
   round: 0
   preMatch: 1
+  preMatchName: _pre_match
 --- !u!114 &114004918031666680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,6 +293,8 @@ MonoBehaviour:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   - {fileID: 1364896463435884, guid: 3301e68beab34344987281b3f26528ac, type: 2}
   - {fileID: 1585335431340584, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
+  - {fileID: 1493624755255306, guid: b2e6e753233647c40b18a7cf18e49ce7, type: 2}
+  - {fileID: 1776813213238248, guid: 0c795cb929bd7734fb58adfcdb3f827e, type: 2}
   blockPatterns: []
   findLooseStatics: 1
   Init:

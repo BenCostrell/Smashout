@@ -42,8 +42,11 @@ public class GameManager : MonoBehaviour {
     public bool won = false;
     [HideInInspector]
     public int round = 0;
+	[Space(10)]
 
-	public bool preMatch = true;
+	public bool preMatch;
+	public string preMatchName;
+	private bool runPreMatch;
 
     private LevelQueue.Levels levels;
     private LevelQueue.Levels.Enumerator currentLevel;
@@ -85,6 +88,11 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.AddTask(scaleInTitle);
         ///temporary, just play music all the time
         Services.MusicManager.PlayMainTrack();
+
+		if (preMatch)
+		{
+			runPreMatch = true;
+		}
     }
 
 	// Update is called once per frame
@@ -119,10 +127,10 @@ public class GameManager : MonoBehaviour {
 			blueTrack = 0;
 			won = false;
 			Start ();
-		} else if (preMatch)
+		} else if (runPreMatch)
 		{
-			SceneManager.LoadScene ("_pre_match", LoadSceneMode.Additive);
-			preMatch = false;
+			SceneManager.LoadScene (preMatchName, LoadSceneMode.Additive);
+			runPreMatch = false;
 		}
         else
         {
