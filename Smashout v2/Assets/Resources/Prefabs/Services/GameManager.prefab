@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matchSet: 7
   levelQueue: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
-  _orderedQueue: 1
+  _orderedQueue: 0
   numPlayers: 2
   playerColors:
   - {r: 0.5596351, g: 0, b: 0.9117647, a: 1}
@@ -276,7 +276,7 @@ MonoBehaviour:
   greenTrack: 0
   won: 0
   round: 0
-  preMatch: 1
+  preMatch: 0
 --- !u!114 &114004918031666680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,7 +332,7 @@ MonoBehaviour:
   blockCountHigh: 0
   patternCountLow: 0
   patternCountHigh: 0
-  playerSpawnPlatformOffset: 25
+  playerSpawnPlatformOffset: 50
   genPlayerSpawnPlatforms: 1
   pause: 0
 --- !u!212 &212026704136546920
