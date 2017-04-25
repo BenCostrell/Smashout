@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour {
     public int round = 0;
 	[Space(10)]
 
-	[PreMatchSettings]
 	public bool preMatch;
 	public string preMatchName;
 	private bool runPreMatch;
