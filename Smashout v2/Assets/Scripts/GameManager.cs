@@ -44,9 +44,12 @@ public class GameManager : MonoBehaviour {
     public int round = 0;
 	[Space(10)]
 
+	[PreMatchSettings]
 	public bool preMatch;
 	public string preMatchName;
 	private bool runPreMatch;
+	private bool start1;
+	private bool start2;
 
     private LevelQueue.Levels levels;
     private LevelQueue.Levels.Enumerator currentLevel;

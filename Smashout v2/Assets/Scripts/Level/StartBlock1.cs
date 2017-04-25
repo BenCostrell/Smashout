@@ -19,7 +19,8 @@ public class StartBlock1 : Block {
 
 	protected override void OnCollideWithPlayer(Collision2D collision)
 	{
-		base.OnCollideWithPlayer(collision);
+		BlockShift shift = new BlockShift(this, collision.gameObject.GetComponent<Player>().previousVelocity * shiftFactor, shiftDuration);
+		Services.TaskManager.AddTask(shift);
 	}
 
 	public override void OnBumpedByPlayer(Player player)
