@@ -16,9 +16,13 @@ public class CameraController : MonoBehaviour {
     public bool viewAdjustEnabled;
     public float onHitZoomSizeFactor;
     public float onHitZoomPositionFactor;
+    [Space(10)]
+    public float intensityLow;
+    public float intensityHigh;
+    public float duration;
 
     // Use this for initialization
-	void Start () {
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
         cameraComp = GetComponent<Camera>();
         baseSize = cameraComp.orthographicSize;
@@ -56,6 +60,13 @@ public class CameraController : MonoBehaviour {
         float sizeDiff = targetSize - cameraComp.orthographicSize;
         float newSize = cameraComp.orthographicSize + (sizeDiff * sizeChangeSpeed);
         return newSize;
+    }
+
+    public void SetLight(bool state)
+    {
+        Light l = GetComponentInChildren<Light>();
+        if (!state) l.enabled = false;
+        else Services.TaskManager.AddTask(new CamLightTask(l, intensityLow, intensityHigh, duration));
     }
 
     public Vector3 CalculateAppropriateLocation(float size)

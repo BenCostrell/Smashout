@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour {
 
     void OnSceneLoad(Scene s, LoadSceneMode m)
     {
+        Camera.main.GetComponent<CameraController>().SetLight(false);
         Debug.Log("Loaded " + s.name);
 
         transform.Find("DefaultBlockManager").gameObject.SetActive(false);
@@ -218,6 +219,8 @@ public class GameManager : MonoBehaviour {
 
         waitForBlocksToDie
             .Then(waitToRestart);
+
+        Camera.main.GetComponent<CameraController>().SetLight(true);
 
         Services.TaskManager.AddTask(roundTask);
         Services.TaskManager.AddTask(scaleInCongrats);

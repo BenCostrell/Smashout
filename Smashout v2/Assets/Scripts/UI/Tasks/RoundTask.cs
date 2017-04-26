@@ -50,6 +50,11 @@ public class RoundTask : Task
     // Update is called once per frame 
     internal override void Update()
     {
+        if (player == null)
+        {
+            SetStatus(TaskStatus.Aborted);
+            return;
+        }
         timeElapsed += Time.deltaTime;
         float step = player.dashSpeed * Time.deltaTime * 2;
         player.transform.position = Vector3.Lerp(player.transform.position, point, Easing.QuadEaseOut(timeElapsed / duration));
@@ -67,10 +72,6 @@ public class RoundTask : Task
         Debug.Log(roundNum);
         player.gameObject.SetActive(false);
         script.markAsWon(roundNum, color);
-    }
-
-    protected override void CleanUp()
-    {
         player.GetComponent<Rigidbody2D>().isKinematic = false;
         player.GetComponent<CircleCollider2D>().enabled = true;
         rect = null;
