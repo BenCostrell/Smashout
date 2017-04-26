@@ -12,6 +12,7 @@ public class DeathBlock : Block
     }
     protected override void OnCollideWithPlayer(Collision2D collision)
     {
+		Debug.Log ("Death Block Collides With Player");
         collision.gameObject.GetComponent<Player>().Die();
     }
 

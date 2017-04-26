@@ -6,6 +6,11 @@ public class StartBlock2 : Block {
 
 	public int blockNum;
 
+	protected override void Init()
+	{
+		base.Init();
+	}
+
 	// Use this for initialization
 	void Start () {
 		blockNum = 2;
@@ -14,7 +19,8 @@ public class StartBlock2 : Block {
 
 	protected override void OnCollideWithPlayer(Collision2D collision)
 	{
-		base.OnCollideWithPlayer(collision);
+		BlockShift shift = new BlockShift(this, collision.gameObject.GetComponent<Player>().previousVelocity * shiftFactor, shiftDuration);
+		Services.TaskManager.AddTask(shift);
 	}
 
 	public override void OnBumpedByPlayer(Player player)
@@ -22,11 +28,17 @@ public class StartBlock2 : Block {
 		if (player.playerNum == blockNum)
 		{
 			base.OnBumpedByPlayer(player);
+			Services.GameManager.setReady2();
 		}
+	}
+
+	public override void StartDestructionAnimation(bool playSound)
+	{
+		base.StartDestructionAnimation(playSound);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }

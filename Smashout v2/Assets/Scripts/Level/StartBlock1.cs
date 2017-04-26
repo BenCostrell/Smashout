@@ -28,6 +28,7 @@ public class StartBlock1 : Block {
 		if (player.playerNum == blockNum)
 		{
 			base.OnBumpedByPlayer(player);
+			Services.GameManager.setReady1();
 		}
 	}
 

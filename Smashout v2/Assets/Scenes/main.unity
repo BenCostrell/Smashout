@@ -1466,6 +1466,16 @@ Prefab:
       propertyPath: preMatchName
       value: _pre_match
       objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: preMatch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: preMatchTransitionDur
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
   m_IsPrefabParent: 0

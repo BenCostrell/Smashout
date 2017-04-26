@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 212344788834378326}
   - component: {fileID: 82166605941874756}
   - component: {fileID: 61799976046470856}
-  - component: {fileID: 114770682056121626}
   - component: {fileID: 114776999444794822}
   m_Layer: 0
   m_Name: StartBlock2
@@ -169,26 +168,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114770682056121626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1776813213238248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cef20772e1ccff4180bc966a7286dac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageStates: []
-  damage: 0
-  shiftDuration: 0.1
-  shiftFactor: 0.03
-  explosionSound: {fileID: 0}
-  bounceSound: {fileID: 0}
-  deathTime: 0.4
-  appearanceTime: 0.3
-  blockNum: 2
 --- !u!114 &114776999444794822
 MonoBehaviour:
   m_ObjectHideFlags: 1

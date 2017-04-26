@@ -269,7 +269,7 @@ public class BlockManager : MonoBehaviour {
 					Block replacementBlock = Instantiate(blockPrefab, location, b.rotation).GetComponent<Block>();
 					replacementBlock.transform.localScale = b.localScale;
                     Destroy(b.gameObject);
-                    Debug.Log("replaced block at " + location);
+                    //Debug.Log("replaced block at " + location);
                     blocks.Add(replacementBlock);
                 }
                 else
@@ -290,7 +290,7 @@ public class BlockManager : MonoBehaviour {
                 Vector3 location = GenerateValidLocation(patternType);
                 if (location == Vector3.forward)
                 {
-                    Debug.Log("After " + maxNumTries + " tries, failed to place pattern \"" + patternType.name + "\". Decreasing pattern count and trying again with a new random pattern.");
+                    //Debug.Log("After " + maxNumTries + " tries, failed to place pattern \"" + patternType.name + "\". Decreasing pattern count and trying again with a new random pattern.");
                     continue;
                 }
 
@@ -326,7 +326,7 @@ public class BlockManager : MonoBehaviour {
                 ++blockGenCount;
             }
         }
-        else Debug.Log("Attempted to make " + blockCount + " blocks, but no block types were available to select.");
+       // else Debug.Log("Attempted to make " + blockCount + " blocks, but no block types were available to select.");
 
         Debug.Log("Level Generation Info" + "\n" +
         "---------------------" + "\n" +

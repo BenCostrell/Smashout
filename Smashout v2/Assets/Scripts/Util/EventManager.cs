@@ -40,6 +40,7 @@ public class GameOver : Event {
     public GameOver(int playerNum)
     {
         losingPlayer = playerNum;
+		Debug.Log ("GameOver");
     }
 }
 

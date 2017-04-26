@@ -46,9 +46,10 @@ public class GameManager : MonoBehaviour {
 
 	public bool preMatch;
 	public string preMatchName;
+	public float preMatchTransitionDur;
 	private bool runPreMatch;
-	private bool start1;
-	private bool start2;
+	private bool ready1;
+	private bool ready2;
 
     private LevelQueue.Levels levels;
     private LevelQueue.Levels.Enumerator currentLevel;
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour {
 		if (preMatch)
 		{
 			runPreMatch = true;
+			setAllReadyFalse ();
 		}
     }
 
@@ -101,6 +103,22 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         Services.InputManager.GetInput();
         Services.TaskManager.Update();
+		checkIsReady ();
+	}
+
+	void checkIsReady()
+	{
+		if (preMatch & ready1 && ready2)
+		{
+			ready1 = false;
+			ready2 = false;
+			Services.BlockManager.DestroyAllBlocks(true);
+			foreach (Player p in players) Destroy(p.gameObject);
+			foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
+			//gameStarted = false;
+			//SceneManager.UnloadSceneAsync(currentLevel.Current);
+			Services.TaskManager.AddTask (new preMatchTransition(preMatchTransitionDur));
+		}
 	}
 
     void OnDestroy()
@@ -120,7 +138,7 @@ public class GameManager : MonoBehaviour {
         Services.MusicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
     }
 
-    void StartGame()
+    public void StartGame()
     {
         round++;
 		if (won == true) {
@@ -128,6 +146,7 @@ public class GameManager : MonoBehaviour {
 			greenTrack = 0;
 			blueTrack = 0;
 			won = false;
+
 			Start ();
 		} else if (runPreMatch)
 		{
@@ -136,6 +155,7 @@ public class GameManager : MonoBehaviour {
 		}
         else
         {
+			Debug.Log ("StartGame load level scene");
             SceneManager.LoadScene(currentLevel.Current, LoadSceneMode.Additive);
         }
         
@@ -143,14 +163,14 @@ public class GameManager : MonoBehaviour {
 
     void OnSceneLoad(Scene s, LoadSceneMode m)
     {
-        Debug.Log("Loaded " + s.name);
+        //Debug.Log("Loaded " + s.name);
 
         transform.Find("DefaultBlockManager").gameObject.SetActive(false);
         if (s == SceneManager.GetSceneByName("main")) return;
         Services.BlockManager = FindObjectOfType<BlockManager>();
         if (Services.BlockManager == null)
         {
-            Debug.Log("No Block Manager detected. Using Default.");
+            //Debug.Log("No Block Manager detected. Using Default.");
             transform.Find("DefaultBlockManager").gameObject.SetActive(true);
             Services.BlockManager = GetComponentInChildren<BlockManager>();
         }
@@ -190,7 +210,7 @@ public class GameManager : MonoBehaviour {
             currentLevel.Reset();
             currentLevel.MoveNext();
         }
-        foreach (string l in levels) Debug.Log(l);
+        //foreach (string l in levels) Debug.Log(l);
         Services.UIManager.SetUpUI();
         Services.EventManager.Register<GameOver>(GameOver);
 
@@ -251,4 +271,19 @@ public class GameManager : MonoBehaviour {
 
         return newPlayer;
     }
+
+	void setAllReadyFalse()
+	{
+		ready1 = false;
+		ready2 = false;
+	}
+
+	public void setReady1()
+	{
+		ready1 = true;
+	}
+
+	public void setReady2() {
+		ready2 = true;
+	}
 }

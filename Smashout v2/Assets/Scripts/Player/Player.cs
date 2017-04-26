@@ -101,6 +101,10 @@ public class Player : MonoBehaviour
 
     // Use this for initialization
 
+	void Init() {
+		rb = GetComponent<Rigidbody2D>();
+	}
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -230,6 +234,7 @@ public class Player : MonoBehaviour
         if (input.magnitude > 0.1f)
         {
             Vector2 dashVector = input.normalized * dashSpeed;
+			if (rb == null) rb = GetComponent<Rigidbody2D> ();
             rb.velocity = dashVector;
         }
         BumpTask bumpTask = new BumpTask(this, bumpActiveTime);
@@ -475,8 +480,10 @@ public class Player : MonoBehaviour
 
     public void Die()
     { 
+		Debug.Log ("Player Dies");
         gameObject.SetActive(false);
 		fireObj.SetActive(false);
+		Debug.Log (playerNum);
         Services.EventManager.Fire(new GameOver(playerNum));
     }
 
@@ -484,4 +491,5 @@ public class Player : MonoBehaviour
     {
         LockAllInput();
     }
+
 }
