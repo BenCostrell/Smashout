@@ -850,9 +850,9 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fireGlowIntensity: 2
+  fireGlowIntensity: 3
   fireGlowRange: 20
-  dashGlowIntensity: 3
+  dashGlowIntensity: 6
   dashGlowRange: 50
   playerNum: 0
   bumpActiveTime: 0.25
@@ -887,7 +887,6 @@ MonoBehaviour:
   platformLifetimeWhileStanding: 0.3
   fireObj: {fileID: 0}
   fire: {fileID: 0}
-  rings: {fileID: 0}
   basePower: 1
   maxPower: 5
   baseRadius: 1.5
@@ -896,6 +895,7 @@ MonoBehaviour:
   powerUpAudio: {fileID: 8300000, guid: 3c26fd1dddd9b944a945d6bbb20e1978, type: 3}
   bumpPlayerHitAudio: {fileID: 8300000, guid: d136685d6c932f544b1a5a39e103572a, type: 3}
   bounce: {fileID: 8300000, guid: 836f84e945af1944780f6ce74c983768, type: 3}
+  reached: 0
 --- !u!114 &114763017142639038
 MonoBehaviour:
   m_ObjectHideFlags: 1

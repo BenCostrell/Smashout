@@ -11,7 +11,7 @@ public class StunTask : LockOutAllInput {
         if (player == null) return;
         base.Init();
         player.stun = true;
-        player.gameObject.GetComponent<SpriteRenderer>().color = 0.4f * player.color + 0.6f * Color.red;
+        player.gameObject.GetComponent<SpriteRenderer>().color = Services.GameManager.stunColors[player.playerNum - 1];/*0.4f * player.color + 0.6f * Color.red;*/
     }
 
     protected override void OnSuccess()

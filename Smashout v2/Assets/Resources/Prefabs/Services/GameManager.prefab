@@ -170,6 +170,9 @@ MonoBehaviour:
   playerColors:
   - {r: 0.5596351, g: 0, b: 0.9117647, a: 1}
   - {r: 0, g: 0.9191176, b: 0, a: 1}
+  stunColors:
+  - {r: 0.91034484, g: 0.5, b: 1, a: 0.784}
+  - {r: 0.5202841, g: 1, b: 0.36764705, a: 0.784}
   fireColors:
   - key0:
       serializedVersion: 2
@@ -276,10 +279,10 @@ MonoBehaviour:
   greenTrack: 0
   won: 0
   round: 0
-  preMatch: 0
+  preMatch: 1
   preMatchName: _pre_match
   preMatchTransitionDur: 0.5
-  roundThreshold: 0.5
+  roundThreshold: 1
   durationRoundTask: 1.5
 --- !u!114 &114004918031666680
 MonoBehaviour:

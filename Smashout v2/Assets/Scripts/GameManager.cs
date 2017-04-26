@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 
     public int numPlayers;
     public Color[] playerColors;
+    public Color[] stunColors;
 	public Gradient[] fireColors;
     public Color[] bumpColors;
     public RenderTexture[] reticleRenderTextures;
