@@ -51,8 +51,13 @@ public class GameManager : MonoBehaviour {
 	private bool ready1;
 	private bool ready2;
 
+    private ScaleInMatch script;
+
     private LevelQueue.Levels levels;
     private LevelQueue.Levels.Enumerator currentLevel;
+
+    public float roundThreshold;
+    public float durationRoundTask;
 
     // Use this for initialization
     void Awake() {
@@ -63,6 +68,9 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
+        script = Services.UIManager.matchCount.GetComponent<ScaleInMatch>();
+        script.blueRound = 0;
+        script.greenRound = 0;
         //should initialize levels and currentLevel
         playQueueInOrder = playQueueInOrder;
         currentLevel.MoveNext();
@@ -222,6 +230,7 @@ public class GameManager : MonoBehaviour {
         GetComponent<AudioSource>().Play();
         Services.EventManager.Unregister<GameOver>(GameOver);
         Services.BlockManager.DestroyAllBlocks(true);
+        RoundTask roundTask = new RoundTask(3 - e.losingPlayer, durationRoundTask, roundThreshold);
         ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
         WaitForTime waitForBlocksToDie = new WaitForTime(Services.BlockManager.blockTypes[0].GetComponent<Block>().deathTime);
         WaitToRestart waitToRestart = new WaitToRestart();
@@ -230,6 +239,7 @@ public class GameManager : MonoBehaviour {
         waitForBlocksToDie
             .Then(waitToRestart);
 
+        Services.TaskManager.AddTask(roundTask);
         Services.TaskManager.AddTask(scaleInCongrats);
         Services.TaskManager.AddTask(waitForBlocksToDie);
 
