@@ -278,6 +278,8 @@ MonoBehaviour:
   round: 0
   preMatch: 1
   preMatchName: _pre_match
+  roundThreshold: 0.5
+  durationRoundTask: 1.5
 --- !u!114 &114004918031666680
 MonoBehaviour:
   m_ObjectHideFlags: 1
