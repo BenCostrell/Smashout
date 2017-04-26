@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
 	public Fire fire;
     private ParticleSystem sparks;
+    public ParticleSystem rings;
     private Camera offscreenCamera;
     public int basePower;
     public int maxPower;
@@ -111,6 +112,7 @@ public class Player : MonoBehaviour
 		fireObj.SetActive (true);
 		fire = GetComponentInChildren<Fire> ();
         sparks = GetComponentsInChildren<ParticleSystem>()[1];
+        rings = GetComponentsInChildren<ParticleSystem>()[2];
         offscreenCamera = GetComponentInChildren<Camera>();
     }
 
@@ -121,6 +123,8 @@ public class Player : MonoBehaviour
         currentTimeOnTopOfPlatform = 0f;
         GetComponent<SpriteRenderer>().color = color;
         trailObj.GetComponent<TrailRenderer>().colorGradient = trailColor;
+        ParticleSystem.MainModule settings = rings.main;
+        settings.startColor = new ParticleSystem.MinMaxGradient(color);
         bumpAvailable = true;
         dashing = false;
         defaultGravity = rb.gravityScale;

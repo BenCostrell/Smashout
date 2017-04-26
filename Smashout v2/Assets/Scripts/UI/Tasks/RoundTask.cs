@@ -71,6 +71,7 @@ public class RoundTask : Task
         Color color = Services.GameManager.playerColors[winningPlayer - 1];
         Debug.Log(roundNum);
         player.gameObject.SetActive(false);
+        player.rings.Play();
         script.markAsWon(roundNum, color);
         player.GetComponent<Rigidbody2D>().isKinematic = false;
         player.GetComponent<CircleCollider2D>().enabled = true;
