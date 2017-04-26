@@ -102,13 +102,13 @@ Material:
       second: 35
     - first:
         name: _DistortionFrequency
-      second: 0.05
+      second: 0.02
     - first:
         name: _DistortionMagnitude
-      second: 0.04
+      second: 0.015
     - first:
         name: _DistortionSpeed
-      second: 4
+      second: 2
     - first:
         name: _DistortionSpreader
       second: 10
@@ -175,7 +175,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
+      second: {r: 0.6985294, g: 1, b: 0.9750507, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}

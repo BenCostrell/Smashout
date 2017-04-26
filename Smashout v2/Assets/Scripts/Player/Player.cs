@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
         dashing = false;
         defaultGravity = rb.gravityScale;
         UnlockAllInput();
+        SetTrailActiveStatus(false);
         Services.EventManager.Register<GameOver>(OnGameOver);
     }
 
