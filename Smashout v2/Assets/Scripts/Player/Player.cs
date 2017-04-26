@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
         if (input.magnitude > 0.1f)
         {
             Vector2 dashVector = input.normalized * dashSpeed;
-			if (rb == null) rb = GetComponent<Rigidbody2D> ();
+			//if (rb == null) rb = GetComponent<Rigidbody2D> ();
             rb.velocity = dashVector;
         }
         BumpTask bumpTask = new BumpTask(this, bumpActiveTime);

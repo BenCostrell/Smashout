@@ -75,6 +75,12 @@ public class GameManager : MonoBehaviour {
         playQueueInOrder = playQueueInOrder;
         currentLevel.MoveNext();
 
+		if (preMatch)
+		{
+			runPreMatch = true;
+			setAllReadyFalse ();
+		}
+
         Cursor.visible = false;
 
         Services.EventManager.Register<Reset>(Reset);
@@ -99,12 +105,6 @@ public class GameManager : MonoBehaviour {
         Services.TaskManager.AddTask(scaleInTitle);
         ///temporary, just play music all the time
         Services.MusicManager.PlayMainTrack();
-
-		if (preMatch)
-		{
-			runPreMatch = true;
-			setAllReadyFalse ();
-		}
     }
 
 	// Update is called once per frame
@@ -114,16 +114,17 @@ public class GameManager : MonoBehaviour {
 		checkIsReady ();
 	}
 
+	//This is the method that is used for checking if
+	//Both players hit the start block
 	void checkIsReady()
 	{
 		if (preMatch & ready1 && ready2)
 		{
-			ready1 = false;
-			ready2 = false;
+			setAllReadyFalse ();
 			Services.BlockManager.DestroyAllBlocks(true);
 			foreach (Player p in players) Destroy(p.gameObject);
-			foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
-			//gameStarted = false;
+			//foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
+			gameStarted = false;
 			//SceneManager.UnloadSceneAsync(currentLevel.Current);
 			Services.TaskManager.AddTask (new preMatchTransition(preMatchTransitionDur));
 		}

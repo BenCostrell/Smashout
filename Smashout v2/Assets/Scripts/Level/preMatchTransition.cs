@@ -30,5 +30,6 @@ public class preMatchTransition : Task
 	protected override void OnSuccess()
 	{
 		Services.GameManager.StartGame();
+		//Services.GameManager.gameStarted = true;
 	}
 }
