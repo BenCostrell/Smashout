@@ -488,6 +488,7 @@ public class Player : MonoBehaviour
 		Debug.Log ("Player Dies");
         gameObject.SetActive(false);
 		fireObj.SetActive(false);
+        LockAllInput();
 		Debug.Log (playerNum);
         Services.EventManager.Fire(new GameOver(playerNum));
     }

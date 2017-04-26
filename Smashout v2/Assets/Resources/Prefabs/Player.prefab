@@ -887,6 +887,7 @@ MonoBehaviour:
   platformLifetimeWhileStanding: 0.3
   fireObj: {fileID: 0}
   fire: {fileID: 0}
+  rings: {fileID: 0}
   basePower: 1
   maxPower: 5
   baseRadius: 1.5
@@ -929,7 +930,7 @@ ParticleSystem:
   simulationSpeed: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   autoRandomSeed: 1
   startDelay:
     scalar: 0

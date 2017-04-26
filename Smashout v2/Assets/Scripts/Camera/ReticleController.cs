@@ -22,7 +22,7 @@ public class ReticleController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Reposition();
+        if (player != null) Reposition();
 	}
 
     public void InitializeReticle(Player pl, RenderTexture renderTexture)
