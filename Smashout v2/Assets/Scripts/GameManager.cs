@@ -122,9 +122,13 @@ public class GameManager : MonoBehaviour {
 		{
 			setAllReadyFalse ();
 			Services.BlockManager.DestroyAllBlocks(true);
-			foreach (Player p in players) Destroy(p.gameObject);
-			//foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
-			gameStarted = false;
+            foreach (Player p in players)
+            {
+                p.LockAllInput();
+                Destroy(p.gameObject);
+            }
+            //foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
+            gameStarted = false;
 			//SceneManager.UnloadSceneAsync(currentLevel.Current);
 			Services.TaskManager.AddTask (new preMatchTransition(preMatchTransitionDur));
 		}
@@ -201,7 +205,11 @@ public class GameManager : MonoBehaviour {
 
     public void LevelReset()
     {
-        foreach (Player p in players) Destroy(p.gameObject);
+        foreach (Player p in players)
+        {
+            p.LockAllInput();
+            Destroy(p.gameObject);
+        }
         foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
         Services.BlockManager.DestroyAllBlocks(false);
         Services.UIManager.SetUpUI();

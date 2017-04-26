@@ -102,10 +102,6 @@ public class Player : MonoBehaviour
 
     // Use this for initialization
 
-	void Init() {
-		rb = GetComponent<Rigidbody2D>();
-	}
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
