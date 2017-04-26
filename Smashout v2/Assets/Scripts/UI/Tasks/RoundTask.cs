@@ -68,6 +68,7 @@ public class RoundTask : Task
 
     protected override void OnSuccess()
     {
+        Services.TaskManager.AddTask(new MatchTrackerBounce(rect, 0.25f));
         Color color = Services.GameManager.playerColors[winningPlayer - 1];
         Debug.Log(roundNum);
         player.gameObject.SetActive(false);
