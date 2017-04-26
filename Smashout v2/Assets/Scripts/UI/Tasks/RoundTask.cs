@@ -55,7 +55,6 @@ public class RoundTask : Task
             SetStatus(TaskStatus.Aborted);
             return;
         }
-        player.rings.Play();
         timeElapsed += Time.deltaTime;
         float step = player.dashSpeed * Time.deltaTime * 2;
         player.transform.position = Vector3.Lerp(player.transform.position, point, Easing.QuadEaseOut(timeElapsed / duration));

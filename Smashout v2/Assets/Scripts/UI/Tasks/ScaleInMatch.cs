@@ -50,6 +50,9 @@ public class ScaleInMatch : MonoBehaviour {
 
     public void markAsWon(int place, Color color)
     {
+        /*ParticleSystem.MainModule settings = roundCircles[place].GetComponent<ParticleSystem>().main;
+        settings.startColor = new ParticleSystem.MinMaxGradient(color);
+        roundCircles[place].GetComponent<ParticleSystem>().Play();*/
         roundCircles[place].GetComponent<Image>().color = color;
     }
 }
