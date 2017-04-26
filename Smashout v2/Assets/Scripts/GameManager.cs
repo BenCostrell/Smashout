@@ -160,6 +160,7 @@ public class GameManager : MonoBehaviour {
 		} else if (runPreMatch)
 		{
 			SceneManager.LoadScene (preMatchName, LoadSceneMode.Additive);
+			round = 0;
 			runPreMatch = false;
 		}
         else
