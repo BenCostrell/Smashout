@@ -525,8 +525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76276c07efc069a439622755547e8b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundCircles: []
   blueMatchCountColor: {r: 0.84259623, g: 0.28676468, b: 1, a: 1}
   greenMatchCountColor: {r: 0.31135896, g: 1, b: 0.28676468, a: 1}
+  blueRound: 0
+  greenRound: 0
 --- !u!1 &412343843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,8 +1604,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
-      propertyPath: preMatchName
-      value: _pre_match
+      propertyPath: preMatch
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
         type: 2}
