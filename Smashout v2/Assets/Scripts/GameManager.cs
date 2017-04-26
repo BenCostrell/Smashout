@@ -173,11 +173,11 @@ public class GameManager : MonoBehaviour {
 
     void OnSceneLoad(Scene s, LoadSceneMode m)
     {
-        Camera.main.GetComponent<CameraController>().SetLight(false);
         Debug.Log("Loaded " + s.name);
 
         transform.Find("DefaultBlockManager").gameObject.SetActive(false);
         if (s == SceneManager.GetSceneByName("main")) return;
+        Camera.main.GetComponent<CameraController>().SetLight(false);
         Services.BlockManager = FindObjectOfType<BlockManager>();
         if (Services.BlockManager == null)
         {
