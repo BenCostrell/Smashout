@@ -276,8 +276,9 @@ MonoBehaviour:
   greenTrack: 0
   won: 0
   round: 0
-  preMatch: 1
+  preMatch: 0
   preMatchName: _pre_match
+  preMatchTransitionDur: 0.5
   roundThreshold: 0.5
   durationRoundTask: 1.5
 --- !u!114 &114004918031666680
