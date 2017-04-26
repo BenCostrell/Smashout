@@ -53,7 +53,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776813213238248}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 58.483025, y: 11.156631, z: 0}
   m_LocalScale: {x: 2.7, y: 3.4, z: 1}
   m_Children:
@@ -183,8 +183,8 @@ MonoBehaviour:
   damage: 0
   shiftDuration: 0.1
   shiftFactor: 0.03
-  explosionSound: {fileID: 0}
-  bounceSound: {fileID: 0}
+  explosionSound: {fileID: 8300000, guid: 66e89eb5e49933642b4d2e550470b194, type: 3}
+  bounceSound: {fileID: 8300000, guid: 836f84e945af1944780f6ce74c983768, type: 3}
   deathTime: 0.4
   appearanceTime: 0.3
   blockNum: 2

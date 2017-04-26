@@ -31,10 +31,12 @@ public class Block : MonoBehaviour {
 
     protected virtual void OnCollideWithPlayer(Collision2D collision)
     {
+        Vector3 prevVel = collision.gameObject.GetComponent<Player>().previousVelocity;
         DamageThis();
-        BlockShift shift = new BlockShift(this, collision.gameObject.GetComponent<Player>().previousVelocity * shiftFactor, shiftDuration);
+        BlockShift shift = new BlockShift(this,  prevVel * shiftFactor, shiftDuration);
         Services.TaskManager.AddTask(shift);
         audioSrc.clip = bounceSound;
+        audioSrc.volume = prevVel.magnitude / 200f;
         audioSrc.Play();       
     }
     
@@ -69,6 +71,7 @@ public class Block : MonoBehaviour {
         if (playSound)
         {
             audioSrc.clip = explosionSound;
+            audioSrc.volume = 1;
             audioSrc.Play();
         }
     }

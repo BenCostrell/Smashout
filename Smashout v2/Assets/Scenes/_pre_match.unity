@@ -166,18 +166,6 @@ Prefab:
       propertyPath: m_Name
       value: WallLeft (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 14.694811
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 291.1541
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
   m_IsPrefabParent: 0
@@ -223,14 +211,6 @@ Prefab:
     - target: {fileID: 1585335431340584, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
       propertyPath: m_Name
       value: WallLeft
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 12.608934
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 283.2657
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
@@ -329,14 +309,6 @@ Prefab:
       propertyPath: m_Name
       value: WallRight
       objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 12.60893
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 283.26572
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
   m_IsPrefabParent: 0
@@ -392,10 +364,6 @@ Prefab:
     - target: {fileID: 1585335431340584, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
       propertyPath: m_Name
       value: WallLeft (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 14.69481
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
