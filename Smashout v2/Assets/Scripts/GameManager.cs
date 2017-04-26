@@ -237,16 +237,14 @@ public class GameManager : MonoBehaviour {
         WaitForTime waitForBlocksToDie = new WaitForTime(Services.BlockManager.blockTypes[0].GetComponent<Block>().deathTime);
         WaitToRestart waitToRestart = new WaitToRestart();
         gameStarted = false;
-
-        waitForBlocksToDie
+        roundTask
+            .Then(waitForBlocksToDie)
             .Then(waitToRestart);
 
         Camera.main.GetComponent<CameraController>().SetLight(true);
 
         Services.TaskManager.AddTask(roundTask);
         Services.TaskManager.AddTask(scaleInCongrats);
-        Services.TaskManager.AddTask(waitForBlocksToDie);
-
         //Services.MusicManager.PauseMainTrack();
 
 
