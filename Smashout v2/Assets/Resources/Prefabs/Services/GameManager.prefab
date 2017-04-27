@@ -164,15 +164,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matchSet: 7
-  levelQueue: {fileID: 11400000, guid: 4d21d2b81722ade4ab8e00dd8757370a, type: 2}
+  levelQueue: {fileID: 11400000, guid: 82b9ab8a20d505d4e916641164d06122, type: 2}
   _orderedQueue: 0
   numPlayers: 2
   playerColors:
   - {r: 0.5596351, g: 0, b: 0.9117647, a: 1}
   - {r: 0, g: 0.9191176, b: 0, a: 1}
   stunColors:
-  - {r: 0.91034484, g: 0.5, b: 1, a: 0.784}
-  - {r: 0.5202841, g: 1, b: 0.36764705, a: 0.784}
+  - {r: 0.66176474, g: 0, b: 0.12322511, a: 1}
+  - {r: 0.4852941, g: 0.3313387, b: 0, a: 1}
   fireColors:
   - key0:
       serializedVersion: 2
