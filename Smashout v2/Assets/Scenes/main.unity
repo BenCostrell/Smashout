@@ -1569,6 +1569,17 @@ Prefab:
       propertyPath: stunColors.Array.data[1].a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: levelQueue
+      value: 
+      objectReference: {fileID: 11400000, guid: 82b9ab8a20d505d4e916641164d06122,
+        type: 2}
+    - target: {fileID: 114004488586353830, guid: ceee4e9e6d194f04ea9f6908a06c48f5,
+        type: 2}
+      propertyPath: preMatch
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ceee4e9e6d194f04ea9f6908a06c48f5, type: 2}
   m_IsPrefabParent: 0
