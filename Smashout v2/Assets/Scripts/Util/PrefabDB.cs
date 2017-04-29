@@ -15,4 +15,8 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject hitShockwave;
     public GameObject HitShockwave { get { return hitShockwave; } }
+
+    [SerializeField]
+    private GameObject deathExplosion;
+    public GameObject DeathExplosion { get { return deathExplosion; } }
 }

@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
 	public Fire fire;
     private ParticleSystem sparks;
+    private ParticleSystem deathExplosion;
     private Camera offscreenCamera;
     public int basePower;
     public int maxPower;
@@ -112,6 +113,7 @@ public class Player : MonoBehaviour
 		fireObj.SetActive (true);
 		fire = GetComponentInChildren<Fire> ();
         sparks = GetComponentsInChildren<ParticleSystem>()[1];
+        deathExplosion = GetComponentsInChildren<ParticleSystem>()[2];
         offscreenCamera = GetComponentInChildren<Camera>();
     }
 
@@ -479,6 +481,7 @@ public class Player : MonoBehaviour
     public void Die()
     { 
 		Debug.Log ("Player Dies");
+        PlayDeathExplosion();
         gameObject.SetActive(false);
 		fireObj.SetActive(false);
         LockAllInput();
@@ -491,4 +494,14 @@ public class Player : MonoBehaviour
         LockAllInput();
     }
 
+
+    void PlayDeathExplosion()
+    {
+        GameObject explosion = Instantiate(Services.PrefabDB.DeathExplosion, transform.position, Quaternion.identity);
+        ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
+        var colorOverLife = ps.colorOverLifetime;
+        colorOverLife.color = fireColor;
+        ps.Play();
+        Destroy(explosion, ps.main.duration + ps.main.startLifetime.constant);
+    }
 }
