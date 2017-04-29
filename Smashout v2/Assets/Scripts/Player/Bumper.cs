@@ -42,14 +42,14 @@ public class Bumper : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision) {
         GameObject obj = collision.gameObject;
-        if (obj.tag == "Surface")
-        {
-            if (obj.GetComponent<Block>().GetType() != typeof(DeathBlock))
-            {
-				player.CollideWithSurface (obj, true);
-				//player.CollideWithSurface(collision, true);
-            }
-        }
+    //    if (obj.tag == "Surface")
+    //    {
+    //        if (obj.GetComponent<Block>().GetType() != typeof(DeathBlock))
+    //        {
+				//player.CollideWithSurface (obj, true);
+				////player.CollideWithSurface(collision, true);
+    //        }
+    //    }
         if(obj.tag == "Bumper" || obj.tag == "Player")
         {
             Player enemy;

@@ -23,7 +23,7 @@ public class StartBlock : Block
         {
             blockNum = 2;
         }
-        GetComponent<SpriteRenderer>().color = Services.GameManager.playerColors[blockNum - 1];
+        damageStates[0].GetComponent<SpriteRenderer>().color = Services.GameManager.playerColors[blockNum - 1];
         GetComponentInChildren<Light>().color = Services.GameManager.playerColors[blockNum - 1];
         ParticleSystem.MainModule psm = GetComponentInChildren<ParticleSystem>().main;
         psm.startColor = Services.GameManager.playerColors[blockNum - 1];

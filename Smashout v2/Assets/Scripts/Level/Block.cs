@@ -22,6 +22,7 @@ public class Block : MonoBehaviour {
 
     void Start () {
         Init();
+        foreach (SpriteRenderer s in GetComponentsInChildren<SpriteRenderer>()) s.enabled = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
