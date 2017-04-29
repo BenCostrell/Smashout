@@ -10,7 +10,8 @@ public class BlockShift : Task
     private Vector3 shift;
     private float duration;
     private float timeElapsed;
-    private Vector3 initialPosition;
+    private List<Vector3> initialPositions;
+    private List<GameObject> objectsToShift;
 
     public BlockShift(Block blk, Vector3 shft, float dur)
     {
@@ -21,7 +22,17 @@ public class BlockShift : Task
 
     protected override void Init()
     {
-        initialPosition = block.transform.position;
+        SpriteRenderer[] spriteRenderers = block.GetComponentsInChildren<SpriteRenderer>();
+        initialPositions = new List<Vector3>();
+        objectsToShift = new List<GameObject>();
+        foreach (SpriteRenderer sr in spriteRenderers)
+        {
+            if (sr.gameObject != block.gameObject)
+            {
+                objectsToShift.Add(sr.gameObject);
+                initialPositions.Add(sr.transform.position);
+            }
+        }
         timeElapsed = 0;
     }
 
@@ -31,15 +42,18 @@ public class BlockShift : Task
         {
             timeElapsed += Time.deltaTime;
 
-            if (timeElapsed <= duration / 2)
+            for (int i = 0; i < objectsToShift.Count; i++)
             {
-                block.transform.position = Vector3.Lerp(initialPosition, initialPosition + shift,
-                    Easing.QuadEaseOut(timeElapsed / (duration / 2)));
-            }
-            else
-            {
-                block.transform.position = Vector3.Lerp(initialPosition + shift, initialPosition,
-                    Easing.QuadEaseIn((timeElapsed - (duration / 2)) / (duration / 2)));
+                if (timeElapsed <= duration / 2)
+                {
+                    objectsToShift[i].transform.position = Vector3.Lerp(initialPositions[i], initialPositions[i] + shift,
+                        Easing.QuadEaseOut(timeElapsed / (duration / 2)));
+                }
+                else
+                {
+                    objectsToShift[i].transform.position = Vector3.Lerp(initialPositions[i] + shift, initialPositions[i],
+                        Easing.QuadEaseIn((timeElapsed - (duration / 2)) / (duration / 2)));
+                } 
             }
 
             if (timeElapsed >= duration)
