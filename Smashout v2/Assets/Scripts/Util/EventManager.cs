@@ -44,6 +44,16 @@ public class GameOver : Event {
     }
 }
 
+public class BlockShifted : Event
+{
+    public Block block;
+    public BlockShifted(Block blk)
+    {
+        block = blk;
+    }
+}
+
+
 public class EventManager {
 
 	public delegate void EventDelegate<T>(T e) where T: Event;

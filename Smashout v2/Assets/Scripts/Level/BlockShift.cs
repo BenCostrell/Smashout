@@ -22,6 +22,8 @@ public class BlockShift : Task
 
     protected override void Init()
     {
+        Services.EventManager.Fire(new BlockShifted(block));
+        Services.EventManager.Register<BlockShifted>(Interrupt);
         SpriteRenderer[] spriteRenderers = block.GetComponentsInChildren<SpriteRenderer>();
         initialPositions = new List<Vector3>();
         objectsToShift = new List<GameObject>();
@@ -63,7 +65,28 @@ public class BlockShift : Task
         }
         else
         {
+            SetStatus(TaskStatus.Fail);
+        }
+    }
+
+    void Interrupt(BlockShifted e)
+    {
+        if (e.block == block)
+        {
             SetStatus(TaskStatus.Aborted);
         }
+    }
+
+    protected override void OnAbort()
+    {
+        for (int i = 0; i < objectsToShift.Count; i++)
+        {
+            objectsToShift[i].transform.position = initialPositions[i];
+        }
+    }
+
+    protected override void CleanUp()
+    {
+        Services.EventManager.Unregister<BlockShifted>(Interrupt);
     }
 }
