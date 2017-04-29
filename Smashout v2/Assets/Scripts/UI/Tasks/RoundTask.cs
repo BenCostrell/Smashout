@@ -61,6 +61,7 @@ public class RoundTask : Task
 
         if (Vector3.Distance(player.transform.position, point) < threshold)
         {
+            duration = 0;
             SetStatus(TaskStatus.Success);
         }
 
