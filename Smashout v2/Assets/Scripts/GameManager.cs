@@ -43,8 +43,9 @@ public class GameManager : MonoBehaviour {
     public bool won = false;
     [HideInInspector]
     public int round = 0;
-	[Space(10)]
+    [Space(10)]
 
+    public GameObject musicManagerPrefab;
 	public bool preMatch;
 	public string preMatchName;
 	public float preMatchTransitionDur;
@@ -59,11 +60,16 @@ public class GameManager : MonoBehaviour {
     public float roundThreshold;
     public float durationRoundTask;
 
+    private static bool musicManagerLoaded = false;
+
+    private MusicManager muse;
+
     // Use this for initialization
     void Awake() {
         SceneManager.sceneLoaded += OnSceneLoad;
         InitializeServices();
         audioSrc = GetComponent<AudioSource>();
+        muse = Services.MusicManager;
     }
 
     void Start()
@@ -105,7 +111,11 @@ public class GameManager : MonoBehaviour {
 
         Services.TaskManager.AddTask(scaleInTitle);
         ///temporary, just play music all the time
-        Services.MusicManager.PlayMainTrack();
+        if (!musicManagerLoaded)
+        {
+            muse.PlayMainTrack();
+            musicManagerLoaded = true;
+        }
     }
 
 	// Update is called once per frame
@@ -134,8 +144,11 @@ public class GameManager : MonoBehaviour {
             }
             //foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
             gameStarted = false;
-			//SceneManager.UnloadSceneAsync(currentLevel.Current);
-			Services.TaskManager.AddTask (new preMatchTransition(preMatchTransitionDur));
+            //SceneManager.UnloadSceneAsync(currentLevel.Current);
+            preMatchTransition transition = new preMatchTransition(preMatchTransitionDur);
+            LPFadeTask lpfade = new LPFadeTask(muse.GetComponent<AudioLowPassFilter>(), 1000, 22000, 1, 1, muse.lpFadeOutDuration, Easing.QuadEaseIn);
+            Services.TaskManager.AddTask(transition);
+            Services.TaskManager.AddTask(lpfade);
 		}
 	}
 
@@ -153,7 +166,12 @@ public class GameManager : MonoBehaviour {
         Services.BlockManager = gameObject.transform.GetComponentInChildren<BlockManager>();
         Services.UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Services.InputManager = new InputManager();
-        Services.MusicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        if (!musicManagerLoaded)
+        {
+            MusicManager mm = Instantiate(musicManagerPrefab).GetComponent<MusicManager>();
+            Services.MusicManager = mm;
+            DontDestroyOnLoad(mm.gameObject);
+        }
     }
 
     public void StartGame()
@@ -249,16 +267,19 @@ public class GameManager : MonoBehaviour {
         RoundTask roundTask = new RoundTask(3 - e.losingPlayer, durationRoundTask, roundThreshold);
         ScaleInCongrats scaleInCongrats = new ScaleInCongrats(3 - e.losingPlayer);
         WaitForTime waitForBlocksToDie = new WaitForTime(Services.BlockManager.blockTypes[0].GetComponent<Block>().deathTime);
+        LPFadeTask lowPassFadeIn = new LPFadeTask(muse.GetComponent<AudioLowPassFilter>(), 22000, 1000, 1, 1, muse.lpFadeInDuration, Easing.QuadEaseOut);
         WaitToRestart waitToRestart = new WaitToRestart();
         gameStarted = false;
         roundTask
-            .Then(waitForBlocksToDie)
+            .Then(waitForBlocksToDie);
+        lowPassFadeIn
             .Then(waitToRestart);
 
         Camera.main.GetComponent<CameraController>().SetLight(true);
 
         Services.TaskManager.AddTask(roundTask);
         Services.TaskManager.AddTask(scaleInCongrats);
+        Services.TaskManager.AddTask(lowPassFadeIn);
         //Services.MusicManager.PauseMainTrack();
 
 

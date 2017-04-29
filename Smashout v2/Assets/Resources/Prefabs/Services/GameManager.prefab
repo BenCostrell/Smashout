@@ -174,15 +174,30 @@ MonoBehaviour:
   - {r: 0.66176474, g: 0, b: 0.12322511, a: 1}
   - {r: 0.4852941, g: 0.3313387, b: 0, a: 1}
   fireColors:
-  - serializedVersion: 2
-    key0: {r: 0.56078434, g: 0, b: 0.9098039, a: 1}
-    key1: {r: 0.5529412, g: 0.25882354, b: 0.7058824, a: 0}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+  - key0:
+      serializedVersion: 2
+      rgba: 4294967295
+    key1:
+      serializedVersion: 2
+      rgba: 4294967295
+    key2:
+      serializedVersion: 2
+      rgba: 0
+    key3:
+      serializedVersion: 2
+      rgba: 0
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
     ctime0: 0
     ctime1: 15998
     ctime2: 0
@@ -202,15 +217,30 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  - serializedVersion: 2
-    key0: {r: 0, g: 0.91764706, b: 0, a: 1}
-    key1: {r: 0.32941177, g: 0.8509804, b: 0.32941177, a: 0}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+  - key0:
+      serializedVersion: 2
+      rgba: 4294967295
+    key1:
+      serializedVersion: 2
+      rgba: 4294967295
+    key2:
+      serializedVersion: 2
+      rgba: 0
+    key3:
+      serializedVersion: 2
+      rgba: 0
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
     ctime0: 0
     ctime1: 15998
     ctime2: 0
@@ -249,9 +279,12 @@ MonoBehaviour:
   greenTrack: 0
   won: 0
   round: 0
+  musicManagerPrefab: {fileID: 1826438235588196, guid: 6cfb9920bdc3c3447a01596f3857e2f8,
+    type: 2}
   preMatch: 1
   preMatchName: _pre_match
   preMatchTransitionDur: 0.5
+  readyList: 
   roundThreshold: 1
   durationRoundTask: 1.5
 --- !u!114 &114004918031666680
@@ -343,13 +376,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5cba7623c6cf73f47b7e59a9babfdaba, type: 3}
   m_Color: {r: 0, g: 0.13103437, b: 1, a: 0.266}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
