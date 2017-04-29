@@ -174,30 +174,15 @@ MonoBehaviour:
   - {r: 0.66176474, g: 0, b: 0.12322511, a: 1}
   - {r: 0.4852941, g: 0.3313387, b: 0, a: 1}
   fireColors:
-  - key0:
-      serializedVersion: 2
-      rgba: 4293394575
-    key1:
-      serializedVersion: 2
-      rgba: 11813517
-    key2:
-      serializedVersion: 2
-      rgba: 0
-    key3:
-      serializedVersion: 2
-      rgba: 0
-    key4:
-      serializedVersion: 2
-      rgba: 0
-    key5:
-      serializedVersion: 2
-      rgba: 0
-    key6:
-      serializedVersion: 2
-      rgba: 0
-    key7:
-      serializedVersion: 2
-      rgba: 0
+  - serializedVersion: 2
+    key0: {r: 0.56078434, g: 0, b: 0.9098039, a: 1}
+    key1: {r: 0.5529412, g: 0.25882354, b: 0.7058824, a: 0}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 15998
     ctime2: 0
@@ -217,30 +202,15 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  - key0:
-      serializedVersion: 2
-      rgba: 4278249984
-    key1:
-      serializedVersion: 2
-      rgba: 5560660
-    key2:
-      serializedVersion: 2
-      rgba: 0
-    key3:
-      serializedVersion: 2
-      rgba: 0
-    key4:
-      serializedVersion: 2
-      rgba: 0
-    key5:
-      serializedVersion: 2
-      rgba: 0
-    key6:
-      serializedVersion: 2
-      rgba: 0
-    key7:
-      serializedVersion: 2
-      rgba: 0
+  - serializedVersion: 2
+    key0: {r: 0, g: 0.91764706, b: 0, a: 1}
+    key1: {r: 0.32941177, g: 0.8509804, b: 0.32941177, a: 0}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 15998
     ctime2: 0
@@ -299,8 +269,7 @@ MonoBehaviour:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   - {fileID: 1364896463435884, guid: 3301e68beab34344987281b3f26528ac, type: 2}
   - {fileID: 1585335431340584, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
-  - {fileID: 1493624755255306, guid: b2e6e753233647c40b18a7cf18e49ce7, type: 2}
-  - {fileID: 1776813213238248, guid: 0c795cb929bd7734fb58adfcdb3f827e, type: 2}
+  - {fileID: 1232639080774660, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
   blockPatterns: []
   findLooseStatics: 1
   Init:
@@ -374,8 +343,13 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5cba7623c6cf73f47b7e59a9babfdaba, type: 3}
   m_Color: {r: 0, g: 0.13103437, b: 1, a: 0.266}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0

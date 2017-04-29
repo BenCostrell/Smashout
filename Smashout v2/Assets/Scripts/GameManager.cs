@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour {
 	public string preMatchName;
 	public float preMatchTransitionDur;
 	private bool runPreMatch;
-	private bool ready1;
-	private bool ready2;
+    public bool[] readyList;
 
     private ScaleInMatch script;
 
@@ -79,7 +78,8 @@ public class GameManager : MonoBehaviour {
 		if (preMatch)
 		{
 			runPreMatch = true;
-			setAllReadyFalse ();
+            readyList = new bool[numPlayers];
+            setAllReadyFalse ();
 		}
 
         Cursor.visible = false;
@@ -119,8 +119,12 @@ public class GameManager : MonoBehaviour {
 	//Both players hit the start block
 	void checkIsReady()
 	{
-		if (preMatch & ready1 && ready2)
+		if (preMatch)
 		{
+            foreach(bool ready in readyList)
+            {
+                if (ready == false) return;
+            }
 			setAllReadyFalse ();
 			Services.BlockManager.DestroyAllBlocks(true);
             foreach (Player p in players)
@@ -296,16 +300,14 @@ public class GameManager : MonoBehaviour {
 
 	void setAllReadyFalse()
 	{
-		ready1 = false;
-		ready2 = false;
+        for(int i = 0; i < readyList.Length; i++)
+        {
+            readyList[i] = false;
+        }
 	}
 
-	public void setReady1()
-	{
-		ready1 = true;
-	}
-
-	public void setReady2() {
-		ready2 = true;
-	}
+    public void setReady(int blockNum)
+    {
+        readyList[blockNum - 1] = true;
+    }
 }
