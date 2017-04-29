@@ -285,8 +285,8 @@ MonoBehaviour:
   preMatchName: _pre_match
   preMatchTransitionDur: 0.5
   readyList: 
-  roundThreshold: 1
-  durationRoundTask: 1.5
+  roundThreshold: 5
+  durationRoundTask: 3.5
 --- !u!114 &114004918031666680
 MonoBehaviour:
   m_ObjectHideFlags: 1
