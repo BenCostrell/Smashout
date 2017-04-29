@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool dashing;
 
+    public float minBounceHeight;
     public float wallKickCut;
     public float wallKickMinSpeed;
     public float sideCollisionOffset;
@@ -413,8 +414,13 @@ public class Player : MonoBehaviour
         RefreshBumpPrivilege();
 
         if (collision.contacts[0].point.y > transform.position.y) bounceVector.y *= (1.0f - underBumpCut);
-        if (collision.contacts[0].point.y < collision.contacts[0].collider.bounds.max.y &&
-            collision.contacts[0].point.y > collision.contacts[0].collider.bounds.min.y)
+        else if (collision.contacts[0].point.x != collision.contacts[0].otherCollider.bounds.min.x && collision.contacts[0].point.x != collision.contacts[0].otherCollider.bounds.max.x)
+        {
+            bounceVector += minBounceHeight * Vector2.up;
+        }
+
+        if (collision.contacts[0].point.y < collision.contacts[0].otherCollider.bounds.max.y &&
+            collision.contacts[0].point.y > collision.contacts[0].otherCollider.bounds.min.y)
         {
             bounceVector.x *= (1.0f - wallKickCut);
             bounceVector.x += Mathf.Sign(bounceVector.x) * wallKickMinSpeed;

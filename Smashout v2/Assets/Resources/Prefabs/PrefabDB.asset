@@ -15,3 +15,5 @@ MonoBehaviour:
   reticle: {fileID: 1606140940844608, guid: 2f2eb3837ff534840b703f0637a67a11, type: 2}
   hitShockwave: {fileID: 1913642773000192, guid: ef787ee22c5a2944b9a44782ac992042,
     type: 2}
+  deathExplosion: {fileID: 1472464441954646, guid: d808378d8dcf0ec4b94e4695bf085ec4,
+    type: 2}

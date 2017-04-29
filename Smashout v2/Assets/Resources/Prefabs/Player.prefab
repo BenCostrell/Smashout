@@ -875,6 +875,7 @@ MonoBehaviour:
   bumpAvailable: 0
   defaultGravity: 0
   dashing: 0
+  minBounceHeight: 20
   wallKickCut: 0.5
   wallKickMinSpeed: 25
   sideCollisionOffset: 0.7
