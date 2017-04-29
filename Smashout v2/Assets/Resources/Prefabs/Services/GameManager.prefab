@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2f1f785c2779249b62c015df4cda7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matchSet: 7
+  matchSet: 1
   levelQueue: {fileID: 11400000, guid: 82b9ab8a20d505d4e916641164d06122, type: 2}
   _orderedQueue: 0
   numPlayers: 2
@@ -176,10 +176,10 @@ MonoBehaviour:
   fireColors:
   - key0:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4293394575
     key1:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4290003597
     key2:
       serializedVersion: 2
       rgba: 0
@@ -219,10 +219,10 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   - key0:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4278249984
     key1:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4283750740
     key2:
       serializedVersion: 2
       rgba: 0
