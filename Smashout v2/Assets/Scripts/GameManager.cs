@@ -270,16 +270,27 @@ public class GameManager : MonoBehaviour {
         LPFadeTask lowPassFadeIn = new LPFadeTask(muse.GetComponent<AudioLowPassFilter>(), 22000, 1000, 1, 1, muse.lpFadeInDuration, Easing.QuadEaseOut);
         WaitToRestart waitToRestart = new WaitToRestart();
         gameStarted = false;
-        roundTask
-            .Then(waitForBlocksToDie);
-        lowPassFadeIn
-            .Then(waitToRestart);
+        if((blueTrack == matchSet/2 && (3 - e.losingPlayer) == 1) || (greenTrack == matchSet/2 && (3 - e.losingPlayer) == 2))
+        {
+            roundTask
+                .Then(waitForBlocksToDie);
+
+            lowPassFadeIn
+                .Then(waitToRestart);
+
+            Services.TaskManager.AddTask(lowPassFadeIn);
+        }
+        else
+        {
+            roundTask
+                .Then(waitForBlocksToDie)
+                .Then(waitToRestart);
+        }
 
         Camera.main.GetComponent<CameraController>().SetLight(true);
 
         Services.TaskManager.AddTask(roundTask);
         Services.TaskManager.AddTask(scaleInCongrats);
-        Services.TaskManager.AddTask(lowPassFadeIn);
         //Services.MusicManager.PauseMainTrack();
 
 

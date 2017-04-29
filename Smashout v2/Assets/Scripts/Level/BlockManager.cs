@@ -115,7 +115,7 @@ public class BlockManager : MonoBehaviour {
     {
         GameObject obj = Instantiate(blockType, location, Quaternion.identity) as GameObject;
         Block block = obj.GetComponent<Block>();
-        block.GetComponent<SpriteRenderer>().enabled = false;
+        //foreach (SpriteRenderer s in block.GetComponentsInChildren<SpriteRenderer>()) s.enabled = false;
         return block;
     }
 
@@ -267,7 +267,6 @@ public class BlockManager : MonoBehaviour {
                     }                
                     Vector3 location = b.transform.position;
 					Block replacementBlock = Instantiate(blockPrefab, location, b.rotation).GetComponent<Block>();
-					replacementBlock.transform.localScale = b.localScale;
                     Destroy(b.gameObject);
                     //Debug.Log("replaced block at " + location);
                     blocks.Add(replacementBlock);
