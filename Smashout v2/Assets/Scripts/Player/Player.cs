@@ -520,6 +520,15 @@ public class Player : MonoBehaviour
         Services.EventManager.Fire(new GameOver(playerNum));
     }
 
+    public void startScreenDie()
+    {
+        Debug.Log("Player Dies on Start Screen");
+        PlayDeathExplosion();
+        gameObject.SetActive(false);
+        fireObj.SetActive(false);
+        LockAllInput();
+    }
+
     void OnGameOver(GameOver e)
     {
         LockAllInput();

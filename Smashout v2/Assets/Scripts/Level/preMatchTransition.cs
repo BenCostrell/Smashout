@@ -6,10 +6,14 @@ public class preMatchTransition : Task
 {
 	private float timeElapsed;
 	private float duration;
+    private float keepPercent;
+    private bool exploded;
 
-	public preMatchTransition(float dur)
+	public preMatchTransition(float dur, float keepPer)
 	{
 		duration = dur;
+        keepPercent = keepPer;
+        exploded = false;
 	}
 
 	protected override void Init ()
@@ -25,11 +29,26 @@ public class preMatchTransition : Task
 		{
 			SetStatus (TaskStatus.Success);
 		}
-	}
+        if (!exploded && timeElapsed >= duration / 4)
+        {
+            foreach (Player p in Services.GameManager.players)
+            {
+                p.startScreenDie();
+            }
+            exploded = true;
+        }
+        //foreach (Player p in Services.GameManager.players)
+        //{
+        //    p.gameObject.transform.localScale *= keepPercent;
+        //}
+    }
 
 	protected override void OnSuccess()
 	{
-		Services.GameManager.StartGame();
-		//Services.GameManager.gameStarted = true;
+        foreach (Player p in Services.GameManager.players)
+        {
+            Object.Destroy(p.gameObject);
+        }
+        Services.GameManager.StartGame();
 	}
 }
