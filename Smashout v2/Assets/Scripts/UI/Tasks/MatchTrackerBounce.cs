@@ -10,11 +10,15 @@ public class MatchTrackerBounce :Task
     private float timeElapsed;
     private RectTransform trackerCircle;
     private Vector2 baseSize;
+    private Vector3 pos;
+    private float shakeFactor;
 
     public MatchTrackerBounce(RectTransform circle, float dur)
     {
         trackerCircle = circle;
+        pos = trackerCircle.position;
         duration = dur;
+        shakeFactor = 10.0f;
     }
 
     protected override void Init()
@@ -36,8 +40,11 @@ public class MatchTrackerBounce :Task
             trackerCircle.localScale = Vector2.Lerp(1.8f * baseSize, baseSize, Easing.QuadEaseIn((timeElapsed - (duration / 2)) / (duration / 2)));
         }
 
+        trackerCircle.position = new Vector3(trackerCircle.position.x + shakeFactor, trackerCircle.position.y, trackerCircle.position.z);
+        shakeFactor *= -1;
         if (timeElapsed >= duration)
         {
+            trackerCircle.position = pos;
             SetStatus(TaskStatus.Success);
         }
     }
