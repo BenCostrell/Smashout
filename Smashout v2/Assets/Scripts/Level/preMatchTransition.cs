@@ -6,10 +6,14 @@ public class preMatchTransition : Task
 {
 	private float timeElapsed;
 	private float duration;
+    private float explodeStartPercent;
+    private bool exploded;
 
-	public preMatchTransition(float dur)
+	public preMatchTransition(float dur, float expPer)
 	{
 		duration = dur;
+        explodeStartPercent = expPer;
+        exploded = false;
 	}
 
 	protected override void Init ()
@@ -25,11 +29,22 @@ public class preMatchTransition : Task
 		{
 			SetStatus (TaskStatus.Success);
 		}
-	}
+        if (!exploded && timeElapsed >= duration*explodeStartPercent)
+        {
+            foreach (Player p in Services.GameManager.players)
+            {
+                p.startScreenDie();
+            }
+            exploded = true;
+        }
+    }
 
 	protected override void OnSuccess()
 	{
-		Services.GameManager.StartGame();
-		//Services.GameManager.gameStarted = true;
+        foreach (Player p in Services.GameManager.players)
+        {
+            Object.Destroy(p.gameObject);
+        }
+        Services.GameManager.StartGame();
 	}
 }

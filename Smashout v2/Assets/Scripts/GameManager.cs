@@ -49,8 +49,11 @@ public class GameManager : MonoBehaviour {
 	public bool preMatch;
 	public string preMatchName;
 	public float preMatchTransitionDur;
+    public float preMatchDissapearPercent;
 	private bool runPreMatch;
-    public bool[] readyList;
+    private bool oneTimePreMatch;
+    private bool[] readyList;
+    [Space(10)]
 
     private ScaleInMatch script;
 
@@ -140,12 +143,19 @@ public class GameManager : MonoBehaviour {
             foreach (Player p in players)
             {
                 p.LockAllInput();
-                Destroy(p.gameObject);
+                p.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+
+            }
+            GameObject[] startText;
+            startText = GameObject.FindGameObjectsWithTag("PreMatchText");
+            foreach (GameObject text in startText)
+            {
+                Destroy(text);
             }
             //foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
             gameStarted = false;
             //SceneManager.UnloadSceneAsync(currentLevel.Current);
-            preMatchTransition transition = new preMatchTransition(preMatchTransitionDur);
+            preMatchTransition transition = new preMatchTransition(preMatchTransitionDur, preMatchDissapearPercent);
             LPFadeTask lpfade = new LPFadeTask(muse.GetComponent<AudioLowPassFilter>(), 1000, 22000, 1, 1, muse.lpFadeOutDuration, Easing.QuadEaseIn);
             Services.TaskManager.AddTask(transition);
             Services.TaskManager.AddTask(lpfade);
