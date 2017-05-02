@@ -12,6 +12,7 @@ TagManager:
   - Canvas
   - MusicManager
   - Border
+  - PreMatchText
   layers:
   - Default
   - TransparentFX

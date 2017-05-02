@@ -146,6 +146,12 @@ public class GameManager : MonoBehaviour {
                 p.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 
             }
+            GameObject[] startText;
+            startText = GameObject.FindGameObjectsWithTag("PreMatchText");
+            foreach (GameObject text in startText)
+            {
+                Destroy(text);
+            }
             //foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
             gameStarted = false;
             //SceneManager.UnloadSceneAsync(currentLevel.Current);
