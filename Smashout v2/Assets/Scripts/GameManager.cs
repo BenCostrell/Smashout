@@ -21,10 +21,6 @@ public class GameManager : MonoBehaviour {
     private GameObject canvas;
     [Space(10)]
 
-    public Vector3[] spawnpoints;
-    public bool customSpawns;
-    public bool shufflePlayerSpawns;
-
     private AudioSource audioSrc;
     public AudioClip deathClip;
    
@@ -66,6 +62,9 @@ public class GameManager : MonoBehaviour {
     private static bool musicManagerLoaded = false;
 
     private MusicManager muse;
+    [HideInInspector]
+    public TaskManager tutorialTaskManager;
+
 
     // Use this for initialization
     void Awake() {
@@ -73,6 +72,7 @@ public class GameManager : MonoBehaviour {
         InitializeServices();
         audioSrc = GetComponent<AudioSource>();
         muse = Services.MusicManager;
+        tutorialTaskManager = new TaskManager();
     }
 
     void Start()
@@ -101,12 +101,6 @@ public class GameManager : MonoBehaviour {
         ScaleInTitle scaleInTitle = new ScaleInTitle();
         WaitToStart waitToStart = new WaitToStart();
         ActionTask startGame = new ActionTask(StartGame);
-
-        if (!customSpawns) //if spawnpoints are to be generated, generate them equally spaced from each other
-        {
-            spawnpoints = new Vector3[numPlayers];
-            for (int i = 0; i < numPlayers; ++i) spawnpoints[i] = new Vector3(i * 200.0f / (numPlayers - 1) - 100.0f, 100);
-        }
 
         scaleInTitle
             .Then(waitToStart)
@@ -154,11 +148,14 @@ public class GameManager : MonoBehaviour {
             }
             //foreach (ReticleController reticle in reticles) Destroy(reticle.gameObject);
             gameStarted = false;
+            tutorialTaskManager.Clear();
             //SceneManager.UnloadSceneAsync(currentLevel.Current);
+            Services.BlockManager.gameObject.SetActive(false);
             preMatchTransition transition = new preMatchTransition(preMatchTransitionDur, preMatchDissapearPercent);
             LPFadeTask lpfade = new LPFadeTask(muse.GetComponent<AudioLowPassFilter>(), 1000, 22000, 1, 1, muse.lpFadeOutDuration, Easing.QuadEaseIn);
             Services.TaskManager.AddTask(transition);
             Services.TaskManager.AddTask(lpfade);
+            
 		}
 	}
 
@@ -218,7 +215,7 @@ public class GameManager : MonoBehaviour {
         Services.BlockManager = FindObjectOfType<BlockManager>();
         if (Services.BlockManager == null)
         {
-            //Debug.Log("No Block Manager detected. Using Default.");
+            Debug.Log("No Block Manager detected. Using Default.");
             transform.Find("DefaultBlockManager").gameObject.SetActive(true);
             Services.BlockManager = GetComponentInChildren<BlockManager>();
         }
@@ -311,22 +308,23 @@ public class GameManager : MonoBehaviour {
     {
         players = new Player[numPlayers];
         reticles = new ReticleController[numPlayers];
-        if (shufflePlayerSpawns)
-        {
-            int i = 0;
-            foreach (int j in new UniqueRandomSample(0, numPlayers))
-            {
-                players[i] = InitializePlayer(i + 1, j);
-                ++i;
-            }
-        }
-        else for (int i = 0; i < numPlayers; ++i) players[i] = InitializePlayer(i + 1);
+        //if (shufflePlayerSpawns)
+        //{
+        //    int i = 0;
+        //    foreach (int j in new UniqueRandomSample(0, numPlayers))
+        //    {
+        //        players[i] = InitializePlayer(i + 1, j);
+        //        ++i;
+        //    }
+        //}
+        //else 
+        for (int i = 0; i < numPlayers; ++i) players[i] = InitializePlayer(i + 1);
     }
 
     Player InitializePlayer(int num, int spawnNum = -1)
     {
         if (spawnNum == -1) spawnNum = num - 1;
-        Player newPlayer = Instantiate(Services.PrefabDB.Player, spawnpoints[spawnNum], Quaternion.identity).GetComponent<Player>();
+        Player newPlayer = Instantiate(Services.PrefabDB.Player, Services.BlockManager.spawnpoints[spawnNum], Quaternion.identity).GetComponent<Player>();
         newPlayer.color = playerColors[num - 1];
 		newPlayer.fireColor = fireColors [num - 1];
         newPlayer.playerNum = num;

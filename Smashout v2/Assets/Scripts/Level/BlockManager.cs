@@ -25,11 +25,14 @@ public class BlockManager : MonoBehaviour {
     [Space(10)]
     public float playerSpawnPlatformOffset;
     public bool genPlayerSpawnPlatforms;
+    public Vector3[] spawnpoints;
+    public bool shufflePlayerSpawns;
     [Space(10)]
     [HideInInspector]
     public bool pause;
 
-    private List<Block> blocks = new List<Block>();
+    [HideInInspector]
+    public List<Block> blocks = new List<Block>();
     private UnityEngine.Random.State preInitRNG;
     private int blockCount;
     private int patternCount;
@@ -240,7 +243,7 @@ public class BlockManager : MonoBehaviour {
 
         if(genPlayerSpawnPlatforms)
         {
-            foreach (Vector3 loc in Services.GameManager.spawnpoints)
+            foreach (Vector3 loc in spawnpoints)
             {
                 blocks.Add(Create(loc - Vector3.up * playerSpawnPlatformOffset, 0));
                 ++spawnPlatformsGenCount;
@@ -347,6 +350,7 @@ public class BlockManager : MonoBehaviour {
 
     public void DestroyBlock(Block block, bool animate, bool playSound)
     {
+        if (!block) return;
         if(blocks.Contains(block)) blocks.Remove(block);
         if (animate)
         {

@@ -266,11 +266,6 @@ MonoBehaviour:
   reticleRenderTextures:
   - {fileID: 8400000, guid: 1a0da0ca81d0197429ac6b4010243c1d, type: 2}
   - {fileID: 8400000, guid: a52284d8536b20649ab309e4b6c720f6, type: 2}
-  spawnpoints:
-  - {x: -50, y: 100, z: 0}
-  - {x: 50, y: 100, z: 0}
-  customSpawns: 0
-  shufflePlayerSpawns: 0
   deathClip: {fileID: 0}
   players: []
   reticles: []
@@ -283,8 +278,8 @@ MonoBehaviour:
     type: 2}
   preMatch: 1
   preMatchName: _pre_match
-  preMatchTransitionDur: 0.5
-  readyList: 
+  preMatchTransitionDur: 1
+  preMatchDissapearPercent: 0.25
   roundThreshold: 5
   durationRoundTask: 3.5
 --- !u!114 &114004918031666680
@@ -345,7 +340,12 @@ MonoBehaviour:
   patternCountHigh: 0
   playerSpawnPlatformOffset: 50
   genPlayerSpawnPlatforms: 1
+  spawnpoints:
+  - {x: -75, y: 100, z: 0}
+  - {x: 75, y: 100, z: 0}
+  shufflePlayerSpawns: 0
   pause: 0
+  blocks: []
 --- !u!212 &212026704136546920
 SpriteRenderer:
   m_ObjectHideFlags: 1

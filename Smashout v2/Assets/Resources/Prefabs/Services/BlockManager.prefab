@@ -35,8 +35,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1843176945687640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -18, z: 0}
-  m_LocalScale: {x: 70.72232, y: 99.463524, z: 1}
+  m_LocalPosition: {x: -0.3, y: -13, z: 0}
+  m_LocalScale: {x: 269.40097, y: 39.587822, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,11 +55,25 @@ MonoBehaviour:
   blockTypes:
   - {fileID: 1172797353499834, guid: c0fdf5a9852551b428c9f81ae5d59fbb, type: 2}
   - {fileID: 1364896463435884, guid: 3301e68beab34344987281b3f26528ac, type: 2}
+  - {fileID: 1232639080774660, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
+  - {fileID: 1078124164332100, guid: 1a1c80f75d76e434c9259badbe5b20d7, type: 2}
+  - {fileID: 1585335431340584, guid: 9f25c47aaae4f2249a6cca622b5f705f, type: 2}
   blockPatterns: []
   findLooseStatics: 1
   Init:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114693460184072476}
+        m_MethodName: DefaultInit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_TypeName: BlockManager+Event, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   Behaviour:
@@ -69,13 +83,18 @@ MonoBehaviour:
       PublicKeyToken=null
   minAcceptableDistance: 30
   maxNumTries: 100
-  blockCountLow: 7
-  blockCountHigh: 12
+  blockCountLow: 10
+  blockCountHigh: 15
   patternCountLow: 1
   patternCountHigh: 1
   playerSpawnPlatformOffset: 50
   genPlayerSpawnPlatforms: 1
+  spawnpoints:
+  - {x: -120, y: 100, z: 0}
+  - {x: 120, y: 100, z: 0}
+  shufflePlayerSpawns: 0
   pause: 0
+  blocks: []
 --- !u!212 &212200256428378876
 SpriteRenderer:
   m_ObjectHideFlags: 1

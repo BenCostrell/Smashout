@@ -44,6 +44,6 @@ public class ListenToQueueUpDash : Task
     protected override void OnSuccess()
     {
         Services.EventManager.Unregister<ButtonPressed>(QueueUpDash);
-        if (dashQueued) player.Bump();
+        if (dashQueued && player.bumpAvailable) player.Bump();
     }
 }

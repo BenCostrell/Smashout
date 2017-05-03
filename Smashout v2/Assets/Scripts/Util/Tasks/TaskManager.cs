@@ -41,4 +41,9 @@ public class TaskManager {
 		task.SetStatus (Task.TaskStatus.Detached);
 	}
 
+    public void Clear()
+    {
+        tasks.Clear();
+    }
+
 }
