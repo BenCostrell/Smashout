@@ -6,6 +6,7 @@ public class BumpTask : Task {
     private float activeDuration;
     private Player player;
     private float timeElapsed;
+    private bool bumpHit;
 
     public BumpTask(Player pl, float activeDur)
     {
@@ -27,6 +28,7 @@ public class BumpTask : Task {
 		player.SetFireColor(true);
         player.SetFireGlow(true);
         player.dashing = true;
+        bumpHit = false;
     }
 
     internal override void Update()
@@ -73,6 +75,7 @@ public class BumpTask : Task {
         if (player == null) return;
         if (e.player == player)
         {
+            bumpHit = true;
             SetStatus(TaskStatus.Aborted);
         }
     }
@@ -96,11 +99,14 @@ public class BumpTask : Task {
         Services.EventManager.Unregister<BumpHit>(OnBumpHit);
         Services.EventManager.Unregister<GameOver>(OnGameOver);
         Services.EventManager.Unregister<ButtonPressed>(CancelDash);
-        player.SetTrailColor(false);
-		player.SetFireColor(false);
-        player.SetFireGlow(false);
         player.dashing = false;
-        player.SetTrailActiveStatus(false);
-		player.SetFireActiveStatus (false);
+        player.SetTrailColor(false);
+        player.SetFireColor(false);
+        player.SetFireGlow(false);
+        if (!bumpHit)
+        {
+            player.SetTrailActiveStatus(false);
+            player.SetFireActiveStatus(false);
+        }
     }
 }

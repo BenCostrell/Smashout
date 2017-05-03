@@ -61,7 +61,7 @@ public class TutorialManager : MonoBehaviour {
         WaitForTime wait5 = new WaitForTime(0.5f);
         SpawnTutorialPattern spawnStartPlats = new SpawnTutorialPattern(tutorialPatterns[2], true);
         SetTutorialText setDontFallText = new SetTutorialText(tutorialTextArray[5], tutorialText);
-        WaitForTime wait6 = new WaitForTime(0.8f);
+        WaitForTime wait6 = new WaitForTime(0.65f);
         ActionTask beginGame = new ActionTask(Services.GameManager.BeginMatch);
 
         setInitialText
