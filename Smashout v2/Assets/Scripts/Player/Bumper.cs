@@ -61,7 +61,7 @@ public class Bumper : MonoBehaviour {
             {
                 enemy = obj.GetComponent<Player>();
             }
-            player.InitiateBumpHit(enemy);
+            if(player.dashing) player.InitiateBumpHit(enemy);
         }
     }
 }
