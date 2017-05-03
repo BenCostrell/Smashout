@@ -235,7 +235,7 @@ Prefab:
     - target: {fileID: 198988001332859064, guid: 8f04f3d9eb421ea45904994320719cf6,
         type: 2}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.96470594
+      value: 0.9647059
       objectReference: {fileID: 0}
     - target: {fileID: 198988001332859064, guid: 8f04f3d9eb421ea45904994320719cf6,
         type: 2}
@@ -389,7 +389,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: press A to start
+  m_Text: 'press A to start
+
+    press B for Tutorial'
 --- !u!222 &110751055
 CanvasRenderer:
   m_ObjectHideFlags: 0

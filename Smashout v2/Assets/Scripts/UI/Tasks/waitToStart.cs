@@ -14,6 +14,12 @@ public class WaitToStart : Task {
     {
         if (e.button == "A")
         {
+            Services.GameManager.tutorialOn = false;
+            SetStatus(TaskStatus.Success);
+        }
+        else if (e.button == "B")
+        {
+            Services.GameManager.tutorialOn = true;
             SetStatus(TaskStatus.Success);
         }
     }

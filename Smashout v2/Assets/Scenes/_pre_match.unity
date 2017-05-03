@@ -121,7 +121,7 @@ Transform:
   - {fileID: 1266554674}
   - {fileID: 1812749362}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &336911092
 Prefab:
@@ -294,14 +294,14 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 640551340}
-  m_Text: Dash Your Color Block To Start
+  m_Text: Destroy your colored block to begin!
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 75
+  m_FontSize: 100
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 63907e1ee475c454293797492c89aa77, type: 3}
@@ -346,11 +346,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 640551340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10.3, z: 0}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &698030621
 GameObject:
@@ -381,13 +381,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialTextArray:
   - Press A and hold a direction to Dash.
-  - Dash into a block to destroy it.
+  - "Your Dash is expended when used, \nand refreshed upon touching a surface or the
+    other player.\nTry Dashing a few times."
+  - 'Dash into a block to destroy it.
+
+    Blocks will also degrade after being bounced on a few times.
+
+    Try destroying these blocks.'
   - Touch yellow blocks to increase size and power.
   - Destroy your colored block to begin!
+  - Don't fall into the lightning!
   tutorialPatterns:
   - {fileID: 1863271353941766, guid: eb51650d81cb0b448abd44b744142f1f, type: 2}
   - {fileID: 1125497762009812, guid: 27e0c6047e01bc34b9e073ca3969a18b, type: 2}
-  - {fileID: 1316739356169984, guid: 5beb9516577f1824bb2f139fe70c778b, type: 2}
+  - {fileID: 1886398344989220, guid: 600894103b826774a9d47bda77a4ee41, type: 2}
   tutorialTextObject: {fileID: 640551340}
 --- !u!4 &698030623
 Transform:
@@ -400,7 +407,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &860228932
 Prefab:
@@ -583,99 +590,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f,
     type: 2}
   m_PrefabInternal: {fileID: 1057888071}
---- !u!1001 &1133619430
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-  m_IsPrefabParent: 0
 --- !u!4 &1266554674 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4255211371795376, guid: 9f25c47aaae4f2249a6cca622b5f705f,
     type: 2}
   m_PrefabInternal: {fileID: 551270017}
---- !u!1001 &1502991446
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284385572350386, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1232639080774660, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-      propertyPath: m_Name
-      value: StartBlock (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 8f04f3d9eb421ea45904994320719cf6, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1507879752
 Prefab:
   m_ObjectHideFlags: 0
@@ -811,7 +730,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1812749362 stripped
 Transform:

@@ -6,27 +6,37 @@ using UnityEngine;
 
 public class WaitForDashes : Task
 {
-    private bool[] playersReady;
+    private int[] playerDashes;
+    private int numRequiredDashes;
+
+    public WaitForDashes(int numReqDashes)
+    {
+        numRequiredDashes = numReqDashes;
+    }
+
 
     protected override void Init()
     {
-        playersReady = new bool[Services.GameManager.numPlayers];
-        for (int i = 0; i < playersReady.Length; i++)
+        playerDashes = new int[Services.GameManager.numPlayers];
+        for (int i = 0; i < playerDashes.Length; i++)
         {
-            playersReady[i] = false;
+            playerDashes[i] = 0;
         }
         Services.EventManager.Register<ButtonPressed>(PlayerPressedButton);
     }
 
     void PlayerPressedButton(ButtonPressed e)
     {
-        playersReady[e.playerNum - 1] = true;
-        bool ready = true;
-        foreach(bool playerReady in playersReady)
+        if (e.button == "A")
         {
-            if (!playerReady) ready = false;
+            playerDashes[e.playerNum - 1] += 1;
+            bool ready = true;
+            foreach (int numDashes in playerDashes)
+            {
+                if (numDashes < numRequiredDashes) ready = false;
+            }
+            if (ready) SetStatus(TaskStatus.Success);
         }
-        if (ready) SetStatus(TaskStatus.Success);
     }
 
     protected override void CleanUp()
