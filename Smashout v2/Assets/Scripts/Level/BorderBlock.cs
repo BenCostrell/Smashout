@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BorderBlock : Block {
-	void update() {
-		damage = 0;
-	}
+	void update() {}
 
-	public override void DestroyThis(bool playSound)
+    public override void DamageThis()
+    {
+        damage = 0;
+    }
+
+    public override void DestroyThis(bool playSound)
 	{
-		
 	}
 }

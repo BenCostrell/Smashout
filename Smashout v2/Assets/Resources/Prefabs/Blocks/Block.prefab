@@ -531,7 +531,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -16308328
+  randomSeed: -108796479
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5879,7 +5879,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 08c4e6c291efbb34a96f3cdcfbc2a8b3, type: 3}
   m_Color: {r: 0.441, g: 1, b: 1, a: 0.247}
   m_FlipX: 0

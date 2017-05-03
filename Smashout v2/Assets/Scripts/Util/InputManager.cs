@@ -13,14 +13,6 @@ public class InputManager {
         {
             Services.EventManager.Fire(new ButtonPressed("A", 2));
         }
-        if (Input.GetButtonDown("B_P1"))
-        {
-            Services.EventManager.Fire(new ButtonPressed("B", 1));
-        }
-        if (Input.GetButtonDown("B_P2"))
-        {
-            Services.EventManager.Fire(new ButtonPressed("B", 2));
-        }
         if (Input.GetButtonDown("Reset"))
         {
             Services.EventManager.Fire(new Reset());

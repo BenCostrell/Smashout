@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour {
     private MusicManager muse;
     [HideInInspector]
     public TaskManager tutorialTaskManager;
-    public bool tutorialOn;
 
 
     // Use this for initialization
@@ -120,7 +119,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         Services.InputManager.GetInput();
         Services.TaskManager.Update();
-		//checkIsReady ();
+		checkIsReady ();
 	}
 
 	//This is the method that is used for checking if
@@ -159,31 +158,6 @@ public class GameManager : MonoBehaviour {
             
 		}
 	}
-
-    public void BeginMatch()
-    {
-        Services.BlockManager.DestroyAllBlocks(true);
-        foreach (Player p in players)
-        {
-            p.LockAllInput();
-            p.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-
-        }
-        GameObject[] startText;
-        startText = GameObject.FindGameObjectsWithTag("PreMatchText");
-        foreach (GameObject text in startText)
-        {
-            Destroy(text);
-        }
-        foreach (ReticleController reticle in reticles) reticle.gameObject.SetActive(false);
-        gameStarted = false;
-        //SceneManager.UnloadSceneAsync(currentLevel.Current);
-        Services.BlockManager.gameObject.SetActive(false);
-        preMatchTransition transition = new preMatchTransition(preMatchTransitionDur, preMatchDissapearPercent);
-        LPFadeTask lpfade = new LPFadeTask(muse.GetComponent<AudioLowPassFilter>(), 1000, 22000, 1, 1, muse.lpFadeOutDuration, Easing.QuadEaseIn);
-        Services.TaskManager.AddTask(transition);
-        Services.TaskManager.AddTask(lpfade);
-    }
 
     void OnDestroy()
     {

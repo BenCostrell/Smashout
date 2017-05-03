@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4415852422702072}
-  - component: {fileID: 212191987364191482}
   - component: {fileID: 61128671323138364}
   - component: {fileID: 114132260743556916}
   - component: {fileID: 82641113446708692}
+  - component: {fileID: 212643095899195078}
   m_Layer: 9
   m_Name: WallPlatform
   m_TagString: Surface
@@ -220,10 +220,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5cba7623c6cf73f47b7e59a9babfdaba, type: 3}
-  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 0.64705884}
+  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!212 &212191987364191482
+--- !u!212 &212643095899195078
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -255,6 +255,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5cba7623c6cf73f47b7e59a9babfdaba, type: 3}
-  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 0.64705884}
+  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
