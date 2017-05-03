@@ -396,6 +396,8 @@ MonoBehaviour:
   - {fileID: 1125497762009812, guid: 27e0c6047e01bc34b9e073ca3969a18b, type: 2}
   - {fileID: 1886398344989220, guid: 600894103b826774a9d47bda77a4ee41, type: 2}
   tutorialTextObject: {fileID: 640551340}
+  textScaleInDuration: 0.2
+  waitBetweenStuff: 0.3
 --- !u!4 &698030623
 Transform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class TutorialManager : MonoBehaviour {
     public string[] tutorialTextArray;
     public GameObject[] tutorialPatterns;
     public GameObject tutorialTextObject;
+    public float textScaleInDuration;
+    public float waitBetweenStuff;
     private TextMesh tutorialText;
 
 	// Use this for initialization
@@ -32,7 +34,7 @@ public class TutorialManager : MonoBehaviour {
     void StartNonTutorialSequence()
     {
         SpawnTutorialPattern spawnStartPlats = new SpawnTutorialPattern(tutorialPatterns[2], true);
-        SetTutorialText setDontFallText = new SetTutorialText(tutorialTextArray[5], tutorialText);
+        SetTutorialText setDontFallText = new SetTutorialText(tutorialTextArray[5], tutorialText, textScaleInDuration);
         WaitForTime wait6 = new WaitForTime(0.8f);
         ActionTask beginGame = new ActionTask(Services.GameManager.BeginMatch);
 
@@ -45,23 +47,23 @@ public class TutorialManager : MonoBehaviour {
 
     void StartTutorialSequence()
     {
-        SetTutorialText setInitialText = new SetTutorialText(tutorialTextArray[0], tutorialText);
+        SetTutorialText setInitialText = new SetTutorialText(tutorialTextArray[0], tutorialText, textScaleInDuration);
         WaitForDashes waitForDashes = new WaitForDashes(1);
-        WaitForTime wait1 = new WaitForTime(0.5f);
-        SetTutorialText setDashRefreshText = new SetTutorialText(tutorialTextArray[1], tutorialText);
+        WaitForTime wait1 = new WaitForTime(waitBetweenStuff);
+        SetTutorialText setDashRefreshText = new SetTutorialText(tutorialTextArray[1], tutorialText, textScaleInDuration);
         WaitForDashes waitForMultipleDashes = new WaitForDashes(5);
-        WaitForTime wait2 = new WaitForTime(0.5f);
-        SetTutorialText setDestroyBlockText = new SetTutorialText(tutorialTextArray[2], tutorialText);
-        WaitForTime wait3 = new WaitForTime(0.5f);
+        WaitForTime wait2 = new WaitForTime(waitBetweenStuff);
+        SetTutorialText setDestroyBlockText = new SetTutorialText(tutorialTextArray[2], tutorialText, textScaleInDuration);
+        WaitForTime wait3 = new WaitForTime(waitBetweenStuff);
         SpawnTutorialPattern spawnNormalPlats = new SpawnTutorialPattern(tutorialPatterns[0], true);
-        SetTutorialText setDestroyPowerBlockText = new SetTutorialText(tutorialTextArray[3], tutorialText);
-        WaitForTime wait4 = new WaitForTime(0.5f);
+        SetTutorialText setDestroyPowerBlockText = new SetTutorialText(tutorialTextArray[3], tutorialText, textScaleInDuration);
+        WaitForTime wait4 = new WaitForTime(waitBetweenStuff);
         SpawnTutorialPattern spawnPowerBlocks = new SpawnTutorialPattern(tutorialPatterns[1], true);
-        SetTutorialText setStartGameText = new SetTutorialText(tutorialTextArray[4], tutorialText);
-        WaitForTime wait5 = new WaitForTime(0.5f);
+        SetTutorialText setStartGameText = new SetTutorialText(tutorialTextArray[4], tutorialText, textScaleInDuration);
+        WaitForTime wait5 = new WaitForTime(waitBetweenStuff);
         SpawnTutorialPattern spawnStartPlats = new SpawnTutorialPattern(tutorialPatterns[2], true);
-        SetTutorialText setDontFallText = new SetTutorialText(tutorialTextArray[5], tutorialText);
-        WaitForTime wait6 = new WaitForTime(0.65f);
+        SetTutorialText setDontFallText = new SetTutorialText(tutorialTextArray[5], tutorialText, textScaleInDuration);
+        WaitForTime wait6 = new WaitForTime(waitBetweenStuff*2);
         ActionTask beginGame = new ActionTask(Services.GameManager.BeginMatch);
 
         setInitialText
