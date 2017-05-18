@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72136c96bfe0584885b51d721ab947a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainTrack: {fileID: 8300000, guid: 33871c840625f464083b77b2ad85896f, type: 3}
+  mainTrack: {fileID: 8300000, guid: bde5150d3a68e4c44bfbb85b825d4a1d, type: 3}
   lpFadeInDuration: 1.5
   lpFadeOutDuration: 4
   fadeOutRate: 0.02
